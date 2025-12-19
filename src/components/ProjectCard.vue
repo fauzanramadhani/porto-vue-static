@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import ArrowButton from '@/assets/ArrowButton.vue'
+import ArrowButton from '@/components/ArrowButton.vue'
 const props = defineProps({
   loading: { type: Boolean, default: false },
   projects: { type: Array, default: () => [] }
@@ -51,7 +51,8 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
   color: #fff;
   padding: 24px 28px 0px 28px;
   width: 100%;
-  height: 100%;
+  height: 350px;
+  max-height: 350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -107,6 +108,8 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
   gap: 12px;
   overflow-y: auto;
   padding-right: 4px;
+  max-height: 260px;
+  flex: 1;
 }
 
 .project-list::-webkit-scrollbar {

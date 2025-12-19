@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import ArrowButton from '@/assets/ArrowButton.vue'
+import ArrowButton from '@/components/ArrowButton.vue'
 const props = defineProps({
   loading: { type: Boolean, default: false },
   certifications: { type: Array, default: () => [] }
@@ -62,7 +62,8 @@ const formatDate = (d) => {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 100%;
+  height: 350px;
+  max-height: 350px;
 }
 
 .certification-glass-card::before {
@@ -113,6 +114,8 @@ const formatDate = (d) => {
   gap: 12px;
   overflow-y: auto;
   padding-right: 4px;
+  max-height: 260px;
+  flex: 1;
 }
 
 .certification-list::-webkit-scrollbar {

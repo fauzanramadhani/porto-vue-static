@@ -20,28 +20,42 @@
         <div v-if="loading" class="desc-skeleton shimmer"></div>
         <div v-else class="profile-desc" v-html="computedDesc"></div>
         
-        <div v-if="profile?.status?.label" class="status-chip">
+        <div v-if="loading" class="status-skeleton shimmer"></div>
+        <div v-else-if="profile?.status?.label" class="status-chip">
           <span class="online-dot"></span>
           {{ profile.status.label }}
         </div>
         
         <div class="social-icons">
-          <a v-if="profile?.xUrl" :href="profile.xUrl" target="_blank" class="social-link" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a v-if="profile?.instagramUrl" :href="profile.instagramUrl" target="_blank" class="social-link" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a v-if="profile?.githubUrl" :href="profile.githubUrl" target="_blank" class="social-link" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a v-if="profile?.linkedinUrl" :href="profile.linkedinUrl" target="_blank" class="social-link" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a v-if="profile?.contactEmail" :href="`mailto:${profile.contactEmail}`" target="_blank" class="social-link" aria-label="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
+          <template v-if="loading">
+            <div class="social-skeleton shimmer" v-for="n in 5" :key="n"></div>
+          </template>
+          <template v-else>
+            <!-- Loop socialLinks dari profile -->
+            <a
+              v-for="(link, index) in profile?.socialLinks"
+              :key="index"
+              :href="link.url"
+              target="_blank"
+              class="social-link"
+              :aria-label="link.platform"
+            >
+              <img :src="link.icon" :alt="link.platform" style="width: 24px; height: 24px;">
+            </a>
+
+            <!-- Optional: Email -->
+            <a
+              v-if="profile?.contactEmail"
+              :href="`mailto:${profile.contactEmail}`"
+              target="_blank"
+              class="social-link"
+              aria-label="Email"
+            >
+              <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email" style="width:24px; height:24px;">
+            </a>
+          </template>
         </div>
+
       </div>
     </div>
   </div>
@@ -55,8 +69,8 @@ const props = defineProps({
   profile: { type: Object, default: null }
 })
 
-const coverSrc = computed(() => props.profile?.coverPhotoUrl ? `${BASE_API_URL}${props.profile.coverPhotoUrl}` : 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80')
-const avatarSrc = computed(() => props.profile?.profilePhotoUrl ? `${BASE_API_URL}${props.profile.profilePhotoUrl}` : 'https://randomuser.me/api/portraits/men/32.jpg')
+const coverSrc = computed(() => props.profile?.coverPhotoUrl ?? 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80')
+const avatarSrc = computed(() => props.profile?.profilePhotoUrl ?? 'https://randomuser.me/api/portraits/men/32.jpg')
 const computedDesc = computed(() => {
   const lines = []
   if (props.profile?.tagline) lines.push(props.profile.tagline)
@@ -78,7 +92,7 @@ const computedDesc = computed(() => {
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.05);
   margin-bottom: 24px;
-  width: 100%;
+  max-width: 100%;
 }
 
 /* Cover Photo Styles */
@@ -172,6 +186,7 @@ const computedDesc = computed(() => {
 }
 
 .name-skeleton {
+  margin-top: 15px;
   width: 60%;
   height: 28px;
   border-radius: 8px;
@@ -187,11 +202,20 @@ const computedDesc = computed(() => {
 }
 
 .desc-skeleton {
+  padding-top: 20px;
   width: 80%;
   height: 18px;
   border-radius: 8px;
   background: rgba(255,255,255,0.06);
   margin-top: 6px;
+}
+
+.status-skeleton {
+  width: 180px;
+  height: 40px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  margin-top: 13px;
 }
 
 .shimmer {
@@ -224,6 +248,13 @@ const computedDesc = computed(() => {
   align-items: center;
   gap: 12px;
   margin-top: 8px;
+}
+
+.social-skeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
 }
 
 .social-link {

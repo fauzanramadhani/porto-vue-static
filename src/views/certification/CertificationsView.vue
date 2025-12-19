@@ -75,83 +75,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
+import { ref, computed, onMounted } from 'vue';
+import dataService from '@/services/dataService';
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
-const certifications = ref([
-  {
-    id: 1,
-    title: "MEMENANGKAN HATI KEZIA",
-    issuer: "Kezia Ramadhani",
-    description: "Perjuangan untuk menangkan hati Kezia",
-    logo: "https://images.squarespace-cdn.com/content/v1/5519ab2ee4b02a4410b6a7c6/1573572780880-TNGN7R4EX4N141SBXP50/beautiful-hands-heart-5390.jpg",
-    issuedDate: "23 June 2024",
-    expiryDate: "Endless",
-    credentialId: "LOVE-RMDHNI",
-    status: "Completed",
-    verifyUrl: "https://aws.amazon.com/verification"
-  },
-  {
-    id: 2,
-    title: "Google Cloud Professional Developer",
-    issuer: "Google Cloud",
-    description: "Validates skills in developing and deploying applications on Google Cloud Platform.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg",
-    issuedDate: "January 2024",
-    expiryDate: "January 2027",
-    credentialId: "GCP-DEV-987654321",
-    status: "Completed",
-    verifyUrl: "https://cloud.google.com/certification"
-  },
-  {
-    id: 3,
-    title: "Microsoft Azure Developer Associate",
-    issuer: "Microsoft",
-    description: "Proves ability to design, build, test, and maintain cloud applications and services.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_logo.svg",
-    issuedDate: "December 2023",
-    expiryDate: "December 2026",
-    credentialId: "AZ-204-123456",
-    status: "Completed",
-    verifyUrl: "https://www.microsoft.com/en-us/learning"
-  },
-  {
-    id: 4,
-    title: "Vue.js Advanced Certification",
-    issuer: "Vue.js Team",
-    description: "Advanced Vue.js development skills including Composition API, TypeScript integration, and performance optimization.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
-    issuedDate: "February 2024",
-    expiryDate: null,
-    credentialId: "VUE-ADV-456789",
-    status: "Completed",
-    verifyUrl: null
-  },
-  {
-    id: 5,
-    title: "React Developer Certification",
-    issuer: "Meta",
-    description: "Comprehensive React development skills including hooks, context, and advanced patterns.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    issuedDate: null,
-    expiryDate: null,
-    credentialId: "REACT-DEV-789123",
-    status: "In Progress",
-    verifyUrl: null
-  },
-  {
-    id: 6,
-    title: "Docker Certified Associate",
-    issuer: "Docker Inc.",
-    description: "Validates skills in containerization, Docker deployment, and container orchestration.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.svg",
-    issuedDate: "November 2023",
-    expiryDate: "November 2026",
-    credentialId: "DCA-123789",
-    status: "Completed",
-    verifyUrl: "https://www.docker.com/certification"
-  }
-]);
+const certifications = ref([]);
 
 const completedCertifications = computed(() => {
   return certifications.value.filter(cert => cert.status === 'Completed').length;
@@ -171,6 +99,16 @@ const verifyCertificate = (verifyUrl) => {
     window.open(verifyUrl, '_blank');
   }
 };
+
+// Load data on mount
+onMounted(async () => {
+  try {
+    const data = await dataService.getCertifications()
+    certifications.value = data
+  } catch (error) {
+    console.error('Failed to load certifications:', error)
+  }
+});
 </script>
 
 <style scoped>

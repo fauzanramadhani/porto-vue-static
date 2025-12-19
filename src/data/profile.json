@@ -1,0 +1,28 @@
+{
+  "name": "Fauzan Gracia Ramadhani",
+  "tagline": "Full Stack Developer | Tech Enthusiast | Problem Solver",
+  "dateOfBirth": "2001-12-05",
+  "profilePhotoUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+  "coverPhotoUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+  "status": {
+    "label": "Available for Work",
+    "isOnline": true
+  },
+  "socialLinks": [
+    {
+      "platform": "github",
+      "url": "https://github.com/johndoe",
+      "icon": "https://cdn.worldvectorlogo.com/logos/github-icon-2.svg"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/johndoe",
+      "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0bGEl9v47XieEtHyj0TqTr1tOXJmib-KHtw&s"
+    },
+    {
+      "platform": "twitter",
+      "url": "https://twitter.com/johndoe",
+      "icon": "https://img.freepik.com/premium-vector/twitter-new-x-logo-design-vector_1340851-70.jpg?semt=ais_hybrid&w=740&q=80"
+    }
+  ]
+}

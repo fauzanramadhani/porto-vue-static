@@ -1,0 +1,187 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Platform",
+    "description": "A full-featured e-commerce platform with real-time inventory management and payment processing.",
+    "thumbnail": "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=400&q=80",
+    "image": "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=80",
+    "category": "Web Apps",
+    "technologies": ["Vue.js", "Node.js", "MongoDB", "Stripe"],
+    "year": "2024",
+    "status": "Completed",
+    "duration": "6 months",
+    "overview": "Built a comprehensive e-commerce solution from scratch, featuring user authentication, product catalog, shopping cart, and secure payment processing. The platform supports multiple payment methods and provides real-time inventory updates.",
+    "features": [
+      "User authentication and authorization",
+      "Product catalog with search and filtering",
+      "Shopping cart with persistent state",
+      "Multiple payment gateway integration",
+      "Order tracking and management",
+      "Admin dashboard for inventory management",
+      "Real-time notifications",
+      "Responsive design for all devices"
+    ],
+    "details": [
+      {
+        "heading": "Technical Architecture",
+        "paragraph": "The platform is built using a microservices architecture, with separate services for authentication, product management, order processing, and payment handling. This ensures scalability and maintainability."
+      },
+      {
+        "heading": "Key Challenges",
+        "paragraph": "One of the main challenges was implementing real-time inventory synchronization across multiple instances. We solved this using Redis pub/sub and WebSocket connections."
+      }
+    ],
+    "links": {
+      "demo": "https://demo-ecommerce.example.com",
+      "github": "https://github.com/johndoe/ecommerce-platform"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Task Management App",
+    "description": "A collaborative task management application with real-time updates and team collaboration features.",
+    "thumbnail": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=400&q=80",
+    "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1200&q=80",
+    "category": "Web Apps",
+    "technologies": ["React", "Firebase", "Tailwind CSS"],
+    "year": "2023",
+    "status": "Completed",
+    "duration": "4 months",
+    "overview": "Developed a modern task management solution that enables teams to collaborate effectively. Features include task assignment, progress tracking, real-time updates, and integrated communication.",
+    "features": [
+      "Create and assign tasks to team members",
+      "Real-time collaboration and updates",
+      "Kanban board visualization",
+      "Project timeline and Gantt charts",
+      "File attachments and comments",
+      "Email notifications",
+      "Activity tracking and reporting",
+      "Mobile-responsive interface"
+    ],
+    "details": [
+      {
+        "heading": "Real-time Synchronization",
+        "paragraph": "Leveraged Firebase Realtime Database for instant synchronization across all connected clients, ensuring team members always see the latest updates."
+      },
+      {
+        "heading": "User Experience",
+        "paragraph": "Focused on creating an intuitive drag-and-drop interface with smooth animations and responsive feedback for all user actions."
+      }
+    ],
+    "links": {
+      "demo": "https://demo-taskapp.example.com",
+      "github": "https://github.com/johndoe/task-management"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Weather Forecast App",
+    "description": "A beautiful weather application with detailed forecasts, radar maps, and severe weather alerts.",
+    "thumbnail": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=400&q=80",
+    "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1200&q=80",
+    "category": "Mobile Apps",
+    "technologies": ["React Native", "OpenWeather API", "Redux"],
+    "year": "2023",
+    "status": "Completed",
+    "duration": "3 months",
+    "overview": "Created a cross-platform mobile weather application providing accurate forecasts, interactive radar maps, and timely severe weather alerts. The app features a clean, modern UI with smooth animations.",
+    "features": [
+      "Current weather conditions",
+      "7-day forecast with hourly breakdown",
+      "Interactive radar maps",
+      "Severe weather alerts",
+      "Multiple location support",
+      "Weather widgets",
+      "Offline data caching",
+      "Push notifications for alerts"
+    ],
+    "details": [
+      {
+        "heading": "API Integration",
+        "paragraph": "Integrated with OpenWeather API for comprehensive weather data, including current conditions, forecasts, and historical data."
+      },
+      {
+        "heading": "Performance Optimization",
+        "paragraph": "Implemented efficient caching strategies and data compression to minimize API calls and ensure fast load times even on slower connections."
+      }
+    ],
+    "links": {
+      "demo": null,
+      "github": "https://github.com/johndoe/weather-app"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Portfolio Website Builder",
+    "description": "A drag-and-drop website builder specifically designed for creating professional portfolio websites.",
+    "thumbnail": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=400&q=80",
+    "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80",
+    "category": "Web Apps",
+    "technologies": ["Vue.js", "Nuxt.js", "TailwindCSS", "Netlify"],
+    "year": "2024",
+    "status": "In Progress",
+    "duration": "Ongoing",
+    "overview": "Building an intuitive website builder that allows designers, developers, and creative professionals to create stunning portfolio websites without writing code. Features pre-built templates and customizable components.",
+    "features": [
+      "Drag-and-drop interface",
+      "Pre-built portfolio templates",
+      "Custom component library",
+      "SEO optimization tools",
+      "Image optimization",
+      "Contact form integration",
+      "Analytics dashboard",
+      "One-click deployment"
+    ],
+    "details": [
+      {
+        "heading": "Component System",
+        "paragraph": "Developed a flexible component system that allows users to customize every aspect of their website while maintaining design consistency."
+      },
+      {
+        "heading": "Performance",
+        "paragraph": "Implemented lazy loading, image optimization, and code splitting to ensure generated websites load quickly and perform well."
+      }
+    ],
+    "links": {
+      "demo": "https://demo-portfolio-builder.example.com",
+      "github": null
+    }
+  },
+  {
+    "id": 5,
+    "title": "Fitness Tracking App",
+    "description": "A comprehensive fitness tracking application with workout plans, nutrition tracking, and progress analytics.",
+    "thumbnail": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=400&q=80",
+    "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80",
+    "category": "Mobile Apps",
+    "technologies": ["Flutter", "Firebase", "HealthKit", "Google Fit"],
+    "year": "2023",
+    "status": "Completed",
+    "duration": "5 months",
+    "overview": "Developed a cross-platform fitness application that helps users track their workouts, monitor nutrition, and achieve their fitness goals. Integrates with popular health platforms for comprehensive data tracking.",
+    "features": [
+      "Workout logging and tracking",
+      "Pre-built workout plans",
+      "Nutrition and calorie tracking",
+      "Progress photos and measurements",
+      "Integration with health platforms",
+      "Social features and challenges",
+      "Personal records and achievements",
+      "Custom workout builder"
+    ],
+    "details": [
+      {
+        "heading": "Health Platform Integration",
+        "paragraph": "Integrated with Apple HealthKit and Google Fit to automatically sync workout data and provide a holistic view of user health."
+      },
+      {
+        "heading": "Gamification",
+        "paragraph": "Implemented achievement badges, streaks, and social challenges to keep users motivated and engaged with their fitness journey."
+      }
+    ],
+    "links": {
+      "demo": null,
+      "github": "https://github.com/johndoe/fitness-tracker"
+    }
+  }
+]

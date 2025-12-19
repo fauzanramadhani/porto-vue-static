@@ -1,7 +1,9 @@
 <template>
   <div class="exp-glass-card">
     <div class="exp-header">
-      <span class="exp-header-icon"><i class="fa-regular fa-id-badge"></i></span>
+      <span class="exp-header-icon"
+        ><i class="fa-regular fa-id-badge"></i
+      ></span>
       <span class="exp-header-title">Experience</span>
       <ArrowButton to="/about" title="View more experience" />
     </div>
@@ -19,12 +21,19 @@
       <template v-else>
         <div v-for="exp in experiences" :key="exp.id" class="exp-item">
           <div class="exp-logo-wrapper">
-            <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
+            <img
+              :src="logoSrc(exp.logoUrl)"
+              :alt="exp.company"
+              class="exp-logo"
+            />
           </div>
           <div class="exp-info">
             <div class="exp-company">{{ exp.company }}</div>
             <div class="exp-title">{{ exp.position }}</div>
-            <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+            <div class="exp-years">
+              {{ exp.startYear }} —
+              {{ exp.isCurrent ? 'Present' : exp.endYear || '' }}
+            </div>
           </div>
         </div>
       </template>
@@ -33,16 +42,17 @@
 </template>
 
 <script setup>
-import ArrowButton from '@/assets/ArrowButton.vue'
+import ArrowButton from '@/components/ArrowButton.vue';
 const props = defineProps({
   loading: { type: Boolean, default: false },
-  experiences: { type: Array, default: () => [] }
-})
-const fallbackLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png'
+  experiences: { type: Array, default: () => [] },
+});
+const fallbackLogo =
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png';
 const logoSrc = (url) => {
-  if (!url) return fallbackLogo
-  return /^https?:\/\//i.test(url) ? url : `${BASE_API_URL}${url}`
-}
+  if (!url) return fallbackLogo;
+  return /^https?:\/\//i.test(url) ? url : `${BASE_API_URL}${url}`;
+};
 </script>
 
 <style scoped>
@@ -66,7 +76,7 @@ const logoSrc = (url) => {
 }
 
 .exp-glass-card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 1.5px;
   border-radius: 16.5px;
@@ -131,6 +141,7 @@ const logoSrc = (url) => {
   align-items: center;
   gap: 14px;
   padding: 6px 0;
+  padding-bottom: 24px;
 }
 
 .exp-logo-wrapper {
@@ -151,9 +162,30 @@ const logoSrc = (url) => {
   object-fit: contain;
 }
 
-.sk-line { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.08); margin: 4px 0; }
-.shimmer { background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.sk-line {
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
 
 .exp-info {
   flex: 1 1 auto;
@@ -187,13 +219,13 @@ const logoSrc = (url) => {
   .exp-glass-card {
     height: 180px;
   }
-  
+
   .exp-list {
     flex-direction: row;
     overflow-x: auto;
     overflow-y: hidden;
     gap: 16px;
-    padding-bottom: 8px;
+    padding-bottom: 24px;
     padding-left: 0;
     padding-right: 0;
     margin-left: -28px;
@@ -201,7 +233,7 @@ const logoSrc = (url) => {
     padding-left: 28px;
     padding-right: 28px;
   }
-  
+
   .exp-item {
     min-width: 280px;
     flex-shrink: 0;
@@ -210,15 +242,24 @@ const logoSrc = (url) => {
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
+  .exp-logo-wrapper {
+  width: 32px;
+  height: 32px;
+}
+
+.exp-info {
+  gap: 0px;
+}
+
   .exp-list::-webkit-scrollbar {
     height: 4px;
     width: auto;
   }
-  
+
   .exp-list::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
   }
 }
-</style> 
+</style>

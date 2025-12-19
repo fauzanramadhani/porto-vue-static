@@ -1,124 +1,148 @@
 <template>
-  <nav class="bottom-nav" @mouseleave="resetScales" :style="{
-    '--bg-scale': bgScale,
-    '--gap': currentGap + 'px'
-  }">
-    <button v-for="(btn, index) in buttons" :key="index" class="nav-btn" :class="{ active: btn.active }"
-      :aria-label="btn.label" :style="{ transform: `scale(${scales[index]})` }" @mouseenter="handleMouseEnter(index)"
-      @click="navigateTo(btn.route)">
-      <i :class="btn.icon"></i>
+  <nav
+    class="bottom-nav"
+    @mouseleave="resetScales"
+    :style="{
+      '--bg-scale': bgScale,
+      '--gap': currentGap + 'px',
+    }"
+  >
+    <button
+      v-for="(btn, index) in buttons"
+      :key="index"
+      class="nav-btn"
+      :class="{ active: btn.active }"
+      :aria-label="btn.label"
+      :style="{ transform: `scale(${scales[index]})` }"
+      @mouseenter="handleMouseEnter(index)"
+      @click="navigateTo(btn.route)"
+    >
+      <font-awesome-icon :icon="btn.icon" />
       <span class="nav-tooltip">{{ btn.label }}</span>
     </button>
   </nav>
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref, reactive, computed, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
 const buttons = reactive([
-  { icon: 'fas fa-home', label: 'Home', route: '/home', active: true },
-  { icon: 'fas fa-user', label: 'About', route: '/about', active: false },
-  { icon: 'fas fa-regular fa-newspaper', label: 'Blog', route: '/blog', active: false },
-  { icon: 'fas fa-regular fa-file-code', label: 'Projects', route: '/projects', active: false },
-  { icon: 'fa-regular fa-file-pdf', label: 'Certifications', route: '/certifications', active: false }
-])
+  { icon: ['fas', 'home'], label: 'Home', route: '/home', active: true },
+  { icon: ['fas', 'user'], label: 'About', route: '/about', active: false },
+  { icon: ['far', 'newspaper'], label: 'Blog', route: '/blog', active: false },
+  {
+    icon: ['far', 'file-code'],
+    label: 'Projects',
+    route: '/projects',
+    active: false,
+  },
+  {
+    icon: ['far', 'file-pdf'],
+    label: 'Certifications',
+    route: '/certifications',
+    active: false,
+  },
+]);
 
-const scales = reactive([1, 1, 1, 1, 1])
-const bgScale = ref(1)
-const currentGap = ref(18)
-const baseGap = 18
-const maxGap = 24
+const scales = reactive([1, 1, 1, 1, 1]);
+const bgScale = ref(1);
+const currentGap = ref(18);
+const baseGap = 18;
+const maxGap = 24;
 
 // Watch for route changes to update active state
-watch(() => route.path, (newPath) => {
-  buttons.forEach((btn, index) => {
-    // Handle biography routes (/:username/*) - they should activate the corresponding nav item
-    if (newPath.includes('/') && !newPath.startsWith('/admin') && !newPath.startsWith('/home')) {
-      // Extract the route part after username (e.g., /demo/about -> /about)
-      const pathParts = newPath.split('/')
-      if (pathParts.length >= 3) {
-        const routePart = '/' + pathParts[2] // /about, /blog, etc.
-        btn.active = btn.route === routePart
+watch(
+  () => route.path,
+  (newPath) => {
+    buttons.forEach((btn, index) => {
+      // Handle biography routes (/:username/*) - they should activate the corresponding nav item
+      if (
+        newPath.includes('/') &&
+        !newPath.startsWith('/admin') &&
+        !newPath.startsWith('/home')
+      ) {
+        // Extract the route part after username (e.g., /demo/about -> /about)
+        const pathParts = newPath.split('/');
+        if (pathParts.length >= 3) {
+          const routePart = '/' + pathParts[2]; // /about, /blog, etc.
+          btn.active = btn.route === routePart;
+        } else {
+          btn.active = false;
+        }
       } else {
-        btn.active = false
+        btn.active = btn.route === newPath;
       }
-    } else {
-      btn.active = btn.route === newPath
-    }
-    
-    // Additional active state logic for nested routes
-    if (!btn.active) {
-      // Check if we're on a sub-route (e.g., /blog/list should activate blog)
-      if (newPath.startsWith(btn.route + '/')) {
-        btn.active = true
+
+      // Additional active state logic for nested routes
+      if (!btn.active) {
+        // Check if we're on a sub-route (e.g., /blog/list should activate blog)
+        if (newPath.startsWith(btn.route + '/')) {
+          btn.active = true;
+        }
+        // Check for user routes (e.g., /user/blog/list should activate blog)
+        else if (
+          newPath.includes('/user/') &&
+          newPath.includes(btn.route.substring(1))
+        ) {
+          btn.active = true;
+        }
       }
-      // Check for user routes (e.g., /user/blog/list should activate blog)
-      else if (newPath.includes('/user/') && newPath.includes(btn.route.substring(1))) {
-        btn.active = true
-      }
-    }
-  })
-}, { immediate: true })
+    });
+  },
+  { immediate: true }
+);
 
 const handleMouseEnter = (hoveredIndex) => {
   // Check if we're on mobile (touch device)
-  const isMobile = window.innerWidth <= 600 || 'ontouchstart' in window
+  const isMobile = window.innerWidth <= 600 || 'ontouchstart' in window;
 
   // Only apply zoom effects on desktop
   if (!isMobile) {
     // Animate background and gaps
-    bgScale.value = 1.05
-    currentGap.value = maxGap
+    bgScale.value = 1.05;
+    currentGap.value = maxGap;
 
     buttons.forEach((_, index) => {
-      const distance = Math.abs(index - hoveredIndex)
+      const distance = Math.abs(index - hoveredIndex);
 
       // Enhanced scaling with more dynamic curve
-      const maxScale = 1.3
-      const minScale = 1.0
-      const falloffRate = 0.5 // More pronounced effect
+      const maxScale = 1.3;
+      const minScale = 1.0;
+      const falloffRate = 0.5; // More pronounced effect
 
       // Apply easing function for smoother transitions
-      const scale = minScale + (maxScale - minScale) * Math.pow(falloffRate, distance * 0.8)
+      const scale =
+        minScale +
+        (maxScale - minScale) * Math.pow(falloffRate, distance * 0.8);
 
-      scales[index] = Math.max(scale, minScale)
-    })
+      scales[index] = Math.max(scale, minScale);
+    });
   }
-}
+};
 
 const resetScales = () => {
   // Check if we're on mobile (touch device)
-  const isMobile = window.innerWidth <= 600 || 'ontouchstart' in window
+  const isMobile = window.innerWidth <= 600 || 'ontouchstart' in window;
 
   // Only reset zoom effects on desktop
   if (!isMobile) {
     // Smoothly reset all values
-    bgScale.value = 1
-    currentGap.value = baseGap
+    bgScale.value = 1;
+    currentGap.value = baseGap;
     scales.forEach((_, index) => {
-      scales[index] = 1
-    })
+      scales[index] = 1;
+    });
   }
-}
+};
 
 const navigateTo = (routePath) => {
-  // Check if we're currently on a biography route
-  const currentPath = route.path
-  const pathParts = currentPath.split('/')
+  router.push(routePath);
+};
 
-  if (pathParts.length >= 2 && pathParts[1] && !pathParts[1].startsWith('admin') && pathParts[1] !== 'home') {
-    // We're on a biography route, navigate within the same username
-    const username = pathParts[1]
-    router.push(`/${username}${routePath}`)
-  } else {
-    // We're on a main route, navigate normally
-    router.push(routePath)
-  }
-}
 </script>
 
 <style scoped>
@@ -235,10 +259,11 @@ const navigateTo = (routePath) => {
 }
 
 @keyframes activePulse {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 4px rgba(0, 234, 255, 0.4);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 8px rgba(0, 234, 255, 0.6);
   }
 }

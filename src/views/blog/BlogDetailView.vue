@@ -199,262 +199,15 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
+import dataService from '@/services/dataService';
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 import BlogContentRenderer from '@/components/BlogContentRenderer.vue';
 
 const router = useRouter();
 const route = useRoute();
 
-// Blog posts data (dummy data)
-const blogPostsData = {
-  1: {
-    id: 1,
-    title: "Building Modern Web Applications with Vue 3",
-    excerpt: "Explore the latest features in Vue 3 and how they can improve your development workflow. From Composition API to better TypeScript support...",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop",
-    category: "Development",
-    date: "March 15, 2024",
-    readTime: 8,
-    author: "John Doe",
-    tags: ["Vue.js", "JavaScript", "Web Development", "Frontend"],
-    content: [
-      {
-        heading: "Introduction to Vue 3",
-        paragraph: "Vue 3 represents a significant evolution in the Vue.js framework, introducing the Composition API alongside the existing Options API. This new approach provides better TypeScript support and more flexible code organization."
-      },
-      {
-        paragraph: "The Composition API allows developers to organize code by logical concerns rather than component options, making it easier to extract and reuse logic across components. This is particularly beneficial for large applications where code organization becomes crucial."
-      },
-      {
-        heading: "Key Features of Vue 3",
-        list: [
-          "Composition API for better logic organization",
-          "Improved TypeScript support",
-          "Better tree-shaking for smaller bundle sizes",
-          "Fragments for cleaner component structure",
-          "Teleport for flexible component rendering"
-        ]
-      },
-      {
-        heading: "Getting Started with Composition API",
-        paragraph: "To use the Composition API, you'll need to import the necessary functions from Vue. The setup function serves as the entry point for composition API usage within a component."
-      },
-      {
-        codeBlock: `<script setup>
-import { ref, computed, onMounted } from 'vue'
-
-const count = ref(0)
-const doubleCount = computed(() => count.value * 2)
-
-const increment = () => {
-  count.value++
-}
-
-onMounted(() => {
-  console.log('Component mounted!')
-})
-<\/script>`
-      },
-      {
-        paragraph: "This approach provides a more functional programming style that many developers find more intuitive and easier to test. The reactive references (ref) and computed properties work seamlessly with the template, providing a smooth development experience."
-      },
-      {
-        heading: "Performance Improvements",
-        paragraph: "Vue 3 introduces several performance optimizations, including better tree-shaking, improved virtual DOM diffing, and more efficient reactivity system. These improvements result in faster rendering and smaller bundle sizes."
-      },
-      {
-        heading: "Conclusion",
-        paragraph: "Vue 3 represents a significant step forward for the framework, providing developers with powerful new tools while maintaining backward compatibility. The Composition API, in particular, opens up new possibilities for code organization and reuse."
-      }
-    ]
-  },
-  2: {
-    id: 2,
-    title: "The Future of Frontend Design Systems",
-    excerpt: "Design systems are becoming increasingly important in modern web development. Learn how to create scalable and maintainable design systems...",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=400&fit=crop",
-    category: "Design",
-    date: "March 10, 2024",
-    readTime: 6,
-    author: "Sarah Johnson",
-    tags: ["Design Systems", "UI/UX", "Frontend", "Design"],
-    content: [
-      {
-        heading: "The Rise of Design Systems",
-        paragraph: "In today's fast-paced digital landscape, design systems have emerged as a crucial tool for maintaining consistency and efficiency across complex applications. They serve as a single source of truth for design decisions, enabling teams to work more collaboratively and deliver better user experiences."
-      },
-      {
-        heading: "Core Components of a Design System",
-        list: [
-          "Design tokens for consistent spacing, colors, and typography",
-          "Component library with reusable UI elements",
-          "Documentation and usage guidelines",
-          "Design principles and brand guidelines",
-          "Accessibility standards and best practices"
-        ]
-      },
-      {
-        paragraph: "A well-designed system not only improves the development workflow but also ensures that users have a consistent experience across all touchpoints. This consistency builds trust and familiarity, ultimately leading to better user engagement and satisfaction."
-      },
-      {
-        heading: "Implementation Strategies",
-        paragraph: "When implementing a design system, it's essential to start with the foundational elements and gradually build up to more complex components. This incremental approach allows teams to validate decisions early and iterate based on real-world usage."
-      },
-      {
-        codeBlock: `// Example of design tokens in CSS
-:root {
-  --color-primary: #00eaff;
-  --color-secondary: #ffffff;
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-}`
-      },
-      {
-        heading: "Conclusion",
-        paragraph: "Design systems represent the future of scalable design and development. By investing in a robust design system, organizations can achieve greater efficiency, consistency, and quality in their digital products."
-      }
-    ]
-  },
-  3: {
-    id: 3,
-    title: "Optimizing Performance in React Applications",
-    excerpt: "Performance is crucial for user experience. Discover techniques to optimize your React applications and improve loading times...",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop",
-    category: "Development",
-    date: "March 5, 2024",
-    readTime: 10,
-    author: "Mike Chen",
-    tags: ["React", "Performance", "JavaScript", "Frontend"],
-    content: [
-      {
-        heading: "Why Performance Matters",
-        paragraph: "In today's competitive digital landscape, application performance directly impacts user satisfaction, conversion rates, and search engine rankings. Users expect fast, responsive applications, and even small delays can lead to significant user drop-off."
-      },
-      {
-        heading: "Key Performance Metrics",
-        list: [
-          "First Contentful Paint (FCP)",
-          "Largest Contentful Paint (LCP)",
-          "Time to Interactive (TTI)",
-          "Cumulative Layout Shift (CLS)",
-          "First Input Delay (FID)"
-        ]
-      },
-      {
-        paragraph: "Understanding these metrics is crucial for identifying performance bottlenecks and measuring the effectiveness of optimization efforts. Each metric provides insights into different aspects of the user experience."
-      },
-      {
-        heading: "React-Specific Optimizations",
-        paragraph: "React provides several built-in optimization features that developers can leverage to improve application performance. These include React.memo, useMemo, useCallback, and the Suspense API for code splitting."
-      },
-      {
-        codeBlock: `// Example of React.memo usage
-const ExpensiveComponent = React.memo(({ data }) => {
-  return (
-    <div className="expensive-component">
-      {data.map(item => (
-        <div key={item.id}>{item.name}</div>
-      ))}
-    </div>
-  );
-});`
-      },
-      {
-        heading: "Conclusion",
-        paragraph: "Performance optimization is an ongoing process that requires continuous monitoring and improvement. By implementing these techniques and staying informed about best practices, developers can create React applications that provide exceptional user experiences."
-      }
-    ]
-  },
-  4: {
-    id: 4,
-    title: "CSS Grid vs Flexbox: When to Use What",
-    excerpt: "Understanding the differences between CSS Grid and Flexbox is essential for modern layout design. Here's a comprehensive guide...",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
-    category: "CSS",
-    date: "February 28, 2024",
-    readTime: 7,
-    author: "Emily Rodriguez",
-    tags: ["CSS", "Layout", "Grid", "Flexbox"],
-    content: [
-      {
-        heading: "Understanding Layout Systems",
-        paragraph: "CSS Grid and Flexbox are two powerful layout systems that have revolutionized how we approach web design. While they can both be used for layout, they serve different purposes and excel in different scenarios."
-      },
-      {
-        heading: "When to Use Flexbox",
-        list: [
-          "One-dimensional layouts (row or column)",
-          "Navigation menus and toolbars",
-          "Form layouts and input groups",
-          "Card layouts with flexible heights",
-          "Centering content both horizontally and vertically"
-        ]
-      },
-      {
-        heading: "When to Use CSS Grid",
-        list: [
-          "Two-dimensional layouts (rows and columns)",
-          "Page layouts and overall structure",
-          "Complex form layouts",
-          "Image galleries and portfolios",
-          "Dashboard layouts with multiple sections"
-        ]
-      },
-      {
-        paragraph: "The key is to understand that these systems are not mutually exclusive. In fact, they work beautifully together, with Grid handling the overall page structure and Flexbox managing the alignment and distribution of items within grid areas."
-      },
-      {
-        codeBlock: `/* Example of Grid and Flexbox working together */
-.page-layout {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-}
-
-.header, .footer {
-  grid-column: 1 / -1;
-}
-
-.sidebar {
-  grid-row: 2;
-  grid-column: 2;
-}
-
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}`
-      },
-      {
-        heading: "Conclusion",
-        paragraph: "Both CSS Grid and Flexbox are essential tools in the modern web developer's toolkit. Understanding when and how to use each will enable you to create more flexible, maintainable, and responsive layouts."
-      }
-    ]
-  }
-};
-
-const blogPost = ref(blogPostsData[1]); // Default to first post
-
+const blogPost = ref(null);
 const relatedPosts = ref([]);
-
-// Function to get related posts (excluding current post)
-const getRelatedPosts = (currentPostId) => {
-  const allPosts = Object.values(blogPostsData);
-  return allPosts
-    .filter(post => post.id !== currentPostId)
-    .slice(0, 3)
-    .map(post => ({
-      id: post.id,
-      title: post.title,
-      image: post.image.replace('w=800&h=400', 'w=200&h=120'),
-      date: post.date
-    }));
-};
 
 // Methods
 const goBack = () => {
@@ -462,22 +215,37 @@ const goBack = () => {
 };
 
 const navigateToPost = (postId) => {
-  router.push(`/fauzan/blog/${postId}`);
+  router.push(`/blog/${postId}`);
 };
 
-onMounted(() => {
-  // Load the blog post data based on the route parameter
-  const postId = parseInt(route.params.postId);
-  console.log('Loading blog post:', postId);
-  
-  if (blogPostsData[postId]) {
-    blogPost.value = blogPostsData[postId];
-    // Update related posts
-    relatedPosts.value = getRelatedPosts(postId);
-  } else {
-    // Handle case when post is not found
-    console.warn('Blog post not found:', postId);
-    // You could redirect to 404 or show an error message
+onMounted(async () => {
+  try {
+    // Load the blog post data based on the route parameter
+    const postId = parseInt(route.params.postId);
+    console.log('Loading blog post:', postId);
+    
+    const post = await dataService.getBlogPostById(postId);
+    
+    if (post) {
+      blogPost.value = post;
+      
+      // Get all posts for related posts
+      const allPosts = await dataService.getBlogPosts();
+      relatedPosts.value = allPosts
+        .filter(p => p.id !== postId)
+        .slice(0, 3)
+        .map(p => ({
+          id: p.id,
+          title: p.title,
+          image: p.image,
+          date: p.date
+        }));
+    } else {
+      console.warn('Blog post not found:', postId);
+      // Could redirect to 404 or show an error message
+    }
+  } catch (error) {
+    console.error('Failed to load blog post:', error);
   }
 });
 </script>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "AWS Certified Solutions Architect",
+    "issuer": "Amazon Web Services",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+    "issuedDate": "2023-06-15",
+    "expiryDate": "2026-06-15",
+    "credentialId": "AWS-SA-2023-12345",
+    "status": "Completed",
+    "description": "Validates expertise in designing and deploying scalable systems on AWS.",
+    "verifyUrl": "https://aws.amazon.com/verification"
+  },
+  {
+    "id": 2,
+    "title": "Google Cloud Professional Developer",
+    "issuer": "Google Cloud",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg",
+    "issuedDate": "2024-01-10",
+    "expiryDate": "2026-01-10",
+    "credentialId": "GCP-DEV-2024-67890",
+    "status": "Completed",
+    "description": "Validates skills in developing and deploying applications on Google Cloud Platform.",
+    "verifyUrl": "https://cloud.google.com/certification/verify"
+  },
+  {
+    "id": 3,
+    "title": "Microsoft Certified: Azure Developer Associate",
+    "issuer": "Microsoft",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    "issuedDate": "2023-09-20",
+    "expiryDate": "2025-09-20",
+    "credentialId": "MSFT-AZ-2023-54321",
+    "status": "Completed",
+    "description": "Demonstrates ability to design, build, test, and maintain cloud applications on Azure.",
+    "verifyUrl": "https://learn.microsoft.com/verify"
+  },
+  {
+    "id": 4,
+    "title": "Certified Kubernetes Administrator (CKA)",
+    "issuer": "Cloud Native Computing Foundation",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
+    "issuedDate": "2023-11-05",
+    "expiryDate": "2026-11-05",
+    "credentialId": "CKA-2023-11223",
+    "status": "Completed",
+    "description": "Validates skills in Kubernetes administration and deployment.",
+    "verifyUrl": "https://www.cncf.io/verify"
+  },
+  {
+    "id": 5,
+    "title": "Vue.js Professional Certification",
+    "issuer": "Vue School",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
+    "issuedDate": "2024-03-01",
+    "expiryDate": null,
+    "credentialId": "VUE-PRO-2024-99887",
+    "status": "In Progress",
+    "description": "Advanced certification covering Vue.js 3 composition API, Pinia, and modern patterns.",
+    "verifyUrl": null
+  }
+]

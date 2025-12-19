@@ -152,15 +152,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { getAboutByUsername } from '@/utils/api'
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
-
-const route = useRoute()
-const username = route.params.username
+import dataService from '@/services/dataService'
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const isLoading = ref(true)
-const data = ref({ profile: null, about: null })
+const data = ref({ profile: null })
 
 const aboutText = ref('')
 const skills = ref([])
@@ -173,21 +169,18 @@ const splitParagraphs = (text) => {
 
 const logoSrc = (url) => {
   if (!url) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png'
-  return /^https?:\/\//i.test(url) ? url : `${BASE_API_URL}${url}`
+  return /^https?:\/\//i.test(url) ? url : url
 }
 
 onMounted(async () => {
   try {
-    const res = await getAboutByUsername(username)
-    if (res.ok) {
-      const json = await res.json()
-      if (json.status === 'success') {
-        data.value = json.data || {}
-        aboutText.value = data.value.about?.aboutText || ''
-        skills.value = data.value.about?.skills || []
-        experiences.value = data.value.about?.experiences || []
-      }
-    }
+    const aboutData = await dataService.getAboutData()
+    data.value.profile = aboutData.profile
+    aboutText.value = aboutData.aboutText || ''
+    skills.value = aboutData.skills || []
+    experiences.value = aboutData.experiences || []
+  } catch (error) {
+    console.error('Failed to load about data:', error)
   } finally {
     isLoading.value = false
   }

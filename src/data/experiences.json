@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "company": "Tech Corp",
+    "position": "Senior Full Stack Developer",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "startYear": "2022",
+    "endYear": null,
+    "isCurrent": true,
+    "description": "Leading development of cloud-based applications using modern tech stack."
+  },
+  {
+    "id": 2,
+    "company": "Digital Solutions Inc",
+    "position": "Full Stack Developer",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "startYear": "2020",
+    "endYear": "2022",
+    "isCurrent": false,
+    "description": "Developed and maintained multiple web applications for various clients."
+  },
+  {
+    "id": 3,
+    "company": "StartUp Labs",
+    "position": "Junior Developer",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "startYear": "2019",
+    "endYear": "2020",
+    "isCurrent": false,
+    "description": "Assisted in building innovative products and learning modern development practices."
+  },
+  {
+    "id": 4,
+    "company": "Web Agency",
+    "position": "Frontend Intern",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "startYear": "2018",
+    "endYear": "2019",
+    "isCurrent": false,
+    "description": "Gained hands-on experience in frontend development and responsive design."
+  },
+  {
+    "id": 5,
+    "company": "Freelance",
+    "position": "Web Developer",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "startYear": "2017",
+    "endYear": "2018",
+    "isCurrent": false,
+    "description": "Built custom websites for small businesses and individuals."
+  }
+]

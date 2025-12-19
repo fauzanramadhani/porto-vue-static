@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import ArrowButton from '@/assets/ArrowButton.vue'
+import ArrowButton from '@/components/ArrowButton.vue'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -121,6 +121,13 @@ const postLink = computed(() => props.post ? `/blog/${props.post.id}` : '/')
   color: #cfd8dc;
   font-size: 1rem;
   margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  max-height: 125px;
+  line-height: 1.55;
 }
 
 .date-skeleton { width: 140px; height: 14px; border-radius: 6px; background: rgba(255,255,255,0.06); }

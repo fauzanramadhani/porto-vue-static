@@ -1,24 +1,22 @@
-<style scoped>
-.main-bg {
-  min-height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow-x: hidden;
-}
-</style>
-
 <template>
-  <VantaBackground :background-settings="backgroundSettings" />
-
-  <main class="content">
-    <h1>Vanta Background</h1>
-  </main>
+  <div class="app">
+    <VantaBackground :background-settings="backgroundSettings" />
+    <router-view />
+    <BottomNav />
+  </div>
 </template>
 
 <script setup>
 import VantaBackground from './assets/VantaBackground.vue'
+import BottomNav from './components/BottomNav.vue'
 
 const backgroundSettings = {
   type: 'halo',
 }
 </script>
+
+<style scoped>
+.app {
+  width: 100%;
+}
+</style>

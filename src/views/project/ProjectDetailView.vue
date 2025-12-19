@@ -259,86 +259,14 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
+import dataService from '@/services/dataService';
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const router = useRouter();
 const route = useRoute();
 
-// Project data (dummy data)
-const project = ref({
-  id: 1,
-  title: "E-Commerce Platform",
-  category: "Web Apps",
-  year: "2024",
-  duration: "3 months",
-  status: "Completed",
-  image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
-  overview: "A modern e-commerce platform built with Vue.js and Node.js. Features include user authentication, product management, shopping cart functionality, payment integration with Stripe, and a responsive admin dashboard.",
-  technologies: [
-    { name: "Vue.js", icon: "VueIcon" },
-    { name: "Node.js", icon: "NodeIcon" },
-    { name: "MongoDB", icon: "MongoIcon" },
-    { name: "Stripe", icon: "StripeIcon" }
-  ],
-  features: [
-    "User authentication and authorization",
-    "Product catalog with search and filtering",
-    "Shopping cart and checkout process",
-    "Payment processing with Stripe",
-    "Admin dashboard for product management",
-    "Responsive design for all devices"
-  ],
-  details: [
-    {
-      heading: "Project Overview",
-      paragraph: "This e-commerce platform was designed to provide a seamless shopping experience for both customers and administrators. The project involved building a full-stack application with modern web technologies."
-    },
-    {
-      heading: "Technical Architecture",
-      paragraph: "The application follows a modern architecture pattern with a Vue.js frontend, Node.js backend, and MongoDB database. The frontend uses Vue 3 with Composition API for better code organization and maintainability."
-    },
-    {
-      heading: "Key Features Implementation",
-      list: [
-        "JWT-based authentication system",
-        "RESTful API with Express.js",
-        "Real-time inventory management",
-        "Order tracking and notifications",
-        "Analytics and reporting dashboard"
-      ]
-    },
-    {
-      heading: "Challenges and Solutions",
-      paragraph: "One of the main challenges was implementing a robust payment system. We solved this by integrating Stripe's payment APIs and implementing proper error handling and validation."
-    }
-  ],
-  links: {
-    demo: "https://demo-ecommerce.com",
-    github: "https://github.com/username/ecommerce-platform",
-    documentation: "https://docs-ecommerce.com"
-  }
-});
-
-const otherProjects = ref([
-  {
-    id: 2,
-    title: "Task Management App",
-    category: "Web Apps",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&h=120&fit=crop"
-  },
-  {
-    id: 3,
-    title: "Fitness Tracking Mobile App",
-    category: "Mobile Apps",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=120&fit=crop"
-  },
-  {
-    id: 4,
-    title: "Portfolio Website Design",
-    category: "Design",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=200&h=120&fit=crop"
-  }
-]);
+const project = ref(null);
+const otherProjects = ref([]);
 
 // Methods
 const goBack = () => {
@@ -346,16 +274,44 @@ const goBack = () => {
 };
 
 const navigateToProject = (projectId) => {
-  router.push(`/fauzan/projects/${projectId}`);
+  router.push(`/projects/${projectId}`);
 };
 
-onMounted(() => {
-  // Load the project data based on the route parameter
-  const projectId = parseInt(route.params.projectId);
-  console.log('Loading project:', projectId);
-  
-  // In a real app, you would fetch the project data based on the ID
-  // For now, we're using static data
+onMounted(async () => {
+  try {
+    // Load the project data based on the route parameter
+    const projectId = parseInt(route.params.projectId);
+    console.log('Loading project:', projectId);
+    
+    const projectData = await dataService.getProjectById(projectId);
+    
+    if (projectData) {
+      project.value = projectData;
+      
+      // Format technologies if they are strings
+      if (project.value.technologies && Array.isArray(project.value.technologies)) {
+        project.value.technologies = project.value.technologies.map(tech => 
+          typeof tech === 'string' ? { name: tech, icon: 'TechIcon' } : tech
+        );
+      }
+      
+      // Get other projects
+      const allProjects = await dataService.getProjects();
+      otherProjects.value = allProjects
+        .filter(p => p.id !== projectId)
+        .slice(0, 3)
+        .map(p => ({
+          id: p.id,
+          title: p.title,
+          category: p.category,
+          image: p.thumbnail || p.image
+        }));
+    } else {
+      console.warn('Project not found:', projectId);
+    }
+  } catch (error) {
+    console.error('Failed to load project:', error);
+  }
 });
 </script>
 

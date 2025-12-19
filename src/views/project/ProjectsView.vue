@@ -86,78 +86,27 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
+import dataService from '@/services/dataService';
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const router = useRouter();
 
 const selectedFilter = ref('All');
+const projects = ref([]);
 
-const filters = ref([
-  { name: 'All' },
-  { name: 'Web Apps' },
-  { name: 'Mobile Apps' },
-  { name: 'Design' },
-  { name: 'Open Source' }
-]);
-
-const projects = ref([
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description: "A modern e-commerce platform built with Vue.js and Node.js. Features include user authentication, product management, and payment integration.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
-    technologies: ["Vue.js", "Node.js", "MongoDB", "Stripe"],
-    year: "2024",
-    category: "Web Apps"
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop",
-    technologies: ["React", "Firebase", "Material-UI", "Socket.io"],
-    year: "2023",
-    category: "Web Apps"
-  },
-  {
-    id: 3,
-    title: "Fitness Tracking Mobile App",
-    description: "A cross-platform mobile app for tracking workouts, nutrition, and fitness goals with beautiful charts and progress visualization.",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop",
-    technologies: ["React Native", "Redux", "Chart.js", "AsyncStorage"],
-    year: "2023",
-    category: "Mobile Apps"
-  },
-  {
-    id: 4,
-    title: "Portfolio Website Design",
-    description: "A modern portfolio website design with smooth animations, responsive layout, and interactive elements.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=250&fit=crop",
-    technologies: ["HTML5", "CSS3", "JavaScript", "GSAP"],
-    year: "2024",
-    category: "Design"
-  },
-  {
-    id: 5,
-    title: "Vue Component Library",
-    description: "An open-source Vue.js component library with 50+ reusable components, comprehensive documentation, and TypeScript support.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop",
-    technologies: ["Vue.js", "TypeScript", "Vite", "Storybook"],
-    year: "2023",
-    category: "Open Source"
-  },
-  {
-    id: 6,
-    title: "Real-time Chat Application",
-    description: "A real-time chat application with features like message encryption, file sharing, and group conversations.",
-    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=250&fit=crop",
-    technologies: ["Socket.io", "Express.js", "MongoDB", "JWT"],
-    year: "2023",
-    category: "Web Apps"
-  }
-]);
+// Compute filters dynamically from projects
+const filters = computed(() => {
+  if (projects.value.length === 0) return [{ name: 'All' }]
+  
+  const categories = new Set(['All'])
+  projects.value.forEach(project => {
+    if (project.category) categories.add(project.category)
+  })
+  
+  return Array.from(categories).map(name => ({ name }))
+});
 
 const filteredProjects = computed(() => {
   if (selectedFilter.value === 'All') {
@@ -171,10 +120,18 @@ const selectFilter = (filterName) => {
 };
 
 const viewProject = (projectId) => {
-  console.log('Viewing project:', projectId);
-  // Navigate to project detail page
-  router.push(`/fauzan/projects/${projectId}`);
+  router.push(`/projects/${projectId}`);
 };
+
+// Load data on mount
+onMounted(async () => {
+  try {
+    const data = await dataService.getProjects()
+    projects.value = data
+  } catch (error) {
+    console.error('Failed to load projects:', error)
+  }
+});
 </script>
 
 <style scoped>

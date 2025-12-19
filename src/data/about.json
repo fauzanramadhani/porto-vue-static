@@ -1,0 +1,47 @@
+{
+  "aboutText": "I'm a passionate Full Stack Developer with over 5 years of experience building modern web applications. My journey in software development started with a curiosity about how websites work, and has evolved into a deep expertise in both frontend and backend technologies.\n\nI specialize in creating scalable, performant applications using cutting-edge technologies like Vue.js, React, Node.js, and cloud platforms. I'm a strong believer in clean code, best practices, and continuous learning.\n\nWhen I'm not coding, you can find me contributing to open-source projects, writing technical articles, or exploring new technologies. I'm always excited to take on challenging projects and collaborate with talented teams.",
+  "skills": [
+    {
+      "id": 1,
+      "title": "Frontend Development",
+      "skills": [
+        "Vue.js",
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "SASS/SCSS"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Backend Development",
+      "skills": [
+        "Node.js",
+        "Express",
+        "NestJS",
+        "Python",
+        "Django",
+        "REST APIs",
+        "GraphQL",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "DevOps & Tools",
+      "skills": [
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "Git",
+        "CI/CD",
+        "Linux",
+        "Nginx",
+        "Redis"
+      ]
+    }
+  ]
+}

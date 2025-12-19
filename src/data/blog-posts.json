@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Getting Started with Vue 3 Composition API",
+    "excerpt": "Learn how to leverage the power of Vue 3's Composition API to write more maintainable and reusable code.",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
+    "category": "Vue.js",
+    "tags": ["vue", "javascript", "composition-api"],
+    "date": "December 10, 2024",
+    "readTime": 8,
+    "author": "John Doe",
+    "createdAt": "2024-12-10T10:00:00Z",
+    "contentFormat": "html",
+    "content": "<h2>Introduction to Composition API</h2><p>The Composition API is one of the most significant additions to Vue 3. It provides a set of additive, function-based APIs that allow flexible composition of component logic.</p><h2>Why Use Composition API?</h2><p>The Composition API solves several problems that developers face when building large-scale applications:</p><ul><li>Better code organization and reusability</li><li>Improved TypeScript support</li><li>More flexible logic composition</li><li>Easier to test and maintain</li></ul><h2>Basic Example</h2><pre><code>import { ref, computed, onMounted } from 'vue'\n\nexport default {\n  setup() {\n    const count = ref(0)\n    const doubleCount = computed(() => count.value * 2)\n    \n    onMounted(() => {\n      console.log('Component is mounted!')\n    })\n    \n    return { count, doubleCount }\n  }\n}</code></pre><p>This is just the beginning. The Composition API offers much more flexibility and power for building complex applications.</p>"
+  },
+  {
+    "id": 2,
+    "title": "Building Scalable Node.js Applications",
+    "excerpt": "Best practices and patterns for building production-ready Node.js applications that can scale.",
+    "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=800&q=80",
+    "category": "Node.js",
+    "tags": ["nodejs", "backend", "scalability"],
+    "date": "December 5, 2024",
+    "readTime": 12,
+    "author": "John Doe",
+    "createdAt": "2024-12-05T14:30:00Z",
+    "contentFormat": "html",
+    "content": "<h2>Introduction to Scalable Architecture</h2><p>Building scalable Node.js applications requires careful planning and adherence to best practices. In this article, we'll explore key concepts and patterns.</p><h2>Microservices Architecture</h2><p>Breaking your application into smaller, independent services can greatly improve scalability and maintainability. Each service should handle a specific business capability.</p><h2>Caching Strategies</h2><p>Implement caching at multiple levels:</p><ul><li>Application-level caching with Redis</li><li>Database query result caching</li><li>CDN caching for static assets</li><li>API response caching</li></ul><h2>Load Balancing</h2><p>Distribute incoming traffic across multiple server instances to ensure high availability and reliability. Use tools like Nginx or AWS ELB.</p><pre><code>// Example: Basic Express server\nconst express = require('express')\nconst app = express()\n\napp.get('/health', (req, res) => {\n  res.status(200).json({ status: 'healthy' })\n})\n\napp.listen(3000, () => {\n  console.log('Server running on port 3000')\n})</code></pre>"
+  },
+  {
+    "id": 3,
+    "title": "Modern CSS Techniques for Responsive Design",
+    "excerpt": "Explore modern CSS features like Grid, Flexbox, and Container Queries for creating responsive layouts.",
+    "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=800&q=80",
+    "category": "CSS",
+    "tags": ["css", "responsive", "webdesign"],
+    "date": "November 28, 2024",
+    "readTime": 10,
+    "author": "John Doe",
+    "createdAt": "2024-11-28T09:15:00Z",
+    "contentFormat": "html",
+    "content": "<h2>The Evolution of Responsive Design</h2><p>Responsive design has come a long way. Modern CSS provides powerful tools that make creating responsive layouts easier than ever.</p><h2>CSS Grid Layout</h2><p>CSS Grid is a two-dimensional layout system perfect for creating complex, responsive layouts with minimal code.</p><pre><code>.grid-container {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n  gap: 2rem;\n}</code></pre><h2>Flexbox for One-Dimensional Layouts</h2><p>Flexbox excels at distributing space and aligning items in a single dimension.</p><h2>Container Queries</h2><p>Container queries allow you to apply styles based on the size of a container rather than the viewport, enabling true component-based responsive design.</p><pre><code>@container (min-width: 400px) {\n  .card {\n    display: flex;\n    flex-direction: row;\n  }\n}</code></pre>"
+  },
+  {
+    "id": 4,
+    "title": "Understanding TypeScript Generics",
+    "excerpt": "A deep dive into TypeScript generics and how they can make your code more reusable and type-safe.",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=800&q=80",
+    "category": "TypeScript",
+    "tags": ["typescript", "programming", "generics"],
+    "date": "November 20, 2024",
+    "readTime": 15,
+    "author": "John Doe",
+    "createdAt": "2024-11-20T11:00:00Z",
+    "contentFormat": "html",
+    "content": "<h2>What Are Generics?</h2><p>Generics provide a way to create reusable components that work with multiple types while maintaining type safety.</p><h2>Basic Generic Function</h2><pre><code>function identity<T>(arg: T): T {\n  return arg;\n}\n\nconst output1 = identity<string>('hello');\nconst output2 = identity<number>(42);</code></pre><h2>Generic Interfaces</h2><p>You can use generics to create flexible interfaces that adapt to different types.</p><pre><code>interface Container<T> {\n  value: T;\n  getValue(): T;\n  setValue(value: T): void;\n}</code></pre><h2>Generic Constraints</h2><p>Sometimes you want to limit the types that can be used with a generic. You can do this with constraints.</p><pre><code>interface Lengthwise {\n  length: number;\n}\n\nfunction logLength<T extends Lengthwise>(arg: T): void {\n  console.log(arg.length);\n}</code></pre>"
+  },
+  {
+    "id": 5,
+    "title": "Optimizing React Performance",
+    "excerpt": "Practical tips and techniques for improving the performance of your React applications.",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
+    "category": "React",
+    "tags": ["react", "performance", "optimization"],
+    "date": "November 15, 2024",
+    "readTime": 11,
+    "author": "John Doe",
+    "createdAt": "2024-11-15T16:45:00Z",
+    "contentFormat": "html",
+    "content": "<h2>Why Performance Matters</h2><p>Poor performance can lead to a frustrating user experience and lower engagement. Let's explore how to optimize React applications.</p><h2>Use React.memo</h2><p>Prevent unnecessary re-renders by memoizing components that don't need to update.</p><pre><code>const MyComponent = React.memo(({ data }) => {\n  return <div>{data}</div>;\n});</code></pre><h2>Optimize useEffect Dependencies</h2><p>Ensure your useEffect hooks have the correct dependencies to avoid unnecessary re-runs.</p><h2>Code Splitting with React.lazy</h2><p>Load components on demand to reduce initial bundle size.</p><pre><code>const LazyComponent = React.lazy(() => import('./LazyComponent'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<div>Loading...</div>}>\n      <LazyComponent />\n    </Suspense>\n  );\n}</code></pre><h2>Virtual Lists for Long Lists</h2><p>Use libraries like react-window or react-virtual to efficiently render large lists.</p>"
+  }
+]

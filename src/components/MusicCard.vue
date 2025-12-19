@@ -53,7 +53,8 @@ const fallbackImage = 'https://images.unsplash.com/photo-1493225457124-a3eb161ff
   align-items: center;
   gap: 10px;
   width: 100%;
-  height: auto;
+  height: 110px;
+  max-height: 110px;
   margin: 0 auto;
   overflow: hidden;
 }

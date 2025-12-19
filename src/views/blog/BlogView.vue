@@ -134,73 +134,47 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import ProfileHeader from '@/components/layout/home/card/ProfileHeaderCard.vue';
+import dataService from '@/services/dataService';
+import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const router = useRouter();
 
 // Reactive state
 const selectedCategory = ref('All');
+const blogPosts = ref([]);
 
-// Blog data
-const blogPosts = ref([
-  {
-    id: 1,
-    title: "Building Modern Web Applications with Vue 3",
-    excerpt: "Explore the latest features in Vue 3 and how they can improve your development workflow. From Composition API to better TypeScript support...",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop",
-    category: "Development",
-    date: "March 15, 2024",
-    readTime: 8
-  },
-  {
-    id: 2,
-    title: "The Future of Frontend Design Systems",
-    excerpt: "Design systems are becoming increasingly important in modern web development. Learn how to create scalable and maintainable design systems...",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=250&fit=crop",
-    category: "Design",
-    date: "March 10, 2024",
-    readTime: 6
-  },
-  {
-    id: 3,
-    title: "Optimizing Performance in React Applications",
-    excerpt: "Performance is crucial for user experience. Discover techniques to optimize your React applications and improve loading times...",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop",
-    category: "Development",
-    date: "March 5, 2024",
-    readTime: 10
-  },
-  {
-    id: 4,
-    title: "CSS Grid vs Flexbox: When to Use What",
-    excerpt: "Understanding the differences between CSS Grid and Flexbox is essential for modern layout design. Here's a comprehensive guide...",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop",
-    category: "CSS",
-    date: "February 28, 2024",
-    readTime: 7
-  }
-]);
+// Compute categories from blog posts
+const categories = computed(() => {
+  if (blogPosts.value.length === 0) return [{ name: 'All', count: 0 }]
+  
+  const categoryMap = {}
+  blogPosts.value.forEach(post => {
+    if (!categoryMap[post.category]) {
+      categoryMap[post.category] = 0
+    }
+    categoryMap[post.category]++
+  })
+  
+  const result = [{ name: 'All', count: blogPosts.value.length }]
+  Object.entries(categoryMap).forEach(([name, count]) => {
+    result.push({ name, count })
+  })
+  return result
+});
 
-const categories = ref([
-  { name: 'All', count: 12 },
-  { name: 'Development', count: 5 },
-  { name: 'Design', count: 4 },
-  { name: 'CSS', count: 2 },
-  { name: 'JavaScript', count: 1 }
-]);
-
-const popularTags = ref([
-  { name: 'Vue.js' },
-  { name: 'React' },
-  { name: 'JavaScript' },
-  { name: 'CSS' },
-  { name: 'Design Systems' },
-  { name: 'Performance' },
-  { name: 'TypeScript' },
-  { name: 'Web Development' }
-]);
+// Compute popular tags from blog posts
+const popularTags = computed(() => {
+  if (blogPosts.value.length === 0) return []
+  
+  const tagSet = new Set()
+  blogPosts.value.forEach(post => {
+    post.tags?.forEach(tag => tagSet.add(tag))
+  })
+  
+  return Array.from(tagSet).map(tag => ({ name: tag }))
+});
 
 // Methods
 const selectCategory = (category) => {
@@ -208,10 +182,18 @@ const selectCategory = (category) => {
 };
 
 const readPost = (postId) => {
-  console.log('Reading post:', postId);
-  // Navigate to post detail page
-  router.push(`/fauzan/blog/${postId}`);
+  router.push(`/blog/${postId}`);
 };
+
+// Load data on mount
+onMounted(async () => {
+  try {
+    const posts = await dataService.getBlogPosts()
+    blogPosts.value = posts
+  } catch (error) {
+    console.error('Failed to load blog posts:', error)
+  }
+});
 </script>
 
 <style scoped>
