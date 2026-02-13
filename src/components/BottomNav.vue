@@ -58,43 +58,15 @@ const maxGap = 24;
 watch(
   () => route.path,
   (newPath) => {
-    buttons.forEach((btn, index) => {
-      // Handle biography routes (/:username/*) - they should activate the corresponding nav item
-      if (
-        newPath.includes('/') &&
-        !newPath.startsWith('/admin') &&
-        !newPath.startsWith('/home')
-      ) {
-        // Extract the route part after username (e.g., /demo/about -> /about)
-        const pathParts = newPath.split('/');
-        if (pathParts.length >= 3) {
-          const routePart = '/' + pathParts[2]; // /about, /blog, etc.
-          btn.active = btn.route === routePart;
-        } else {
-          btn.active = false;
-        }
-      } else {
-        btn.active = btn.route === newPath;
-      }
-
-      // Additional active state logic for nested routes
-      if (!btn.active) {
-        // Check if we're on a sub-route (e.g., /blog/list should activate blog)
-        if (newPath.startsWith(btn.route + '/')) {
-          btn.active = true;
-        }
-        // Check for user routes (e.g., /user/blog/list should activate blog)
-        else if (
-          newPath.includes('/user/') &&
-          newPath.includes(btn.route.substring(1))
-        ) {
-          btn.active = true;
-        }
-      }
-    });
+    buttons.forEach((btn) => {
+      btn.active =
+        newPath === btn.route ||
+        newPath.startsWith(btn.route + '/')
+    })
   },
   { immediate: true }
-);
+)
+
 
 const handleMouseEnter = (hoveredIndex) => {
   // Check if we're on mobile (touch device)

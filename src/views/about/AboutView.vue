@@ -1,5 +1,4 @@
 <template>
-  <div class="main-bg">
     <div class="main-outer">
       <ProfileHeader :loading="isLoading" :profile="data.profile" />
       
@@ -147,7 +146,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -191,20 +189,14 @@ onMounted(async () => {
 /* ===== RESET & BASE ===== */
 * {
   margin: 0;
-  padding: 0;
+  padding: auto auto;
   box-sizing: border-box;
 }
 
 /* ===== LAYOUT CONTAINERS ===== */
-.main-bg {
-  min-height: 100vh;
-  width: 100vw;
-}
 
 .main-outer {
   width: 100%;
-  margin: 48px auto 108px auto;
-  padding: 0 2rem;
 }
 
 .row {
@@ -221,7 +213,7 @@ onMounted(async () => {
   display: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1034px) {
   .desktop-layout {
     display: none;
   }

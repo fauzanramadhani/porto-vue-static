@@ -18,5 +18,8 @@ const backgroundSettings = {
 <style scoped>
 .app {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 </style>

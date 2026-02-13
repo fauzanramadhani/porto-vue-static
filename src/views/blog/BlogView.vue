@@ -1,7 +1,7 @@
 <template>
-  <div class="main-bg">
+
     <div class="main-outer">
-      <ProfileHeader />
+      <ProfileHeader :loading="isLoading" :profile="profile" />
       
       <!-- Desktop Layout -->
       <div class="desktop-layout">
@@ -9,29 +9,48 @@
           <div class="blog-card">
             <h2 class="section-title">Latest Posts</h2>
             <div class="blog-posts">
-              <div v-for="post in blogPosts" :key="post.id" class="blog-post">
-                <div class="post-image">
-                  <img :src="post.image" :alt="post.title" />
-                  <div class="post-category">{{ post.category }}</div>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">{{ post.title }}</h3>
-                  <p class="post-excerpt">{{ post.excerpt }}</p>
-                  <div class="post-meta">
-                    <span class="post-date">{{ post.date }}</span>
-                    <span class="post-read-time">{{ post.readTime }} min read</span>
+              <div v-if="isLoading" class="skeleton-container">
+                <div v-for="n in 3" :key="n" class="blog-post skeleton-post">
+                  <div class="post-image skeleton-image">
+                    <SkeletonLoader width="120px" height="80px" borderRadius="8px" />
                   </div>
-                  <v-btn 
-                    variant="text" 
-                    color="#00eaff" 
-                    class="read-more-btn"
-                    @click="readPost(post.id)"
-                  >
-                    Read More
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                      <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                    </svg>
-                  </v-btn>
+                  <div class="post-content">
+                    <SkeletonLoader width="60%" height="24px" class="mb-2" />
+                    <SkeletonLoader width="100%" height="16px" class="mb-1" />
+                    <SkeletonLoader width="90%" height="16px" class="mb-3" />
+                    <div class="d-flex gap-3 mb-2">
+                       <SkeletonLoader width="80px" height="14px" />
+                    </div>
+                    <SkeletonLoader width="100px" height="32px" />
+                  </div>
+                </div>
+              </div>
+              
+              <div v-else>
+                <div v-for="post in blogPosts" :key="post.id" class="blog-post">
+                  <div class="post-image">
+                    <img :src="post.image" :alt="post.title" />
+                    <div class="post-category">{{ post.category }}</div>
+                  </div>
+                  <div class="post-content">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-excerpt">{{ post.excerpt }}</p>
+                    <div class="post-meta">
+                      <span class="post-date">{{ post.date }}</span>
+                      <span class="post-read-time">{{ post.readTime }} min read</span>
+                    </div>
+                    <v-btn 
+                      variant="text" 
+                      color="#00eaff" 
+                      class="read-more-btn"
+                      @click="readPost(post.id)"
+                    >
+                      Read More
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
+                        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                      </svg>
+                    </v-btn>
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,36 +120,56 @@
         <div class="mobile-blog-posts">
           <h2 class="mobile-section-title">Latest Posts</h2>
           <div class="mobile-posts">
-            <div v-for="post in blogPosts" :key="post.id" class="mobile-blog-post">
-              <div class="mobile-post-image">
-                <img :src="post.image" :alt="post.title" />
-                <div class="mobile-post-category">{{ post.category }}</div>
-              </div>
-              <div class="mobile-post-content">
-                <h3 class="mobile-post-title">{{ post.title }}</h3>
-                <p class="mobile-post-excerpt">{{ post.excerpt }}</p>
-                <div class="mobile-post-meta">
-                  <span class="mobile-post-date">{{ post.date }}</span>
-                  <span class="mobile-post-read-time">{{ post.readTime }} min read</span>
+            <div v-if="isLoading" class="skeleton-container">
+              <div v-for="n in 3" :key="n" class="mobile-blog-post skeleton-post">
+                <div class="mobile-post-image">
+                  <SkeletonLoader width="100%" height="100%" borderRadius="0" />
                 </div>
-                <v-btn 
-                  variant="text" 
-                  color="#00eaff" 
-                  class="mobile-read-more-btn"
-                  @click="readPost(post.id)"
-                >
-                  Read More
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                  </svg>
-                </v-btn>
+                <div class="mobile-post-content">
+                   <SkeletonLoader width="80%" height="24px" class="mb-2" />
+                   <SkeletonLoader width="100%" height="16px" class="mb-1" />
+                   <SkeletonLoader width="90%" height="16px" class="mb-3" />
+                   <div class="d-flex gap-3 mb-2">
+                      <SkeletonLoader width="80px" height="14px" />
+                      <SkeletonLoader width="60px" height="14px" />
+                   </div>
+                   <SkeletonLoader width="100px" height="32px" />
+                </div>
+              </div>
+            </div>
+
+            <div v-else>
+              <div v-for="post in blogPosts" :key="post.id" class="mobile-blog-post">
+                <div class="mobile-post-image">
+                  <img :src="post.image" :alt="post.title" />
+                  <div class="mobile-post-category">{{ post.category }}</div>
+                </div>
+                <div class="mobile-post-content">
+                  <h3 class="mobile-post-title">{{ post.title }}</h3>
+                  <p class="mobile-post-excerpt">{{ post.excerpt }}</p>
+                  <div class="mobile-post-meta">
+                    <span class="mobile-post-date">{{ post.date }}</span>
+                    <span class="mobile-post-read-time">{{ post.readTime }} min read</span>
+                  </div>
+                  <v-btn 
+                    variant="text" 
+                    color="#00eaff" 
+                    class="mobile-read-more-btn"
+                    @click="readPost(post.id)"
+                  >
+                    Read More
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
+                      <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                    </svg>
+                  </v-btn>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script setup>
@@ -138,12 +177,15 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import dataService from '@/services/dataService';
 import ProfileHeader from '@/components/ProfileHeaderCard.vue';
+import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
 
 // Reactive state
 const selectedCategory = ref('All');
 const blogPosts = ref([]);
+const profile = ref(null);
+const isLoading = ref(true);
 
 // Compute categories from blog posts
 const categories = computed(() => {
@@ -188,10 +230,21 @@ const readPost = (postId) => {
 // Load data on mount
 onMounted(async () => {
   try {
-    const posts = await dataService.getBlogPosts()
+    isLoading.value = true
+    // Simulate network delay for demo purposes
+    // await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const [posts, profileData] = await Promise.all([
+      dataService.getBlogPosts(),
+      dataService.getProfile()
+    ])
+    
     blogPosts.value = posts
+    profile.value = profileData
   } catch (error) {
-    console.error('Failed to load blog posts:', error)
+    console.error('Failed to load blog page data:', error)
+  } finally {
+    isLoading.value = false
   }
 });
 </script>
@@ -204,15 +257,10 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
-.main-bg {
-  min-height: 100vh;
-  width: 100vw;
-}
+
 
 .main-outer {
   width: 100%;
-  margin: 48px auto 108px auto;
-  padding: 0 2rem;
 }
 
 @media (min-width: 1420px) {
@@ -231,7 +279,7 @@ onMounted(async () => {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1034px) {
   .desktop-layout {
     display: none;
   }
@@ -239,9 +287,9 @@ onMounted(async () => {
   .mobile-layout {
     display: block;
   }
-  
-  .main-outer {
-    padding: 0 2rem;
+
+  .mobile-layout > * {
+    margin-bottom: 24px;
   }
 }
 
@@ -258,9 +306,10 @@ onMounted(async () => {
   border-radius: 18px;
   box-shadow: 0 8px 32px 0 #0004;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   color: #fff;
-  padding: 24px 28px;
+  padding: 24px 24px 0px 24px;
   overflow: hidden;
 }
 
@@ -278,7 +327,7 @@ onMounted(async () => {
   font-size: 2rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   letter-spacing: -0.5px;
 }
 
@@ -292,7 +341,8 @@ onMounted(async () => {
   display: flex;
   gap: 24px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
@@ -359,7 +409,6 @@ onMounted(async () => {
   align-self: flex-start;
   font-weight: 500;
   text-transform: none;
-  padding: 8px 16px;
   display: flex;
   align-items: center;
   gap: 8px;

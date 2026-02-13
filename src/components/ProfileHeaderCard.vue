@@ -204,10 +204,9 @@ const computedDesc = computed(() => {
 .desc-skeleton {
   padding-top: 20px;
   width: 80%;
-  height: 18px;
+  height: 25px;
   border-radius: 8px;
   background: rgba(255,255,255,0.06);
-  margin-top: 6px;
 }
 
 .status-skeleton {
@@ -381,6 +380,10 @@ const computedDesc = computed(() => {
 }
 
 @media (max-width: 480px) {
+  .avatar-skeleton {
+    width: 100px;
+    height: 100px;
+  }
   .cover-photo {
     height: 140px;
   }
