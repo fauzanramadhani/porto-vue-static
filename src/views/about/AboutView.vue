@@ -1,6 +1,5 @@
 <template>
     <div class="main-outer">
-      <ProfileHeader :loading="isLoading" :profile="data.profile" />
       
       <!-- Desktop Layout -->
       <div class="desktop-layout">
@@ -45,7 +44,7 @@
         <div class="row">
           <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
             <div class="exp-header">
-              <span class="exp-header-icon"><i class="fa-regular fa-id-badge"></i></span>
+              <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
               <span class="exp-header-title">Experience</span>
             </div>
             <div class="exp-list">
@@ -53,9 +52,9 @@
                 <div v-for="n in 5" :key="n" class="exp-item">
                   <div class="exp-logo-wrapper shimmer"></div>
                   <div class="exp-info">
-                    <div class="sk-line shimmer" style="width: 40%"></div>
-                    <div class="sk-line shimmer" style="width: 60%"></div>
-                    <div class="sk-line shimmer" style="width: 30%"></div>
+                    <div class="sk-line shimmer" style="width: 40% ; margin-bottom: 5px"></div>
+                    <div class="sk-line shimmer" style="width: 60% ; margin-bottom: 5px"></div>
+                    <div class="sk-line shimmer" style="width: 30% ; margin-bottom: 5px"></div>
                   </div>
                 </div>
               </template>
@@ -151,10 +150,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import dataService from '@/services/dataService'
-import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const isLoading = ref(true)
-const data = ref({ profile: null })
 
 const aboutText = ref('')
 const skills = ref([])
@@ -173,7 +170,6 @@ const logoSrc = (url) => {
 onMounted(async () => {
   try {
     const aboutData = await dataService.getAboutData()
-    data.value.profile = aboutData.profile
     aboutText.value = aboutData.aboutText || ''
     skills.value = aboutData.skills || []
     experiences.value = aboutData.experiences || []

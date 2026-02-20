@@ -89,8 +89,8 @@ const DEFAULT_SETTINGS = {
 
   // Elegant purple gradient background (CSS, not Vanta)
   gradient: {
-    gradientStart: '#2e026d',
-    gradientEnd: '#8b5cf6',
+    gradientStart: '#1a0b2e',
+    gradientEnd: '#4f2a74',
     gradientDirection: '135deg'
   }
 }

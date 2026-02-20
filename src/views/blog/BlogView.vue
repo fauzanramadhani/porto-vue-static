@@ -1,7 +1,6 @@
 <template>
 
     <div class="main-outer">
-      <ProfileHeader :loading="isLoading" :profile="profile" />
       
       <!-- Desktop Layout -->
       <div class="desktop-layout">
@@ -27,29 +26,34 @@
               </div>
               
               <div v-else>
-                <div v-for="post in blogPosts" :key="post.id" class="blog-post">
-                  <div class="post-image">
-                    <img :src="post.image" :alt="post.title" />
-                    <div class="post-category">{{ post.category }}</div>
-                  </div>
-                  <div class="post-content">
-                    <h3 class="post-title">{{ post.title }}</h3>
-                    <p class="post-excerpt">{{ post.excerpt }}</p>
-                    <div class="post-meta">
-                      <span class="post-date">{{ post.date }}</span>
-                      <span class="post-read-time">{{ post.readTime }} min read</span>
+                <div v-if="filteredPosts.length === 0" class="no-posts">
+                  No posts found matching your criteria.
+                </div>
+                <div v-else>
+                  <div v-for="post in filteredPosts" :key="post.id" class="blog-post">
+                    <div class="post-image">
+                      <img :src="post.image" :alt="post.title" />
+                      <div class="post-category">{{ post.category }}</div>
                     </div>
-                    <v-btn 
-                      variant="text" 
-                      color="#00eaff" 
-                      class="read-more-btn"
-                      @click="readPost(post.id)"
-                    >
-                      Read More
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                      </svg>
-                    </v-btn>
+                    <div class="post-content">
+                      <h3 class="post-title">{{ post.title }}</h3>
+                      <p class="post-excerpt">{{ post.excerpt }}</p>
+                      <div class="post-meta">
+                        <span class="post-date">{{ post.date }}</span>
+                        <span class="post-read-time">{{ post.readTime }} min read</span>
+                      </div>
+                      <v-btn 
+                        variant="text" 
+                        color="#00eaff" 
+                        class="read-more-btn"
+                        @click="readPost(post.id)"
+                      >
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
+                          <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                        </svg>
+                      </v-btn>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -76,6 +80,8 @@
                 v-for="tag in popularTags" 
                 :key="tag.name"
                 class="tag-item"
+                :class="{ active: selectedTag === tag.name }"
+                @click="selectTag(tag.name)"
               >
                 {{ tag.name }}
               </span>
@@ -110,6 +116,8 @@
                 v-for="tag in popularTags" 
                 :key="tag.name"
                 class="mobile-tag-item"
+                :class="{ active: selectedTag === tag.name }"
+                @click="selectTag(tag.name)"
               >
                 {{ tag.name }}
               </span>
@@ -139,29 +147,34 @@
             </div>
 
             <div v-else>
-              <div v-for="post in blogPosts" :key="post.id" class="mobile-blog-post">
-                <div class="mobile-post-image">
-                  <img :src="post.image" :alt="post.title" />
-                  <div class="mobile-post-category">{{ post.category }}</div>
-                </div>
-                <div class="mobile-post-content">
-                  <h3 class="mobile-post-title">{{ post.title }}</h3>
-                  <p class="mobile-post-excerpt">{{ post.excerpt }}</p>
-                  <div class="mobile-post-meta">
-                    <span class="mobile-post-date">{{ post.date }}</span>
-                    <span class="mobile-post-read-time">{{ post.readTime }} min read</span>
+              <div v-if="filteredPosts.length === 0" class="no-posts mobile-no-posts">
+                No posts found matching your criteria.
+              </div>
+              <div v-else>
+                <div v-for="post in filteredPosts" :key="post.id" class="mobile-blog-post">
+                  <div class="mobile-post-image">
+                    <img :src="post.image" :alt="post.title" />
+                    <div class="mobile-post-category">{{ post.category }}</div>
                   </div>
-                  <v-btn 
-                    variant="text" 
-                    color="#00eaff" 
-                    class="mobile-read-more-btn"
-                    @click="readPost(post.id)"
-                  >
-                    Read More
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                      <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                    </svg>
-                  </v-btn>
+                  <div class="mobile-post-content">
+                    <h3 class="mobile-post-title">{{ post.title }}</h3>
+                    <p class="mobile-post-excerpt">{{ post.excerpt }}</p>
+                    <div class="mobile-post-meta">
+                      <span class="mobile-post-date">{{ post.date }}</span>
+                      <span class="mobile-post-read-time">{{ post.readTime }} min read</span>
+                    </div>
+                    <v-btn 
+                      variant="text" 
+                      color="#00eaff" 
+                      class="mobile-read-more-btn"
+                      @click="readPost(post.id)"
+                    >
+                      Read More
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
+                        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                      </svg>
+                    </v-btn>
+                  </div>
                 </div>
               </div>
             </div>
@@ -176,15 +189,14 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import dataService from '@/services/dataService';
-import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
 
 // Reactive state
 const selectedCategory = ref('All');
+const selectedTag = ref(null);
 const blogPosts = ref([]);
-const profile = ref(null);
 const isLoading = ref(true);
 
 // Compute categories from blog posts
@@ -218,9 +230,28 @@ const popularTags = computed(() => {
   return Array.from(tagSet).map(tag => ({ name: tag }))
 });
 
+// Compute filtered posts
+const filteredPosts = computed(() => {
+  return blogPosts.value.filter(post => {
+    const categoryMatch = selectedCategory.value === 'All' || post.category === selectedCategory.value;
+    const tagMatch = !selectedTag.value || (post.tags && post.tags.includes(selectedTag.value));
+    return categoryMatch && tagMatch;
+  });
+});
+
 // Methods
 const selectCategory = (category) => {
   selectedCategory.value = category;
+  selectedTag.value = null; // Reset tag selection when category is selected
+};
+
+const selectTag = (tag) => {
+  if (selectedTag.value === tag) {
+    selectedTag.value = null; // Toggle off if already selected
+  } else {
+    selectedTag.value = tag;
+    selectedCategory.value = 'All'; // Reset category selection when tag is selected
+  }
 };
 
 const readPost = (postId) => {
@@ -234,13 +265,11 @@ onMounted(async () => {
     // Simulate network delay for demo purposes
     // await new Promise(resolve => setTimeout(resolve, 1500));
     
-    const [posts, profileData] = await Promise.all([
-      dataService.getBlogPosts(),
-      dataService.getProfile()
+    const [posts] = await Promise.all([
+      dataService.getBlogPosts()
     ])
     
     blogPosts.value = posts
-    profile.value = profileData
   } catch (error) {
     console.error('Failed to load blog page data:', error)
   } finally {
@@ -342,9 +371,12 @@ onMounted(async () => {
   gap: 24px;
   padding: 24px;
   margin-bottom: 24px;
+  box-shadow: 0 8px 32px 0 #0004;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border-radius: 18px;
   transition: all 0.3s ease;
 }
 
@@ -425,6 +457,13 @@ onMounted(async () => {
   transform: translateX(4px);
 }
 
+.no-posts {
+  color: #b0b0b0;
+  padding: 20px 0;
+  font-style: italic;
+  text-align: center;
+}
+
 /* ===== SIDEBAR ===== */
 .sidebar-card {
   position: relative;
@@ -467,7 +506,11 @@ onMounted(async () => {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px 0 #0004;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  color: #fff;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -517,6 +560,12 @@ onMounted(async () => {
   transform: translateY(-1px);
 }
 
+.tag-item.active {
+  background: rgba(0, 234, 255, 0.3);
+  border-color: rgba(0, 234, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+}
+
 /* ===== MOBILE LAYOUT ===== */
 .mobile-filters {
   margin-bottom: 32px;
@@ -544,12 +593,12 @@ onMounted(async () => {
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-category-item:hover {
@@ -605,6 +654,12 @@ onMounted(async () => {
   transform: translateY(-1px);
 }
 
+.mobile-tag-item.active {
+  background: rgba(0, 234, 255, 0.3);
+  border-color: rgba(0, 234, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+}
+
 .mobile-blog-posts {
   margin-top: 32px;
 }
@@ -620,15 +675,18 @@ onMounted(async () => {
 .mobile-posts {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .mobile-blog-post {
+  box-shadow: 0 8px 32px 0 #0004;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border-radius: 18px;
   overflow: hidden;
   transition: all 0.3s ease;
+  margin-bottom: 20px;
 }
 
 .mobile-blog-post:hover {
@@ -709,4 +767,9 @@ onMounted(async () => {
 .mobile-read-more-btn:hover .arrow-icon {
   transform: translateX(4px);
 }
-</style> 
+
+.mobile-no-posts {
+  text-align: left;
+  padding-left: 8px;
+}
+</style>

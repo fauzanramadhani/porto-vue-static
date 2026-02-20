@@ -159,6 +159,9 @@ const navigateTo = (routePath) => {
 
   /* Semi-transparent circular outline */
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  outline: none;
 }
 
 .nav-btn:hover {
