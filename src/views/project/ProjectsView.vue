@@ -1,6 +1,5 @@
 <template>
   <div class="main-outer">
-    <ProfileHeader :loading="isLoading" :profile="profile" />
     
     <!-- Desktop Layout -->
     <div class="desktop-layout">
@@ -23,22 +22,22 @@
         
         <!-- Projects Grid -->
         <div class="projects-grid">
-          <div v-if="isLoading" class="skeleton-container" style="display: contents;">
+          <div v-if="isLoading" style="display: contents;">
             <!-- Render multiple skeleton cards -->
             <div v-for="n in 3" :key="n" class="project-card skeleton-card">
               <div class="project-image">
                 <SkeletonLoader width="100%" height="100%" borderRadius="0" />
               </div>
-              <div class="project-content">
-                <SkeletonLoader width="70%" height="28px" class="mb-3" />
-                <SkeletonLoader width="100%" height="16px" class="mb-1" />
-                <SkeletonLoader width="90%" height="16px" class="mb-3" />
-                <div class="d-flex gap-2 mb-3">
+              <div class="project-content project-content-loading">
+                <SkeletonLoader width="70%" height="28px" />
+                <SkeletonLoader width="100%" height="16px" />
+                <SkeletonLoader width="90%" height="16px" />
+                <div class="tag-loading">
                   <SkeletonLoader width="60px" height="24px" borderRadius="12px" />
                   <SkeletonLoader width="70px" height="24px" borderRadius="12px" />
                   <SkeletonLoader width="50px" height="24px" borderRadius="12px" />
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="button-loading">
                    <SkeletonLoader width="40px" height="14px" />
                    <SkeletonLoader width="60px" height="20px" borderRadius="4px" />
                 </div>
@@ -123,25 +122,25 @@
         
         <!-- Projects List Mobile -->
         <div class="mobile-projects-list">
-          <div v-if="isLoading" class="skeleton-container">
+          <div v-if="isLoading" style="display: contents;">
              <div v-for="n in 3" :key="n" class="project-card skeleton-card">
               <div class="project-image">
                 <SkeletonLoader width="100%" height="100%" borderRadius="0" />
               </div>
-              <div class="project-content">
-                <SkeletonLoader width="70%" height="24px" class="mb-3" />
-                <SkeletonLoader width="100%" height="16px" class="mb-1" />
-                <SkeletonLoader width="90%" height="16px" class="mb-3" />
-                <div class="d-flex gap-2 mb-3">
+              <div class="project-content project-content-loading">
+                <SkeletonLoader width="70%" height="24px" />
+                <SkeletonLoader width="100%" height="16px" />
+                <SkeletonLoader width="90%" height="16px" />
+                <div class="tag-loading">
                   <SkeletonLoader width="60px" height="24px" borderRadius="12px" />
                   <SkeletonLoader width="70px" height="24px" borderRadius="12px" />
                 </div>
-                <div class="d-flex justify-content-between mb-3">
+                <div class="button-loading">
                    <SkeletonLoader width="40px" height="14px" />
                    <SkeletonLoader width="60px" height="20px" borderRadius="4px" />
                 </div>
               </div>
-              <div class="px-4 pb-4">
+              <div>
                  <SkeletonLoader width="100%" height="36px" borderRadius="4px" />
               </div>
             </div>
@@ -174,16 +173,6 @@
                 <span class="project-category">{{ project.category }}</span>
               </div>
             </div>
-            <div class="px-4 pb-4">
-              <v-btn 
-                block
-                variant="outlined" 
-                color="#00eaff" 
-                class="view-project-btn-mobile"
-              >
-                View Details
-              </v-btn>
-            </div>
           </div>
         </div>
       </div>
@@ -195,14 +184,12 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import dataService from '@/services/dataService';
-import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
 
 const selectedFilter = ref('All');
 const projects = ref([]);
-const profile = ref(null);
 const isLoading = ref(true);
 
 // Compute filters dynamically from projects
@@ -236,16 +223,12 @@ const viewProject = (projectId) => {
 onMounted(async () => {
   try {
     isLoading.value = true
-    // Simulate network delay
-    // await new Promise(resolve => setTimeout(resolve, 1500));
     
-    const [projectsData, profileData] = await Promise.all([
+    const [projectsData] = await Promise.all([
       dataService.getProjects(),
-      dataService.getProfile()
     ])
     
     projects.value = projectsData
-    profile.value = profileData
   } catch (error) {
     console.error('Failed to load projects page data:', error)
   } finally {
@@ -268,7 +251,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 48px 0;
   }
 }
 
@@ -291,12 +274,12 @@ onMounted(async () => {
   color: #ffffff;
   margin-bottom: 32px;
   letter-spacing: -0.5px;
-  text-align: center;
+  text-align: left;
 }
 
 .filter-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 40px;
   flex-wrap: wrap;
@@ -333,6 +316,22 @@ onMounted(async () => {
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.project-content-loading {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tag-loading {
+  display: flex;
+  gap: 8px;
+}
+
+.button-loading {
+  display: flex;
+  justify-content: space-between;
 }
 
 .project-card:hover {

@@ -1,12 +1,11 @@
 <template>
   <div class="main-outer">
-    <ProfileHeader :loading="isLoading" :profile="profile" />
-    
+    <h2 class="section-title">My Certifications</h2>
     <!-- Desktop Layout -->
     <div class="desktop-layout">
       <div class="certifications-card">
         <div class="certifications-grid">
-          <div v-if="isLoading" class="skeleton-container" style="display: contents;">
+          <div v-if="isLoading" style="display: contents;">
             <div v-for="n in 3" :key="n" class="certification-card skeleton-card">
               <div class="cert-header">
                  <div class="cert-logo">
@@ -15,22 +14,17 @@
                  <SkeletonLoader width="80px" height="24px" borderRadius="20px" />
               </div>
               
-              <div class="cert-content">
-                <SkeletonLoader width="70%" height="28px" class="mb-2" />
-                <SkeletonLoader width="50%" height="18px" class="mb-3" />
+              <div class="cert-content cert-content-loading">
+                <SkeletonLoader width="70%" height="28px"/>
+                <SkeletonLoader width="50%" height="18px"/>
                 
-                <SkeletonLoader width="100%" height="16px" class="mb-1" />
-                <SkeletonLoader width="90%" height="16px" class="mb-4" />
+                <SkeletonLoader width="100%" height="16px"/>
+                <SkeletonLoader width="90%" height="16px"/>
                 
-                <div class="cert-details">
-                  <SkeletonLoader width="120px" height="16px" class="mb-1" />
-                  <SkeletonLoader width="130px" height="16px" class="mb-1" />
-                  <SkeletonLoader width="140px" height="16px" class="mb-1" />
-                </div>
-                
-                <div class="cert-actions d-flex gap-2 mt-4">
-                  <SkeletonLoader width="120px" height="36px" />
-                  <SkeletonLoader width="100px" height="36px" />
+                <div class="cert-details cert-details-loading">
+                  <SkeletonLoader width="120px" height="16px"/>
+                  <SkeletonLoader width="130px" height="16px"/>
+                  <SkeletonLoader width="140px" height="16px"/>
                 </div>
               </div>
             </div>
@@ -71,27 +65,6 @@
                   <span class="detail-value">{{ cert.credentialId }}</span>
                 </div>
               </div>
-              
-              <div class="cert-actions">
-                <v-btn 
-                  variant="text" 
-                  color="#00eaff" 
-                  class="view-cert-btn"
-                  @click="viewCertificate(cert.id)"
-                >
-                  View Certificate
-                  <i class="fas fa-external-link-alt ml-2"></i>
-                </v-btn>
-                <v-btn 
-                  v-if="cert.verifyUrl"
-                  variant="outlined" 
-                  color="#00eaff" 
-                  class="verify-btn"
-                  @click="verifyCertificate(cert.verifyUrl)"
-                >
-                  Verify
-                </v-btn>
-              </div>
             </div>
           </div>
         </div>
@@ -101,8 +74,8 @@
     <!-- Mobile Layout -->
     <div class="mobile-layout">
       <div class="certifications-card">
-        <div class="certifications-grid">
-          <div v-if="isLoading" class="skeleton-container" style="display: contents;">
+        <div class="mobile-certifications-grid">
+          <div v-if="isLoading" style="display: contents;">
             <div v-for="n in 3" :key="n" class="certification-card skeleton-card">
               <div class="cert-header">
                 <div class="cert-logo">
@@ -111,22 +84,17 @@
                 <SkeletonLoader width="80px" height="24px" borderRadius="20px" />
               </div>
               
-              <div class="cert-content">
-                <SkeletonLoader width="70%" height="24px" class="mb-2" />
-                <SkeletonLoader width="50%" height="16px" class="mb-3" />
+              <div class="cert-content cert-content-loading">
+                <SkeletonLoader width="70%" height="24px"/>
+                <SkeletonLoader width="50%" height="16px"/>
                 
-                <SkeletonLoader width="100%" height="14px" class="mb-1" />
-                <SkeletonLoader width="90%" height="14px" class="mb-4" />
+                <SkeletonLoader width="100%" height="14px"/>
+                <SkeletonLoader width="90%" height="14px"/>
                 
                 <div class="cert-details">
-                  <SkeletonLoader width="120px" height="14px" class="mb-1" />
-                  <SkeletonLoader width="130px" height="14px" class="mb-1" />
-                  <SkeletonLoader width="140px" height="14px" class="mb-1" />
-                </div>
-                
-                <div class="cert-actions d-flex gap-2 mt-4">
-                  <SkeletonLoader width="100px" height="32px" />
-                  <SkeletonLoader width="80px" height="32px" />
+                  <SkeletonLoader width="120px" height="14px"/>
+                  <SkeletonLoader width="130px" height="14px"/>
+                  <SkeletonLoader width="140px" height="14px"/>
                 </div>
               </div>
             </div>
@@ -162,18 +130,6 @@
                   <span class="detail-label">Expires:</span>
                   <span class="detail-value">{{ cert.expiryDate || 'No Expiry' }}</span>
                 </div>
-              </div>
-              
-              <div class="cert-actions">
-                <v-btn 
-                  variant="text" 
-                  color="#00eaff" 
-                  class="view-cert-btn"
-                  @click="viewCertificate(cert.id)"
-                >
-                  View Check
-                  <i class="fas fa-external-link-alt ml-2"></i>
-                </v-btn>
               </div>
             </div>
           </div>
@@ -216,8 +172,6 @@ const verifyCertificate = (verifyUrl) => {
 onMounted(async () => {
   try {
     isLoading.value = true
-    // Simulate network delay
-    // await new Promise(resolve => setTimeout(resolve, 1500));
     
     const [certData, profileData] = await Promise.all([
       dataService.getCertifications(),
@@ -245,10 +199,19 @@ onMounted(async () => {
   width: 100%;
 }
 
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+  text-align: left;
+}
+
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 48px 0;
   }
 }
 
@@ -346,6 +309,12 @@ onMounted(async () => {
   padding: 24px;
 }
 
+.cert-content-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .cert-title {
   font-size: 1.3rem;
   font-weight: 600;
@@ -392,12 +361,6 @@ onMounted(async () => {
   font-weight: 400;
 }
 
-.cert-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .view-cert-btn {
   font-weight: 500;
   text-transform: none;
@@ -435,10 +398,6 @@ onMounted(async () => {
   
   .cert-title {
     font-size: 1.2rem;
-  }
-  
-  .cert-actions {
-    flex-direction: column;
   }
 }
 </style> 

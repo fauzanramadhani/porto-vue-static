@@ -45,7 +45,6 @@
           :style="colStyle(desktopRow2Count)"
         >
           <MusicCard
-            class="mb-4"
             :enabled="!!homeData.preferences?.music"
             :title="homeData.preferences?.music?.title"
             :artist="homeData.preferences?.music?.artist"
@@ -196,7 +195,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 32px 0;
   }
 }
 

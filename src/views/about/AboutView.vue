@@ -226,7 +226,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 32px 0;
   }
 }
 

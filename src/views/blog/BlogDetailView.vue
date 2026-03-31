@@ -1,10 +1,8 @@
 <template>
   <div class="main-bg">
     <div class="main-outer">
-      <ProfileHeader />
-      
       <!-- Desktop Layout -->
-      <div class="desktop-layout">
+      <div v-if="blogPost" class="desktop-layout">
         <div class="blog-detail-container">
           <div class="blog-detail-card">
             <!-- Back Button -->
@@ -99,7 +97,7 @@
       </div>
 
       <!-- Mobile Layout -->
-      <div class="mobile-layout">
+      <div v-if="blogPost" class="mobile-layout">
         <div class="mobile-blog-detail">
           <!-- Back Button -->
           <div class="mobile-back-section">

@@ -14,13 +14,12 @@
                     <SkeletonLoader width="120px" height="80px" borderRadius="8px" />
                   </div>
                   <div class="post-content">
-                    <SkeletonLoader width="60%" height="24px" class="mb-2" />
-                    <SkeletonLoader width="100%" height="16px" class="mb-1" />
-                    <SkeletonLoader width="90%" height="16px" class="mb-3" />
-                    <div class="d-flex gap-3 mb-2">
+                    <SkeletonLoader width="60%" height="24px" />
+                    <SkeletonLoader width="100%" height="16px"/>
+                    <SkeletonLoader width="90%" height="16px"/>
+                    <div class="d-flex">
                        <SkeletonLoader width="80px" height="14px" />
                     </div>
-                    <SkeletonLoader width="100px" height="32px" />
                   </div>
                 </div>
               </div>
@@ -30,7 +29,7 @@
                   No posts found matching your criteria.
                 </div>
                 <div v-else>
-                  <div v-for="post in filteredPosts" :key="post.id" class="blog-post">
+                  <div v-for="post in filteredPosts" :key="post.id" class="blog-post" @click="readPost(post.id)">
                     <div class="post-image">
                       <img :src="post.image" :alt="post.title" />
                       <div class="post-category">{{ post.category }}</div>
@@ -42,17 +41,6 @@
                         <span class="post-date">{{ post.date }}</span>
                         <span class="post-read-time">{{ post.readTime }} min read</span>
                       </div>
-                      <v-btn 
-                        variant="text" 
-                        color="#00eaff" 
-                        class="read-more-btn"
-                        @click="readPost(post.id)"
-                      >
-                        Read More
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                          <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                        </svg>
-                      </v-btn>
                     </div>
                   </div>
                 </div>
@@ -134,14 +122,13 @@
                   <SkeletonLoader width="100%" height="100%" borderRadius="0" />
                 </div>
                 <div class="mobile-post-content">
-                   <SkeletonLoader width="80%" height="24px" class="mb-2" />
-                   <SkeletonLoader width="100%" height="16px" class="mb-1" />
-                   <SkeletonLoader width="90%" height="16px" class="mb-3" />
-                   <div class="d-flex gap-3 mb-2">
+                   <SkeletonLoader width="80%" height="24px" />
+                   <SkeletonLoader width="100%" height="16px"/>
+                   <SkeletonLoader width="90%" height="16px"/>
+                   <div class="meta-loading">
                       <SkeletonLoader width="80px" height="14px" />
                       <SkeletonLoader width="60px" height="14px" />
                    </div>
-                   <SkeletonLoader width="100px" height="32px" />
                 </div>
               </div>
             </div>
@@ -151,7 +138,7 @@
                 No posts found matching your criteria.
               </div>
               <div v-else>
-                <div v-for="post in filteredPosts" :key="post.id" class="mobile-blog-post">
+                <div v-for="post in filteredPosts" :key="post.id" class="mobile-blog-post" @click="readPost(post.id)">
                   <div class="mobile-post-image">
                     <img :src="post.image" :alt="post.title" />
                     <div class="mobile-post-category">{{ post.category }}</div>
@@ -163,17 +150,6 @@
                       <span class="mobile-post-date">{{ post.date }}</span>
                       <span class="mobile-post-read-time">{{ post.readTime }} min read</span>
                     </div>
-                    <v-btn 
-                      variant="text" 
-                      color="#00eaff" 
-                      class="mobile-read-more-btn"
-                      @click="readPost(post.id)"
-                    >
-                      Read More
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="arrow-icon ml-1">
-                        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                      </svg>
-                    </v-btn>
                   </div>
                 </div>
               </div>
@@ -262,8 +238,6 @@ const readPost = (postId) => {
 onMounted(async () => {
   try {
     isLoading.value = true
-    // Simulate network delay for demo purposes
-    // await new Promise(resolve => setTimeout(resolve, 1500));
     
     const [posts] = await Promise.all([
       dataService.getBlogPosts()
@@ -295,7 +269,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 48px 0;
   }
 }
 
@@ -378,6 +352,7 @@ onMounted(async () => {
   color: #fff;
   border-radius: 18px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .blog-post:hover {
@@ -437,25 +412,7 @@ onMounted(async () => {
   color: #808080;
 }
 
-.read-more-btn {
-  align-self: flex-start;
-  font-weight: 500;
-  text-transform: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.arrow-icon {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-  transition: transform 0.2s ease;
-}
-
-.read-more-btn:hover .arrow-icon {
-  transform: translateX(4px);
-}
 
 .no-posts {
   color: #b0b0b0;
@@ -687,6 +644,7 @@ onMounted(async () => {
   overflow: hidden;
   transition: all 0.3s ease;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .mobile-blog-post:hover {
@@ -726,6 +684,11 @@ onMounted(async () => {
   gap: 12px;
 }
 
+.meta-loading {
+  display: flex;
+  gap: 16px;
+}
+
 .mobile-post-title {
   font-size: 1.2rem;
   font-weight: 600;
@@ -746,27 +709,7 @@ onMounted(async () => {
   color: #808080;
 }
 
-.mobile-read-more-btn {
-  align-self: flex-start;
-  font-weight: 500;
-  text-transform: none;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.mobile-read-more-btn .arrow-icon {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-  transition: transform 0.2s ease;
-}
-
-.mobile-read-more-btn:hover .arrow-icon {
-  transform: translateX(4px);
-}
 
 .mobile-no-posts {
   text-align: left;

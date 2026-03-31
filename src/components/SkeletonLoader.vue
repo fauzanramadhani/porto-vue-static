@@ -1,10 +1,10 @@
 <template>
-  <div 
-    class="skeleton-loader" 
-    :style="{ 
-      width: width, 
-      height: height, 
-      borderRadius: borderRadius 
+  <div
+    class="skeleton-loader"
+    :style="{
+      width: width,
+      height: height,
+      borderRadius: borderRadius
     }"
   ></div>
 </template>
@@ -34,7 +34,7 @@ defineProps({
 }
 
 .skeleton-loader::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
