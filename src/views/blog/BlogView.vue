@@ -260,8 +260,6 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
-
-
 .main-outer {
   width: 100%;
 }
@@ -411,8 +409,6 @@ onMounted(async () => {
   font-size: 0.85rem;
   color: #808080;
 }
-
-
 
 .no-posts {
   color: #b0b0b0;
@@ -708,8 +704,6 @@ onMounted(async () => {
   font-size: 0.8rem;
   color: #808080;
 }
-
-
 
 .mobile-no-posts {
   text-align: left;

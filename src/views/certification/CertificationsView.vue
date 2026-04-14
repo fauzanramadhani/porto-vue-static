@@ -400,4 +400,4 @@ onMounted(async () => {
     font-size: 1.2rem;
   }
 }
-</style> 
+</style>

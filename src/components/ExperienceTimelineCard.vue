@@ -79,7 +79,7 @@ const fallbackLogo =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png';
 const logoSrc = (url) => {
   if (!url) return fallbackLogo;
-  return /^https?:\/\//i.test(url) ? url : `${BASE_API_URL}${url}`;
+  return /^https?:\/\//i.test(url) ? url : `${fallbackLogo}`;
 };
 </script>
 

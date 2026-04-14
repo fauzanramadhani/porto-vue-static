@@ -59,14 +59,17 @@
                 </div>
               </template>
               <template v-else>
-                <div v-for="exp in experiences" :key="exp.id" class="exp-item">
-                  <div class="exp-logo-wrapper">
+                <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item">
+                  <div class="exp-logo-wrapper" :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }">
                     <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
                   </div>
                   <div class="exp-info">
                     <div class="exp-company">{{ exp.company }}</div>
                     <div class="exp-title">{{ exp.position }}</div>
                     <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                    <ul v-if="exp.description && exp.description.length" class="exp-description">
+                      <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
+                    </ul>
                   </div>
                 </div>
               </template>
@@ -115,7 +118,7 @@
         </div>
         <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
           <div class="exp-header">
-            <span class="exp-header-icon"><i class="fa-regular fa-id-badge"></i></span>
+            <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
             <span class="exp-header-title">Experience</span>
           </div>
           <div class="exp-list">
@@ -130,14 +133,17 @@
               </div>
             </template>
             <template v-else>
-              <div v-for="exp in experiences" :key="exp.id" class="exp-item">
-                <div class="exp-logo-wrapper">
+              <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item">
+                <div class="exp-logo-wrapper" :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }">
                   <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
                 </div>
                 <div class="exp-info">
                   <div class="exp-company">{{ exp.company }}</div>
                   <div class="exp-title">{{ exp.position }}</div>
                   <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                  <ul v-if="exp.description && exp.description.length" class="exp-description">
+                    <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
+                  </ul>
                 </div>
               </div>
             </template>
@@ -148,7 +154,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dataService from '@/services/dataService'
 
 const isLoading = ref(true)
@@ -156,6 +162,10 @@ const isLoading = ref(true)
 const aboutText = ref('')
 const skills = ref([])
 const experiences = ref([])
+
+const reversedExperiences = computed(() => {
+  return [...experiences.value].reverse()
+})
 
 const splitParagraphs = (text) => {
   if (!text) return []
@@ -165,6 +175,11 @@ const splitParagraphs = (text) => {
 const logoSrc = (url) => {
   if (!url) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png'
   return /^https?:\/\//i.test(url) ? url : url
+}
+
+const isPng = (url) => {
+  if (!url) return true // Default fallback is a png
+  return /\.png$/i.test(url)
 }
 
 onMounted(async () => {
@@ -393,7 +408,7 @@ onMounted(async () => {
 
 .exp-item {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 14px;
   padding: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -402,12 +417,12 @@ onMounted(async () => {
 }
 
 .exp-logo-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 50%;
   background: #23243a;
   box-shadow: 0 2px 8px #0002;
-  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -417,6 +432,7 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 .sk-line { height: 14px; border-radius: 6px; background: rgba(255,255,255,0.08); }
@@ -448,6 +464,18 @@ onMounted(async () => {
   font-weight: 500;
   text-align: left;
   margin-top: 2px;
+}
+
+.exp-description {
+  margin-top: 8px;
+  padding-left: 20px;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.exp-description li {
+  margin-bottom: 4px;
 }
 
 /* ===== MOBILE RESPONSIVE ===== */

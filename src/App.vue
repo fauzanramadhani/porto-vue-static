@@ -11,7 +11,7 @@ import VantaBackground from './assets/VantaBackground.vue'
 import BottomNav from './components/BottomNav.vue'
 
 const backgroundSettings = {
-  type: 'halo',
+  type: 'solid',
 }
 </script>
 

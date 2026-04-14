@@ -1,52 +1,46 @@
 [
   {
     "id": 1,
-    "company": "Tech Corp",
-    "position": "Senior Full Stack Developer",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
-    "startYear": "2022",
-    "endYear": null,
-    "isCurrent": true,
-    "description": "Leading development of cloud-based applications using modern tech stack."
-  },
-  {
-    "id": 2,
-    "company": "Digital Solutions Inc",
-    "position": "Full Stack Developer",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
+    "company": "Bluhabit",
+    "position": "Mobile Developer",
+    "logoUrl": "src/assets/logo_suitmedia.png",
     "startYear": "2020",
     "endYear": "2022",
     "isCurrent": false,
-    "description": "Developed and maintained multiple web applications for various clients."
+    "description": [
+      "Collaborated within a team to develop financial applications and veterinary (pet care) applications.",
+      "Implemented Clean Architecture with MVVM pattern to ensure scalability, maintainability, and clear separation of concerns.",
+      "Contributed to building efficient, structured, and high-quality mobile applications."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "Suitmedia",
+    "position": "Mobile Developer",
+    "logoUrl": "src/assets/logo_suitmedia.png",
+    "startYear": "2020",
+    "endYear": "2022",
+    "isCurrent": false,
+    "description": [
+      "Developed native mobile applications using Kotlin with modern asynchronous programming approaches.",
+      "Utilized Kotlin Flow, StateFlow, and SharedFlow to improve performance through asynchronous and non-blocking data handling.",
+      "Applied internal Clean Code architecture standards to ensure maintainable, scalable, and high-quality codebase.",
+      "Collaborated with cross-functional teams to deliver robust and user-friendly applications."
+    ]
   },
   {
     "id": 3,
-    "company": "StartUp Labs",
-    "position": "Junior Developer",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
-    "startYear": "2019",
-    "endYear": "2020",
-    "isCurrent": false,
-    "description": "Assisted in building innovative products and learning modern development practices."
-  },
-  {
-    "id": 4,
-    "company": "Web Agency",
-    "position": "Frontend Intern",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
-    "startYear": "2018",
-    "endYear": "2019",
-    "isCurrent": false,
-    "description": "Gained hands-on experience in frontend development and responsive design."
-  },
-  {
-    "id": 5,
-    "company": "Freelance",
-    "position": "Web Developer",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png",
-    "startYear": "2017",
-    "endYear": "2018",
-    "isCurrent": false,
-    "description": "Built custom websites for small businesses and individuals."
+    "company": "PT. Gelora Aksara Pratama (Penerbit Erlangga Group)",
+    "position": "Full Stack Developer",
+    "logoUrl": "src/assets/logo_gap.png",
+    "startYear": "2022",
+    "endYear": null,
+    "isCurrent": true,
+    "description": [
+      "Developed and enhanced features for internal HRIS applications across both mobile and web platforms.",
+      "Built internal enterprise applications to support operational processes across multiple business units.",
+      "Communicated directly with end-users to identify issues, provide solutions, and ensure quick resolution.",
+      "Collaborated effectively within a team to deliver reliable and scalable software solutions."
+    ]
   }
 ]
