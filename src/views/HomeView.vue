@@ -171,6 +171,7 @@ onMounted(async () => {
   try {
     const data = await dataService.getHomeData();
     homeData.value = data;
+    console.log(data);
   } catch (error) {
     console.error('Failed to load home data:', error);
   } finally {

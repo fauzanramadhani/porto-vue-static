@@ -129,9 +129,9 @@ const computedDesc = computed(() => {
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(15, 15, 35, 0.3) 0%,
-    rgba(15, 15, 35, 0.6) 50%,
-    rgba(15, 15, 35, 0.8) 100%
+    rgba(15, 15, 35, 0.1) 0%,
+    rgba(15, 15, 35, 0.3) 50%,
+    rgba(15, 15, 35, 0.5) 100%
   );
 }
 
