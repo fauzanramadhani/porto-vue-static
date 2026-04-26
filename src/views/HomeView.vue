@@ -13,6 +13,7 @@
         >
           <RecentPosts :loading="isLoading" :post="homeData.lastPost" />
         </div>
+
         <div
           v-if="
             isLoading || (homeData.experiences && homeData.experiences.length)
@@ -44,7 +45,6 @@
           :style="colStyle(desktopRow2Count)"
         >
           <MusicCard
-            class="mb-4"
             :enabled="!!homeData.preferences?.music"
             :title="homeData.preferences?.music?.title"
             :artist="homeData.preferences?.music?.artist"
@@ -82,11 +82,13 @@
         "
         :loading="isLoading"
         :experiences="homeData.experiences"
+        :limit="3"
       />
       <ProjectCard
         v-if="isLoading || (homeData.projects && homeData.projects.length)"
         :loading="isLoading"
         :projects="homeData.projects"
+        :limit="3"
       />
       <CertificationCard
         v-if="
@@ -95,6 +97,7 @@
         "
         :loading="isLoading"
         :certifications="homeData.certifications"
+        :limit="3"
       />
       <MusicCard
         v-if="isLoading || homeData.preferences?.music"
@@ -152,15 +155,23 @@ const desktopRow2Count = computed(() => {
   return c > 0 ? c : 3; // Default to 3 if nothing to show
 });
 
-const colStyle = (count) => ({
-  flex: `0 0 ${count ? 100 / count : 100}%`,
-  maxWidth: `${count ? 100 / count : 100}%`,
-});
+const colStyle = (count) => {
+  const gap = 24;
+  if (!count || count <= 1) {
+    return { flex: '0 0 100%', maxWidth: '100%' };
+  }
+  const width = `calc((100% - ${gap * (count - 1)}px) / ${count})`;
+  return {
+    flex: `0 0 ${width}`,
+    maxWidth: `${width}`,
+  };
+};
 
 onMounted(async () => {
   try {
     const data = await dataService.getHomeData();
     homeData.value = data;
+    console.log(data);
   } catch (error) {
     console.error('Failed to load home data:', error);
   } finally {
@@ -185,7 +196,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 32px 0;
   }
 }
 
@@ -204,10 +215,10 @@ onMounted(async () => {
 }
 
 .row .col {
-  padding: 0 8px;
+  padding: 0 0px;
 }
 .row {
-  gap: 0;
+  gap: 24px;
 }
 
 .music-contact-container {

@@ -1,7 +1,7 @@
 <template>
   <div class="post-glass-card">
     <div class="post-header">
-      <span class="post-header-icon"><i class="fa-regular fa-newspaper"></i></span>
+      <span class="post-header-icon"><font-awesome-icon :icon="['fas', 'newspaper']" /></span>
       <span class="post-header-title">Latest Post</span>
       <ArrowButton :to="postLink" title="View details" />
     </div>
@@ -110,7 +110,7 @@ const postLink = computed(() => props.post ? `/blog/${props.post.id}` : '/')
   background: #23243a;
   color: #fff;
   border-radius: 8px;
-  font-size: 0.92rem;
+  font-size: 0.72rem;
   padding: 2px 10px 2px 10px;
   font-weight: 500;
   letter-spacing: 0.01em;

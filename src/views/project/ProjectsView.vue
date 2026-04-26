@@ -1,85 +1,180 @@
 <template>
-  <div class="main-bg">
-    <div class="main-outer">
-      <div class="mb-12">
-        <ProfileHeader />
-      </div>
-      <div class="main-sections">
-        <v-row no-gutters>
-          <v-col cols="12" class="d-flex justify-center">
-            <div class="projects-card">
-              <h2 class="section-title">My Projects</h2>
-              
-              <!-- Filter Buttons -->
-              <div class="filter-buttons">
-                <v-btn
-                  v-for="filter in filters"
-                  :key="filter.name"
-                  :variant="selectedFilter === filter.name ? 'elevated' : 'text'"
-                  :color="selectedFilter === filter.name ? '#00eaff' : '#ffffff'"
-                  class="filter-btn"
-                  @click="selectFilter(filter.name)"
-                >
-                  {{ filter.name }}
-                </v-btn>
+  <div class="main-outer">
+    
+    <!-- Desktop Layout -->
+    <div class="desktop-layout">
+      <div class="projects-card">
+        <h2 class="section-title">My Projects</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <v-btn
+            v-for="filter in filters"
+            :key="filter.name"
+            :variant="selectedFilter === filter.name ? 'elevated' : 'text'"
+            :color="selectedFilter === filter.name ? '#00eaff' : '#ffffff'"
+            class="filter-btn"
+            @click="selectFilter(filter.name)"
+          >
+            {{ filter.name }}
+          </v-btn>
+        </div>
+        
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+          <div v-if="isLoading" style="display: contents;">
+            <!-- Render multiple skeleton cards -->
+            <div v-for="n in 3" :key="n" class="project-card skeleton-card">
+              <div class="project-image">
+                <SkeletonLoader width="100%" height="100%" borderRadius="0" />
               </div>
-              
-              <!-- Projects Grid -->
-              <div class="projects-grid">
-                <div 
-                  v-for="project in filteredProjects" 
-                  :key="project.id" 
-                  class="project-card"
-                  @click="viewProject(project.id)"
-                >
-                  <div class="project-image">
-                    <img :src="project.image" :alt="project.title" />
-                    <div class="project-overlay">
-                      <v-btn 
-                        variant="text" 
-                        color="#ffffff" 
-                        class="view-project-btn"
-                      >
-                        View Project
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke-width="1.5" 
-                          stroke="currentColor" 
-                          class="chevron-icon ms-1"
-                        >
-                          <path 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" 
-                          />
-                        </svg>
-                      </v-btn>
-                    </div>
-                  </div>
-                  <div class="project-content">
-                    <h3 class="project-title">{{ project.title }}</h3>
-                    <p class="project-description">{{ project.description }}</p>
-                    <div class="project-tech">
-                      <span 
-                        v-for="tech in project.technologies" 
-                        :key="tech"
-                        class="tech-tag"
-                      >
-                        {{ tech }}
-                      </span>
-                    </div>
-                    <div class="project-meta">
-                      <span class="project-year">{{ project.year }}</span>
-                      <span class="project-category">{{ project.category }}</span>
-                    </div>
-                  </div>
+              <div class="project-content project-content-loading">
+                <SkeletonLoader width="70%" height="28px" />
+                <SkeletonLoader width="100%" height="16px" />
+                <SkeletonLoader width="90%" height="16px" />
+                <div class="tag-loading">
+                  <SkeletonLoader width="60px" height="24px" borderRadius="12px" />
+                  <SkeletonLoader width="70px" height="24px" borderRadius="12px" />
+                  <SkeletonLoader width="50px" height="24px" borderRadius="12px" />
+                </div>
+                <div class="button-loading">
+                   <SkeletonLoader width="40px" height="14px" />
+                   <SkeletonLoader width="60px" height="20px" borderRadius="4px" />
                 </div>
               </div>
             </div>
-          </v-col>
-        </v-row>
+          </div>
+
+          <div 
+            v-else
+            v-for="project in filteredProjects" 
+            :key="project.id" 
+            class="project-card"
+            @click="viewProject(project.id)"
+          >
+            <div class="project-image">
+              <img :src="project.image" :alt="project.title" />
+              <div class="project-overlay">
+                <v-btn 
+                  variant="text" 
+                  color="#ffffff" 
+                  class="view-project-btn"
+                >
+                  View Project
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="chevron-icon ms-1"
+                  >
+                    <path 
+                      stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" 
+                    />
+                  </svg>
+                </v-btn>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+              <div class="project-tech">
+                <span 
+                  v-for="tech in project.technologies" 
+                  :key="tech"
+                  class="tech-tag"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              <div class="project-meta">
+                <span class="project-year">{{ project.year }}</span>
+                <span class="project-category">{{ project.category }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Layout -->
+    <div class="mobile-layout">
+      <div class="projects-card">
+        <h2 class="section-title">My Projects</h2>
+        
+        <!-- Filter Buttons Mobile -->
+        <div class="filter-buttons">
+          <v-btn
+            v-for="filter in filters"
+            :key="filter.name"
+            :variant="selectedFilter === filter.name ? 'elevated' : 'text'"
+            :color="selectedFilter === filter.name ? '#00eaff' : '#ffffff'"
+            class="filter-btn"
+            size="small"
+            @click="selectFilter(filter.name)"
+          >
+            {{ filter.name }}
+          </v-btn>
+        </div>
+        
+        <!-- Projects List Mobile -->
+        <div class="mobile-projects-list">
+          <div v-if="isLoading" style="display: contents;">
+             <div v-for="n in 3" :key="n" class="project-card skeleton-card">
+              <div class="project-image">
+                <SkeletonLoader width="100%" height="100%" borderRadius="0" />
+              </div>
+              <div class="project-content project-content-loading">
+                <SkeletonLoader width="70%" height="24px" />
+                <SkeletonLoader width="100%" height="16px" />
+                <SkeletonLoader width="90%" height="16px" />
+                <div class="tag-loading">
+                  <SkeletonLoader width="60px" height="24px" borderRadius="12px" />
+                  <SkeletonLoader width="70px" height="24px" borderRadius="12px" />
+                </div>
+                <div class="button-loading">
+                   <SkeletonLoader width="40px" height="14px" />
+                   <SkeletonLoader width="60px" height="20px" borderRadius="4px" />
+                </div>
+              </div>
+              <div>
+                 <SkeletonLoader width="100%" height="36px" borderRadius="4px" />
+              </div>
+            </div>
+          </div>
+
+          <div 
+            v-else
+            v-for="project in filteredProjects" 
+            :key="project.id" 
+            class="project-card"
+            @click="viewProject(project.id)"
+          >
+            <div class="project-image">
+              <img :src="project.image" :alt="project.title" />
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+              <div class="project-tech">
+                <span 
+                  v-for="tech in project.technologies" 
+                  :key="tech"
+                  class="tech-tag"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              <div class="project-meta">
+                <span class="project-year">{{ project.year }}</span>
+                <span class="project-category">{{ project.category }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -89,12 +184,13 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import dataService from '@/services/dataService';
-import ProfileHeader from '@/components/ProfileHeaderCard.vue';
+import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
 
 const selectedFilter = ref('All');
 const projects = ref([]);
+const isLoading = ref(true);
 
 // Compute filters dynamically from projects
 const filters = computed(() => {
@@ -126,10 +222,17 @@ const viewProject = (projectId) => {
 // Load data on mount
 onMounted(async () => {
   try {
-    const data = await dataService.getProjects()
-    projects.value = data
+    isLoading.value = true
+    
+    const [projectsData] = await Promise.all([
+      dataService.getProjects(),
+    ])
+    
+    projects.value = projectsData
   } catch (error) {
-    console.error('Failed to load projects:', error)
+    console.error('Failed to load projects page data:', error)
+  } finally {
+    isLoading.value = false
   }
 });
 </script>
@@ -141,31 +244,28 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
-.main-bg {
-  min-height: 100vh;
-  width: 100vw;
-}
-
 .main-outer {
   width: 100%;
-  margin: 48px auto 108px auto;
-  padding: 0 2rem;
 }
 
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 48px 0;
   }
 }
 
-.main-sections {
-  width: 100%;
+/* Layout containers */
+.desktop-layout {
+  display: block;
+}
+
+.mobile-layout {
+  display: none;
 }
 
 .projects-card {
   width: 100%;
-  max-width: 1200px;
 }
 
 .section-title {
@@ -174,12 +274,12 @@ onMounted(async () => {
   color: #ffffff;
   margin-bottom: 32px;
   letter-spacing: -0.5px;
-  text-align: center;
+  text-align: left;
 }
 
 .filter-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 40px;
   flex-wrap: wrap;
@@ -203,6 +303,12 @@ onMounted(async () => {
   gap: 32px;
 }
 
+.mobile-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .project-card {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 16px;
@@ -210,6 +316,22 @@ onMounted(async () => {
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.project-content-loading {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tag-loading {
+  display: flex;
+  gap: 8px;
+}
+
+.button-loading {
+  display: flex;
+  justify-content: space-between;
 }
 
 .project-card:hover {
@@ -329,8 +451,19 @@ onMounted(async () => {
   font-size: 0.75rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1034px) {
+  .desktop-layout {
+    display: none;
+  }
   
+  .mobile-layout {
+    display: block;
+  }
+  
+  .mobile-layout > * {
+    margin-bottom: 24px;
+  }
+
   .filter-buttons {
     gap: 8px;
     margin-bottom: 32px;
@@ -341,11 +474,6 @@ onMounted(async () => {
     font-size: 0.9rem;
   }
   
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  
   .project-content {
     padding: 20px;
   }
@@ -354,4 +482,4 @@ onMounted(async () => {
     font-size: 1.2rem;
   }
 }
-</style> 
+</style>

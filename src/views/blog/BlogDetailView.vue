@@ -1,10 +1,8 @@
 <template>
   <div class="main-bg">
     <div class="main-outer">
-      <ProfileHeader />
-      
       <!-- Desktop Layout -->
-      <div class="desktop-layout">
+      <div v-if="blogPost" class="desktop-layout">
         <div class="blog-detail-container">
           <div class="blog-detail-card">
             <!-- Back Button -->
@@ -99,7 +97,7 @@
       </div>
 
       <!-- Mobile Layout -->
-      <div class="mobile-layout">
+      <div v-if="blogPost" class="mobile-layout">
         <div class="mobile-blog-detail">
           <!-- Back Button -->
           <div class="mobile-back-section">
@@ -183,7 +181,7 @@
                 <div class="mobile-related-post-image">
                   <img :src="post.image" :alt="post.title" />
                 </div>
-                <div class="mobile-related-post-content">
+                <div class="related-post-content">
                   <h4 class="mobile-related-post-title">{{ post.title }}</h4>
                   <span class="mobile-related-post-date">{{ post.date }}</span>
                 </div>
@@ -582,8 +580,6 @@ onMounted(async () => {
   margin-bottom: 8px;
 }
 
-
-
 .related-post-date {
   font-size: 0.8rem;
   color: #808080;
@@ -822,7 +818,7 @@ onMounted(async () => {
 
 .mobile-share-section {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 12px;
 }
 
@@ -837,7 +833,7 @@ onMounted(async () => {
 }
 
 .mobile-share-btn {
-  min-width: 36px;
-  height: 36px;
+  min-width: 40px;
+  height: 40px;
 }
 </style>

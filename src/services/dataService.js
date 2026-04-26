@@ -8,7 +8,7 @@ import aboutData from '@/data/about.json'
 import preferencesData from '@/data/preferences.json'
 
 // Simulate async API calls with a small delay for realistic behavior
-const simulateDelay = (ms = 300) => new Promise(resolve => setTimeout(resolve, ms))
+const simulateDelay = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const dataService = {
   // Get profile data

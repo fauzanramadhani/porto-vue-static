@@ -1,47 +1,66 @@
 {
-  "aboutText": "I'm a passionate Full Stack Developer with over 5 years of experience building modern web applications. My journey in software development started with a curiosity about how websites work, and has evolved into a deep expertise in both frontend and backend technologies.\n\nI specialize in creating scalable, performant applications using cutting-edge technologies like Vue.js, React, Node.js, and cloud platforms. I'm a strong believer in clean code, best practices, and continuous learning.\n\nWhen I'm not coding, you can find me contributing to open-source projects, writing technical articles, or exploring new technologies. I'm always excited to take on challenging projects and collaborate with talented teams.",
+  "aboutText": "I’m a passionate Full Stack Developer with over 3 years of experience building modern web, mobile, and backend applications. I specialize in crafting scalable, high-performance solutions that deliver seamless user experiences across platforms. With a strong foundation in both frontend and backend development, I enjoy turning complex ideas into clean, efficient, and maintainable code.\n\nMy main focus is on optimizing applications to achieve the best possible performance, reliability, and user satisfaction. I have a particular strength in native mobile development, where I leverage platform-specific capabilities to build responsive, efficient, and polished apps. From architecture design to deployment, I continuously strive to improve system efficiency and code quality.\n\nI am always eager to learn new technologies, refine my skills, and take on challenges that push me to grow as a developer. For me, development is not just about building features—it's about creating impactful digital experiences that are fast, intuitive, and built to scale.",
   "skills": [
     {
       "id": 1,
-      "title": "Frontend Development",
+      "title": "Frontend Web Development",
       "skills": [
-        "Vue.js",
-        "React",
-        "TypeScript",
-        "JavaScript",
         "HTML5",
         "CSS3",
-        "Tailwind CSS",
-        "SASS/SCSS"
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Vue.js",
+        "Responsive Design",
+        "Web Performance Optimization"
       ]
     },
     {
       "id": 2,
-      "title": "Backend Development",
+      "title": "Android Mobile Development",
       "skills": [
-        "Node.js",
-        "Express",
-        "NestJS",
-        "Python",
-        "Django",
-        "REST APIs",
-        "GraphQL",
-        "PostgreSQL"
+        "Kotlin",
+        "Android Native Development",
+        "MVVM Architecture",
+        "Clean Architecture",
+        "Multi-module Architecture",
+        "Kotlin Flow",
+        "StateFlow",
+        "SharedFlow",
+        "Coroutines",
+        "Jetpack Components"
       ]
     },
     {
       "id": 3,
-      "title": "DevOps & Tools",
+      "title": "Multiplatform Mobile Development",
       "skills": [
-        "Docker",
-        "Kubernetes",
-        "AWS",
-        "Git",
-        "CI/CD",
-        "Linux",
-        "Nginx",
-        "Redis"
+        "Flutter",
+        "Dart",
+        "BLoC Architecture",
+        "Provider State Management",
+        "Clean Architecture (Flutter)",
+        "Cross-platform App Development",
+        "App Performance Optimization"
       ]
+    },
+    {
+      "id": 4,
+      "title": "Backend Development",
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "RESTful API Design",
+        "Authentication (JWT)",
+        "MongoDB",
+        "PostgreSQL",
+        "Database Design",
+        "API Performance Optimization"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "DevOps & Tools",
+      "skills": ["Docker", "Git", "CI/CD", "Linux", "Nginx", "Redis"]
     }
   ]
 }

@@ -1,13 +1,13 @@
 <template>
   <div class="project-glass-card">
     <div class="project-header">
-      <span class="project-header-icon"><i class="fa-regular fa-file-code"></i></span>
+      <span class="project-header-icon"><font-awesome-icon :icon="['far', 'file-code']" /></span>
       <span class="project-header-title">Projects</span>
       <ArrowButton to="/projects" title="View more projects" />
     </div>
     <div class="project-list">
       <template v-if="loading">
-        <div v-for="n in 3" :key="n" class="project-item">
+        <div v-for="n in (limit ? limit : 3)" :key="n" class="project-item">
           <div class="project-logo shimmer"></div>
           <div class="project-info">
             <div class="sk-line shimmer" style="width:60%"></div>
@@ -17,7 +17,7 @@
         </div>
       </template>
       <template v-else>
-        <div v-for="p in projects" :key="p.id" class="project-item">
+        <div v-for="p in visibleProjects" :key="p.id" class="project-item">
           <img :src="p.thumbnail || fallbackThumb" :alt="p.title" class="project-logo" />
           <div class="project-info">
             <div class="project-title">{{ p.title }}</div>
@@ -25,17 +25,45 @@
             <div class="project-role" v-if="p.category">{{ p.category }}</div>
           </div>
         </div>
+        <div v-if="remainingCount > 0" class="project-more" @click="goToMore">
+          + {{ remainingCount }} More
+        </div>
       </template>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import ArrowButton from '@/components/ArrowButton.vue'
+
 const props = defineProps({
   loading: { type: Boolean, default: false },
-  projects: { type: Array, default: () => [] }
+  projects: { type: Array, default: () => [] },
+  limit: { type: Number, default: 0 }
 })
+
+const router = useRouter();
+
+const visibleProjects = computed(() => {
+  if (props.limit && props.limit > 0 && props.projects.length > props.limit) {
+    return props.projects.slice(0, props.limit);
+  }
+  return props.projects;
+});
+
+const remainingCount = computed(() => {
+  if (props.limit && props.limit > 0 && props.projects.length > props.limit) {
+    return props.projects.length - props.limit;
+  }
+  return 0;
+});
+
+const goToMore = () => {
+  router.push('/projects');
+};
+
 const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=80&q=80'
 </script>
 
@@ -130,6 +158,7 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
 }
 
 .project-logo {
+  margin-top: 4px;
   width: 48px;
   height: 48px;
   border-radius: 8px;
@@ -184,60 +213,105 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
   border: 1px solid rgba(178, 184, 255, 0.2);
 }
 
+.project-more {
+  text-align: center;
+  color: #b2b8ff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+.project-more:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
 .sk-line { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.08); margin: 4px 0; }
 .shimmer { background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
 @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
 /* Mobile Responsive */
 @media (max-width: 1034px) {
+  .project-glass-card {
+    height: auto;
+    max-height: none;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
   .project-list {
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 16px;
-    padding-bottom: 8px;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: -28px;
-    margin-right: -28px;
-    padding-left: 28px;
-    padding-right: 28px;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: visible;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    max-height: none;
   }
   
+  /* Removed nth-child hiding */
+  
   .project-item {
-    min-width: 320px;
-    flex-shrink: 0;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    flex-direction: column;
+    align-self: stretch;
+    min-width: 0;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-direction: row;
     align-items: flex-start;
+    gap: 12px;
     text-align: left;
   }
   
   .project-logo {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 12px;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 0;
+    border-radius: 4px;
+    flex-shrink: 0;
   }
   
   .project-info {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .project-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1px;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Clamp to 1 line for super compact look, or 2? User says "small icon next to title", implies compact. */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.8rem;
+    color: #cfd8dc;
+    line-height: 1.3;
   }
   
   .project-technologies {
-    justify-content: flex-start;
+    display: none;
   }
-  
-  .project-list::-webkit-scrollbar {
-    height: 4px;
-    width: auto;
-  }
-  
-  .project-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+
+  .tech-tag {
+    font-size: 0.7rem;
+    padding: 1px 5px;
   }
 }
 </style>

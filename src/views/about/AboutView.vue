@@ -1,7 +1,5 @@
 <template>
-  <div class="main-bg">
     <div class="main-outer">
-      <ProfileHeader :loading="isLoading" :profile="data.profile" />
       
       <!-- Desktop Layout -->
       <div class="desktop-layout">
@@ -46,7 +44,7 @@
         <div class="row">
           <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
             <div class="exp-header">
-              <span class="exp-header-icon"><i class="fa-regular fa-id-badge"></i></span>
+              <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
               <span class="exp-header-title">Experience</span>
             </div>
             <div class="exp-list">
@@ -54,21 +52,24 @@
                 <div v-for="n in 5" :key="n" class="exp-item">
                   <div class="exp-logo-wrapper shimmer"></div>
                   <div class="exp-info">
-                    <div class="sk-line shimmer" style="width: 40%"></div>
-                    <div class="sk-line shimmer" style="width: 60%"></div>
-                    <div class="sk-line shimmer" style="width: 30%"></div>
+                    <div class="sk-line shimmer" style="width: 40% ; margin-bottom: 5px"></div>
+                    <div class="sk-line shimmer" style="width: 60% ; margin-bottom: 5px"></div>
+                    <div class="sk-line shimmer" style="width: 30% ; margin-bottom: 5px"></div>
                   </div>
                 </div>
               </template>
               <template v-else>
-                <div v-for="exp in experiences" :key="exp.id" class="exp-item">
-                  <div class="exp-logo-wrapper">
+                <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item">
+                  <div class="exp-logo-wrapper" :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }">
                     <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
                   </div>
                   <div class="exp-info">
                     <div class="exp-company">{{ exp.company }}</div>
                     <div class="exp-title">{{ exp.position }}</div>
                     <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                    <ul v-if="exp.description && exp.description.length" class="exp-description">
+                      <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
+                    </ul>
                   </div>
                 </div>
               </template>
@@ -117,7 +118,7 @@
         </div>
         <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
           <div class="exp-header">
-            <span class="exp-header-icon"><i class="fa-regular fa-id-badge"></i></span>
+            <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
             <span class="exp-header-title">Experience</span>
           </div>
           <div class="exp-list">
@@ -132,14 +133,17 @@
               </div>
             </template>
             <template v-else>
-              <div v-for="exp in experiences" :key="exp.id" class="exp-item">
-                <div class="exp-logo-wrapper">
+              <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item">
+                <div class="exp-logo-wrapper" :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }">
                   <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
                 </div>
                 <div class="exp-info">
                   <div class="exp-company">{{ exp.company }}</div>
                   <div class="exp-title">{{ exp.position }}</div>
                   <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                  <ul v-if="exp.description && exp.description.length" class="exp-description">
+                    <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
+                  </ul>
                 </div>
               </div>
             </template>
@@ -147,20 +151,21 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dataService from '@/services/dataService'
-import ProfileHeader from '@/components/ProfileHeaderCard.vue';
 
 const isLoading = ref(true)
-const data = ref({ profile: null })
 
 const aboutText = ref('')
 const skills = ref([])
 const experiences = ref([])
+
+const reversedExperiences = computed(() => {
+  return [...experiences.value].reverse()
+})
 
 const splitParagraphs = (text) => {
   if (!text) return []
@@ -172,10 +177,14 @@ const logoSrc = (url) => {
   return /^https?:\/\//i.test(url) ? url : url
 }
 
+const isPng = (url) => {
+  if (!url) return true // Default fallback is a png
+  return /\.png$/i.test(url)
+}
+
 onMounted(async () => {
   try {
     const aboutData = await dataService.getAboutData()
-    data.value.profile = aboutData.profile
     aboutText.value = aboutData.aboutText || ''
     skills.value = aboutData.skills || []
     experiences.value = aboutData.experiences || []
@@ -191,20 +200,14 @@ onMounted(async () => {
 /* ===== RESET & BASE ===== */
 * {
   margin: 0;
-  padding: 0;
+  padding: auto auto;
   box-sizing: border-box;
 }
 
 /* ===== LAYOUT CONTAINERS ===== */
-.main-bg {
-  min-height: 100vh;
-  width: 100vw;
-}
 
 .main-outer {
   width: 100%;
-  margin: 48px auto 108px auto;
-  padding: 0 2rem;
 }
 
 .row {
@@ -221,7 +224,7 @@ onMounted(async () => {
   display: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1034px) {
   .desktop-layout {
     display: none;
   }
@@ -238,7 +241,7 @@ onMounted(async () => {
 @media (min-width: 1420px) {
   .main-outer {
     max-width: 1200px;
-    padding: 0;
+    padding: 0 0 32px 0;
   }
 }
 
@@ -405,7 +408,7 @@ onMounted(async () => {
 
 .exp-item {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 14px;
   padding: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -414,12 +417,12 @@ onMounted(async () => {
 }
 
 .exp-logo-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 50%;
   background: #23243a;
   box-shadow: 0 2px 8px #0002;
-  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -429,6 +432,7 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 .sk-line { height: 14px; border-radius: 6px; background: rgba(255,255,255,0.08); }
@@ -460,6 +464,18 @@ onMounted(async () => {
   font-weight: 500;
   text-align: left;
   margin-top: 2px;
+}
+
+.exp-description {
+  margin-top: 8px;
+  padding-left: 20px;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.exp-description li {
+  margin-bottom: 4px;
 }
 
 /* ===== MOBILE RESPONSIVE ===== */

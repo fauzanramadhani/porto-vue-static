@@ -1,13 +1,13 @@
 <template>
   <div class="certification-glass-card">
     <div class="certification-header">
-      <span class="certification-header-icon"><i class="fa-regular fa-file-pdf"></i></span>
+      <span class="certification-header-icon"><font-awesome-icon :icon="['far', 'file-pdf']" /></span>
       <span class="certification-header-title">Certifications</span>
       <ArrowButton to="/certifications" title="View more certifications" />
     </div>
     <div class="certification-list">
       <template v-if="loading">
-        <div v-for="n in 5" :key="n" class="certification-item">
+        <div v-for="n in (limit ? limit : 5)" :key="n" class="certification-item">
           <div class="certification-icon shimmer"></div>
           <div class="certification-info">
             <div class="sk-line shimmer" style="width:60%"></div>
@@ -17,7 +17,7 @@
         </div>
       </template>
       <template v-else>
-        <div v-for="c in certifications" :key="c.id" class="certification-item">
+        <div v-for="c in visibleCertifications" :key="c.id" class="certification-item">
           <div class="certification-icon">
             <img v-if="c.logo" :src="c.logo" alt="logo" class="cert-logo" />
             <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="cert-svg"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#00eaff" d="M240 112L128 112C119.2 112 112 119.2 112 128L112 512C112 520.8 119.2 528 128 528L208 528L208 576L128 576C92.7 576 64 547.3 64 512L64 128C64 92.7 92.7 64 128 64L261.5 64C278.5 64 294.8 70.7 306.8 82.7L429.3 205.3C441.3 217.3 448 233.6 448 250.6L448 400.1L400 400.1L400 272.1L312 272.1C272.2 272.1 240 239.9 240 200.1L240 112.1zM380.1 224L288 131.9L288 200C288 213.3 298.7 224 312 224L380.1 224zM272 444L304 444C337.1 444 364 470.9 364 504C364 537.1 337.1 564 304 564L292 564L292 592C292 603 283 612 272 612C261 612 252 603 252 592L252 464C252 453 261 444 272 444zM304 524C315 524 324 515 324 504C324 493 315 484 304 484L292 484L292 524L304 524zM400 444L432 444C460.7 444 484 467.3 484 496L484 560C484 588.7 460.7 612 432 612L400 612C389 612 380 603 380 592L380 464C380 453 389 444 400 444zM432 572C438.6 572 444 566.6 444 560L444 496C444 489.4 438.6 484 432 484L420 484L420 572L432 572zM508 464C508 453 517 444 528 444L576 444C587 444 596 453 596 464C596 475 587 484 576 484L548 484L548 508L576 508C587 508 596 517 596 528C596 539 587 548 576 548L548 548L548 592C548 603 539 612 528 612C517 612 508 603 508 592L508 464z"/></svg>
@@ -28,17 +28,44 @@
           </div>
           <div class="certification-date">{{ formatDate(c.issuedDate) }}</div>
         </div>
+        <div v-if="remainingCount > 0" class="cert-more" @click="goToMore">
+          + {{ remainingCount }} More
+        </div>
       </template>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import ArrowButton from '@/components/ArrowButton.vue'
+
 const props = defineProps({
   loading: { type: Boolean, default: false },
-  certifications: { type: Array, default: () => [] }
+  certifications: { type: Array, default: () => [] },
+  limit: { type: Number, default: 0 }
 })
+
+const router = useRouter();
+
+const visibleCertifications = computed(() => {
+  if (props.limit && props.limit > 0 && props.certifications.length > props.limit) {
+    return props.certifications.slice(0, props.limit);
+  }
+  return props.certifications;
+});
+
+const remainingCount = computed(() => {
+  if (props.limit && props.limit > 0 && props.certifications.length > props.limit) {
+    return props.certifications.length - props.limit;
+  }
+  return 0;
+});
+
+const goToMore = () => {
+    router.push('/certifications');
+};
 
 const formatDate = (d) => {
   if (!d) return ''
@@ -130,22 +157,20 @@ const formatDate = (d) => {
 /* Items */
 .certification-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   padding: 0px 0;
 }
 
 .certification-icon {
-  font-size: 1.5rem;
-  color: #00eaff;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #23243a;
+  margin-top: 4px;
+  width: 48px;
+  height: 48px;
   border-radius: 8px;
+  object-fit: cover;
+  background: #23243a;
   box-shadow: 0 2px 8px #0002;
+  flex-shrink: 0;
 }
 
 .cert-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
@@ -159,15 +184,31 @@ const formatDate = (d) => {
 }
 
 .certification-title {
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-weight: 500;
+  font-size: 1rem;
   color: #fff;
 }
 
 .certification-issuer {
   color: #b2b8ff;
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   font-weight: 500;
+}
+
+.cert-more {
+  text-align: center;
+  color: #b2b8ff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+.cert-more:hover {
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .sk-line { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.08); margin: 4px 0; }
@@ -184,54 +225,88 @@ const formatDate = (d) => {
 
 /* Mobile Responsive */
 @media (max-width: 1034px) {
-  .certification-list {
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 16px;
-    padding-bottom: 8px;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: -28px;
-    margin-right: -28px;
-    padding-left: 28px;
-    padding-right: 28px;
+  .certification-glass-card {
+    height: auto;
+    max-height: none;
+    padding: 16px;
+    margin-bottom: 16px;
   }
+
+  .certification-list {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: visible;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    max-height: none;
+  }
+
+  /* Show only max 3 items on mobile */
+  /* removed nth-child hiding */
   
   .certification-item {
-    min-width: 260px;
+    align-self: stretch;
+    min-width: 0;
     flex-shrink: 0;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
     text-align: left;
   }
   
   .certification-icon {
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    border-radius: 4px;
+    flex-shrink: 0;
   }
+
+  .cert-svg { width: 20px; height: 20px; }
   
   .certification-info {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  
+  .certification-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    margin-bottom: 1px;
+  }
+
+  .certification-issuer {
+    font-size: 0.8rem;
+    color: #cfd8dc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
   }
   
   .certification-date {
+    margin-top: 0;
+    font-size: 0.75rem;
+    color: #b2b8ff;
+    white-space: nowrap;
+    line-height: 1.2;
     min-width: auto;
-    text-align: left;
-    margin-top: 4px;
-  }
-  
-  .certification-list::-webkit-scrollbar {
-    height: 4px;
-    width: auto;
-  }
-  
-  .certification-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+    text-align: right;
+    /* Optional: hide date if too cramped? No, users usually like dates. */
   }
 }
 </style>
