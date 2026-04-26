@@ -109,7 +109,7 @@
         :spotify-url="homeData.preferences?.music?.spotifyUrl"
       />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script setup>

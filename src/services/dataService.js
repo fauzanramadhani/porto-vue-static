@@ -7,57 +7,46 @@ import blogPostsData from '@/data/blog-posts.json'
 import aboutData from '@/data/about.json'
 import preferencesData from '@/data/preferences.json'
 
-// Simulate async API calls with a small delay for realistic behavior
-const simulateDelay = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms))
-
 export const dataService = {
   // Get profile data
   async getProfile() {
-    await simulateDelay()
     return profileData
   },
 
   // Get experiences
   async getExperiences() {
-    await simulateDelay()
     return experiencesData
   },
 
   // Get certifications
   async getCertifications() {
-    await simulateDelay()
     return certificationsData
   },
 
   // Get projects
   async getProjects() {
-    await simulateDelay()
     return projectsData
   },
 
   // Get project by ID
   async getProjectById(id) {
-    await simulateDelay()
     const project = projectsData.find(p => p.id === parseInt(id))
     return project || null
   },
 
   // Get blog posts
   async getBlogPosts() {
-    await simulateDelay()
     return blogPostsData
   },
 
   // Get blog post by ID
   async getBlogPostById(id) {
-    await simulateDelay()
     const post = blogPostsData.find(p => p.id === parseInt(id))
     return post || null
   },
 
   // Get latest blog post
   async getLatestBlogPost() {
-    await simulateDelay()
     if (blogPostsData.length === 0) return null
     // Sort by createdAt and return the most recent
     const sorted = [...blogPostsData].sort((a, b) => 
@@ -68,19 +57,16 @@ export const dataService = {
 
   // Get about data
   async getAbout() {
-    await simulateDelay()
     return aboutData
   },
 
   // Get preferences (music, contact)
   async getPreferences() {
-    await simulateDelay()
     return preferencesData
   },
 
   // Get home data (combined data for home view)
   async getHomeData() {
-    await simulateDelay()
     const [profile, lastPost, experiences, projects, certifications, preferences] = await Promise.all([
       this.getProfile(),
       this.getLatestBlogPost(),
@@ -102,7 +88,6 @@ export const dataService = {
 
   // Get about page data (combined)
   async getAboutData() {
-    await simulateDelay()
     const [profile, aboutInfo, experiences] = await Promise.all([
       this.getProfile(),
       this.getAbout(),

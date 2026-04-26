@@ -349,7 +349,7 @@ onMounted(async () => {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1034px) {
   .desktop-layout {
     display: none;
   }
@@ -359,7 +359,8 @@ onMounted(async () => {
   }
   
   .main-outer {
-    padding: 0 2rem;
+    padding: 0 1rem;
+    margin: 24px auto 80px auto;
   }
 }
 
@@ -797,5 +798,296 @@ onMounted(async () => {
   width: 100%;
   height: auto;
   object-fit: cover;
+}
+
+/* Mobile Section Headings */
+.mobile-section-heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+/* Mobile Project Overview */
+.mobile-project-overview {
+  margin-bottom: 32px;
+}
+
+.mobile-overview-text {
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+}
+
+/* Mobile Technologies */
+.mobile-technologies-section {
+  margin-bottom: 32px;
+}
+
+.mobile-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mobile-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.mobile-tech-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 234, 255, 0.1);
+  border-radius: 8px;
+}
+
+.mobile-tech-name {
+  font-size: 0.8rem;
+  color: #ffffff;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Mobile Features */
+.mobile-features-section {
+  margin-bottom: 32px;
+}
+
+.mobile-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  line-height: 1.5;
+}
+
+.mobile-feature-icon {
+  width: 16px;
+  height: 16px;
+  fill: #00eaff;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Mobile Project Details */
+.mobile-project-details {
+  margin-bottom: 32px;
+}
+
+.mobile-detail-section {
+  margin-bottom: 24px;
+}
+
+.mobile-detail-heading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.mobile-detail-paragraph {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.mobile-code-block {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+.mobile-code-block pre {
+  margin: 0;
+  color: #00eaff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.mobile-detail-list {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.mobile-detail-list li {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+/* Mobile Project Links */
+.mobile-project-links {
+  margin-bottom: 32px;
+}
+
+.mobile-links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-project-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.mobile-project-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-demo-link {
+  border-color: rgba(0, 234, 255, 0.3);
+  color: #00eaff;
+}
+
+.mobile-github-link {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.mobile-docs-link {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.mobile-link-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Mobile Other Projects */
+.mobile-other-projects {
+  margin-top: 8px;
+}
+
+.mobile-other-projects-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.mobile-other-projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mobile-other-project {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.mobile-other-project:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-other-project-image {
+  flex-shrink: 0;
+}
+
+.mobile-other-project-image img {
+  width: 80px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.mobile-other-project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mobile-other-project-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-other-project-category {
+  font-size: 0.8rem;
+  color: #808080;
+}
+
+/* ===== SMALL SCREEN ADJUSTMENTS ===== */
+@media (max-width: 480px) {
+  .mobile-project-detail {
+    padding: 18px;
+  }
+
+  .mobile-project-title {
+    font-size: 1.5rem;
+  }
+
+  .mobile-tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .mobile-tech-item {
+    padding: 10px 6px;
+  }
+
+  .mobile-tech-name {
+    font-size: 0.75rem;
+  }
+
+  .main-outer {
+    padding: 0 1rem;
+  }
 }
 </style>
