@@ -2,7 +2,7 @@
   <div class="exp-glass-card">
     <div class="exp-header">
       <span class="exp-header-icon">
-        <font-awesome-icon :icon="['far', 'id-badge']" />
+        <font-awesome-icon :icon="['fab', 'stack-overflow']" />
       </span>
       <span class="exp-header-title">Experience</span>
       <ArrowButton to="/about" title="View more experience" />
@@ -31,8 +31,8 @@
             <div class="exp-company">{{ exp.company }}</div>
             <div class="exp-title">{{ exp.position }}</div>
             <div class="exp-years">
-              {{ exp.startYear }} —
-              {{ exp.isCurrent ? 'Present' : exp.endYear || '' }}
+              {{ formatDate(exp.startMonth, exp.startYear) }} —
+              {{ exp.isCurrent ? 'Present' : formatDate(exp.endMonth, exp.endYear) }}
             </div>
           </div>
         </div>
@@ -80,6 +80,12 @@ const fallbackLogo =
 const logoSrc = (url) => {
   if (!url) return fallbackLogo;
   return /^https?:\/\//i.test(url) ? url : `${fallbackLogo}`;
+};
+
+const formatDate = (month, year) => {
+  if (!year) return '';
+  if (!month) return year;
+  return `${month} ${year}`;
 };
 </script>
 

@@ -31,7 +31,7 @@
                 <div v-else>
                   <div v-for="post in filteredPosts" :key="post.id" class="blog-post" @click="readPost(post.id)">
                     <div class="post-image">
-                      <img :src="post.image" :alt="post.title" />
+                      <img :src="normalizeImagePath(post.image)" :alt="post.title" />
                       <div class="post-category">{{ post.category }}</div>
                     </div>
                     <div class="post-content">
@@ -140,7 +140,7 @@
               <div v-else>
                 <div v-for="post in filteredPosts" :key="post.id" class="mobile-blog-post" @click="readPost(post.id)">
                   <div class="mobile-post-image">
-                    <img :src="post.image" :alt="post.title" />
+                    <img :src="normalizeImagePath(post.image)" :alt="post.title" />
                     <div class="mobile-post-category">{{ post.category }}</div>
                   </div>
                   <div class="mobile-post-content">
@@ -168,6 +168,14 @@ import dataService from '@/services/dataService';
 import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
+
+// Helper to normalize image paths
+const normalizeImagePath = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  if (path.startsWith('src/')) return `/${path}`;
+  return path;
+};
 
 // Reactive state
 const selectedCategory = ref('All');

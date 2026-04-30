@@ -33,7 +33,7 @@
 
             <!-- Featured Image -->
             <div class="featured-image">
-              <img :src="blogPost.image" :alt="blogPost.title" />
+              <img :src="normalizeImagePath(blogPost.image)" :alt="blogPost.title" />
             </div>
 
             <!-- Blog Content -->
@@ -84,7 +84,7 @@
             <div class="related-posts">
               <div v-for="post in relatedPosts" :key="post.id" class="related-post" @click="navigateToPost(post.id)">
                 <div class="related-post-image">
-                  <img :src="post.image" :alt="post.title" />
+                  <img :src="normalizeImagePath(post.image)" :alt="post.title" />
                 </div>
                 <div class="related-post-content">
                   <h4 class="related-post-title">{{ post.title }}</h4>
@@ -127,7 +127,7 @@
 
           <!-- Featured Image -->
           <div class="mobile-featured-image">
-            <img :src="blogPost.image" :alt="blogPost.title" />
+            <img :src="normalizeImagePath(blogPost.image)" :alt="blogPost.title" />
           </div>
 
           <!-- Blog Content -->
@@ -179,7 +179,7 @@
             <div class="mobile-related-posts-grid">
               <div v-for="post in relatedPosts" :key="post.id" class="mobile-related-post" @click="navigateToPost(post.id)">
                 <div class="mobile-related-post-image">
-                  <img :src="post.image" :alt="post.title" />
+                  <img :src="normalizeImagePath(post.image)" :alt="post.title" />
                 </div>
                 <div class="related-post-content">
                   <h4 class="mobile-related-post-title">{{ post.title }}</h4>
@@ -206,6 +206,16 @@ const route = useRoute();
 
 const blogPost = ref(null);
 const relatedPosts = ref([]);
+
+// Helper to normalize image paths
+const normalizeImagePath = (path) => {
+  if (!path) return '';
+  // If already absolute URL or starts with /, return as is
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  // If starts with src/, add leading /
+  if (path.startsWith('src/')) return `/${path}`;
+  return path;
+};
 
 // Methods
 const goBack = () => {

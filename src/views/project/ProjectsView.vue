@@ -53,7 +53,7 @@
             @click="viewProject(project.id)"
           >
             <div class="project-image">
-              <img :src="project.image" :alt="project.title" />
+              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
               <div class="project-overlay">
                 <v-btn 
                   variant="text" 
@@ -154,7 +154,7 @@
             @click="viewProject(project.id)"
           >
             <div class="project-image">
-              <img :src="project.image" :alt="project.title" />
+              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
             </div>
             <div class="project-content">
               <h3 class="project-title">{{ project.title }}</h3>
@@ -187,6 +187,14 @@ import dataService from '@/services/dataService';
 import SkeletonLoader from '@/components/SkeletonLoader.vue';
 
 const router = useRouter();
+
+// Helper to normalize image paths
+const normalizeImagePath = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  if (path.startsWith('src/')) return `/${path}`;
+  return path;
+};
 
 const selectedFilter = ref('All');
 const projects = ref([]);
@@ -344,17 +352,22 @@ onMounted(async () => {
   position: relative;
   height: 200px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .project-card:hover .project-image img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .project-overlay {

@@ -34,7 +34,7 @@
 
             <!-- Featured Image -->
             <div class="featured-image">
-              <img :src="project.image" :alt="project.title" />
+              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
             </div>
 
             <!-- Project Overview -->
@@ -116,7 +116,7 @@
             <div class="other-projects">
               <div v-for="otherProject in otherProjects" :key="otherProject.id" class="other-project" @click="navigateToProject(otherProject.id)">
                 <div class="other-project-image">
-                  <img :src="otherProject.image" :alt="otherProject.title" />
+                  <img :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
                 </div>
                 <div class="other-project-content">
                   <h4 class="other-project-title">{{ otherProject.title }}</h4>
@@ -159,7 +159,7 @@
 
           <!-- Featured Image -->
           <div class="mobile-featured-image">
-            <img :src="project.image" :alt="project.title" />
+            <img :src="normalizeImagePath(project.image)" :alt="project.title" />
           </div>
 
           <!-- Project Overview -->
@@ -240,7 +240,7 @@
             <div class="mobile-other-projects-grid">
               <div v-for="otherProject in otherProjects" :key="otherProject.id" class="mobile-other-project" @click="navigateToProject(otherProject.id)">
                 <div class="mobile-other-project-image">
-                  <img :src="otherProject.image" :alt="otherProject.title" />
+                  <img :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
                 </div>
                 <div class="mobile-other-project-content">
                   <h4 class="mobile-other-project-title">{{ otherProject.title }}</h4>
@@ -267,6 +267,14 @@ const route = useRoute();
 const project = ref(null);
 const otherProjects = ref([]);
 
+// Helper to normalize image paths
+const normalizeImagePath = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  if (path.startsWith('src/')) return `/${path}`;
+  return path;
+};
+
 // Methods
 const goBack = () => {
   router.go(-1);
@@ -285,14 +293,14 @@ onMounted(async () => {
     const projectData = await dataService.getProjectById(projectId);
     
     if (projectData) {
-      project.value = projectData;
-      
-      // Format technologies if they are strings
-      if (project.value.technologies && Array.isArray(project.value.technologies)) {
-        project.value.technologies = project.value.technologies.map(tech => 
-          typeof tech === 'string' ? { name: tech, icon: 'TechIcon' } : tech
-        );
-      }
+      project.value = {
+        ...projectData,
+        technologies: Array.isArray(projectData.technologies)
+          ? projectData.technologies.map(tech =>
+              typeof tech === 'string' ? { name: tech, icon: 'TechIcon' } : tech
+            )
+          : projectData.technologies
+      };
       
       // Get other projects
       const allProjects = await dataService.getProjects();
@@ -695,12 +703,18 @@ onMounted(async () => {
 
 .other-project-image {
   margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .other-project-image img {
   width: 100%;
   height: 120px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -1032,12 +1046,18 @@ onMounted(async () => {
 
 .mobile-other-project-image {
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobile-other-project-image img {
   width: 80px;
   height: 56px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 

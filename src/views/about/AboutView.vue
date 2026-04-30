@@ -66,7 +66,7 @@
                   <div class="exp-info">
                     <div class="exp-company">{{ exp.company }}</div>
                     <div class="exp-title">{{ exp.position }}</div>
-                    <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                    <div class="exp-years">{{ formatDate(exp.startMonth, exp.startYear) }} — {{ exp.isCurrent ? 'Present' : formatDate(exp.endMonth, exp.endYear) }}</div>
                     <ul v-if="exp.description && exp.description.length" class="exp-description">
                       <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
                     </ul>
@@ -140,7 +140,7 @@
                 <div class="exp-info">
                   <div class="exp-company">{{ exp.company }}</div>
                   <div class="exp-title">{{ exp.position }}</div>
-                  <div class="exp-years">{{ exp.startYear }} — {{ exp.isCurrent ? 'Present' : (exp.endYear || '') }}</div>
+                  <div class="exp-years">{{ formatDate(exp.startMonth, exp.startYear) }} — {{ exp.isCurrent ? 'Present' : formatDate(exp.endMonth, exp.endYear) }}</div>
                   <ul v-if="exp.description && exp.description.length" class="exp-description">
                     <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
                   </ul>
@@ -180,6 +180,12 @@ const logoSrc = (url) => {
 const isPng = (url) => {
   if (!url) return true // Default fallback is a png
   return /\.png$/i.test(url)
+}
+
+const formatDate = (month, year) => {
+  if (!year) return ''
+  if (!month) return year
+  return `${month} ${year}`
 }
 
 onMounted(async () => {

@@ -1,11 +1,31 @@
 [
-  {
+    {
     "id": 1,
+    "company": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+    "position": "Mobile Developer Student",
+    "logoUrl": "src/assets/logo_bangkit.jpg",
+    "startMonth": "February",
+    "startYear": "2023",
+    "endMonth": "July",
+    "endYear": "2023",
+    "isCurrent": false,
+    "description": [
+      "Completed an intensive, industry-led program focused on Mobile Development, covering Android fundamentals using Kotlin.",
+      "Learned core concepts such as Clean Architecture, MVVM pattern, RESTful API integration, and modern Android development practices.",
+      "Developed mobile applications as part of a capstone project, collaborating with a cross-functional team (Cloud Computing & Machine Learning paths).",
+      "Gained hands-on experience in version control (Git), agile workflow, and professional communication in a team environment.",
+      "Selected as a Bangkit Academy graduate with strong fundamentals in building scalable and maintainable mobile applications."
+    ]
+  },
+  {
+    "id": 2,
     "company": "Bluhabit",
-    "position": "Mobile Developer",
-    "logoUrl": "src/assets/logo_suitmedia.png",
-    "startYear": "2020",
-    "endYear": "2022",
+    "position": "Mobile Developer Intern",
+    "logoUrl": "src/assets/bluhabit.jpg",
+    "startMonth": "August",
+    "startYear": "2023",
+    "endMonth": "February",
+    "endYear": "2024",
     "isCurrent": false,
     "description": [
       "Collaborated within a team to develop financial applications and veterinary (pet care) applications.",
@@ -14,12 +34,14 @@
     ]
   },
   {
-    "id": 2,
+    "id": 3,
     "company": "Suitmedia",
-    "position": "Mobile Developer",
+    "position": "Mobile Developer Intern",
     "logoUrl": "src/assets/logo_suitmedia.png",
-    "startYear": "2020",
-    "endYear": "2022",
+    "startMonth": "February",
+    "startYear": "2024",
+    "endMonth": "July",
+    "endYear": "2024",
     "isCurrent": false,
     "description": [
       "Developed native mobile applications using Kotlin with modern asynchronous programming approaches.",
@@ -29,11 +51,13 @@
     ]
   },
   {
-    "id": 3,
+    "id": 4,
     "company": "PT. Gelora Aksara Pratama (Penerbit Erlangga Group)",
     "position": "Full Stack Developer",
     "logoUrl": "src/assets/logo_gap.png",
-    "startYear": "2022",
+    "startMonth": "August",
+    "startYear": "2024",
+    "endMonth": null,
     "endYear": null,
     "isCurrent": true,
     "description": [

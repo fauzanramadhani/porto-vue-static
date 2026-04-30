@@ -25,13 +25,13 @@ export const dataService = {
 
   // Get projects
   async getProjects() {
-    return projectsData
+    return JSON.parse(JSON.stringify(projectsData))
   },
 
   // Get project by ID
   async getProjectById(id) {
     const project = projectsData.find(p => p.id === parseInt(id))
-    return project || null
+    return project ? JSON.parse(JSON.stringify(project)) : null
   },
 
   // Get blog posts

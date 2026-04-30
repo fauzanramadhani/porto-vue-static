@@ -170,6 +170,7 @@ const colStyle = (count) => {
 onMounted(async () => {
   try {
     const data = await dataService.getHomeData();
+    data.experiences.sort((a, b) => b.id - a.id);
     homeData.value = data;
     console.log(data);
   } catch (error) {
