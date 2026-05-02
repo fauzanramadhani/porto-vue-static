@@ -18,7 +18,10 @@
       </template>
       <template v-else>
         <div v-for="p in visibleProjects" :key="p.id" class="project-item">
-          <img :src="p.thumbnail || fallbackThumb" :alt="p.title" class="project-logo" />
+          <div v-if="!p.thumbnail" class="project-logo project-initials">
+            {{ getInitials(p.title) }}
+          </div>
+          <img v-else :src="normalizeImagePath(p.thumbnail)" :alt="p.title" class="project-logo" />
           <div class="project-info">
             <div class="project-title">{{ p.title }}</div>
             <div class="project-desc">{{ p.description }}</div>
@@ -62,6 +65,21 @@ const remainingCount = computed(() => {
 
 const goToMore = () => {
   router.push('/projects');
+};
+
+const normalizeImagePath = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  if (path.startsWith('src/')) return `/${path}`;
+  return path;
+};
+
+const getInitials = (title) => {
+  if (!title) return 'P';
+  const words = title.split(' ').filter(w => w.length > 0);
+  if (words.length === 0) return 'P';
+  if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
 };
 
 const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=80&q=80'
@@ -162,10 +180,22 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 4px;
   background: #23243a;
   box-shadow: 0 2px 8px #0002;
   flex-shrink: 0;
+}
+
+.project-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00eaff 0%, #0072ff 100%);
+  color: #000;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 0; /* Remove padding for initials to center them better */
 }
 
 .project-info {

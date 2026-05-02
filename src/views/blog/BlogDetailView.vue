@@ -348,6 +348,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .back-arrow-icon {
@@ -511,6 +512,7 @@ onMounted(async () => {
 .share-btn {
   min-width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 
 /* ===== SIDEBAR ===== */
@@ -682,6 +684,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .mobile-back-btn .back-arrow-icon {
@@ -845,5 +848,6 @@ onMounted(async () => {
 .mobile-share-btn {
   min-width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 </style>

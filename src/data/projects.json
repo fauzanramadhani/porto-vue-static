@@ -6,29 +6,15 @@
     "thumbnail": "src/assets/logo_geloraprinting.png",
     "image": "src/assets/logo_geloraprinting.png",
     "category": "Web Apps",
-    "technologies": ["Laravel", "MySQL", "Bootstrap"],
+    "technologies": [
+      { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" },
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" },
+      { "name": "Bootstrap", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan website company profile sekaligus sistem e-commerce untuk Gelora Printing, memungkinkan pelanggan melakukan pemesanan produk cetak secara online dengan alur yang terintegrasi.",
-    "features": [
-      "Company profile",
-      "Katalog produk percetakan",
-      "Pemesanan online",
-      "Manajemen order",
-      "Integrasi pembayaran",
-      "Dashboard admin"
-    ],
-    "details": [
-      {
-        "heading": "E-Commerce Integration",
-        "paragraph": "Mengembangkan sistem pemesanan berbasis web yang terhubung langsung dengan proses produksi dan pembayaran."
-      },
-      {
-        "heading": "Scalability",
-        "paragraph": "Dirancang agar dapat menangani berbagai jenis produk cetak dengan variasi custom."
-      }
-    ],
+    "overview": "Sebagai bagian dari tim pengembang, saya berkontribusi dalam membangun website company profile dan sistem e-commerce terintegrasi untuk Gelora Printing. Proyek ini mencakup pengembangan katalog produk percetakan, sistem pemesanan online, manajemen order, hingga integrasi pembayaran. Fokus utama saya adalah memastikan skalabilitas sistem untuk menangani berbagai variasi produk custom dan integrasi alur kerja dari pemesanan hingga proses produksi.",
     "links": {
       "demo": "https://geloraprinting.co.id/",
       "github": null
@@ -38,31 +24,18 @@
     "id": 2,
     "title": "Gelora Payment",
     "description": "Sistem payment gateway berbasis Vue yang terintegrasi dengan Midtrans API.",
-    "thumbnail": "",
-    "image": "",
+    "thumbnail": "src/assets/logo_gelorapayment.png",
+    "image": "src/assets/logo_gelorapayment.png",
     "category": "Web Apps",
-    "technologies": ["Vue.js", "Midtrans API", "Node.js"],
+    "technologies": [
+      { "name": "Vue.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" },
+      { "name": "Midtrans API", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" },
+      { "name": "Node.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Membangun sistem payment terpusat menggunakan Midtrans sebagai core API untuk digunakan di berbagai platform e-commerce internal.",
-    "features": [
-      "Integrasi Midtrans",
-      "Reusable payment API",
-      "Multi-platform support",
-      "Transaction handling",
-      "Payment status tracking"
-    ],
-    "details": [
-      {
-        "heading": "Core Payment System",
-        "paragraph": "Digunakan sebagai backend payment untuk beberapa aplikasi e-commerce dalam satu ekosistem."
-      },
-      {
-        "heading": "Integration",
-        "paragraph": "Dirancang modular agar mudah diintegrasikan ke berbagai frontend."
-      }
-    ],
+    "overview": "Membangun sistem payment terpusat (payment gateway) menggunakan Midtrans sebagai core API. Proyek ini dirancang secara modular agar dapat digunakan secara reusable oleh berbagai platform e-commerce dalam ekosistem internal perusahaan. Saya bertanggung jawab dalam integrasi API, penanganan transaksi, hingga tracking status pembayaran secara real-time.",
     "links": {
       "demo": null,
       "github": null
@@ -72,31 +45,18 @@
     "id": 3,
     "title": "Tokosuma Web",
     "description": "Platform e-commerce berbasis Vue dan Express.",
-    "thumbnail": "",
-    "image": "",
+    "thumbnail": "src/assets/logo_tokosuma.png",
+    "image": "src/assets/logo_tokosuma.png",
     "category": "Web Apps",
-    "technologies": ["Vue.js", "Express.js", "MongoDB"],
+    "technologies": [
+      { "name": "Vue.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" },
+      { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" },
+      { "name": "MongoDB", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan platform e-commerce Tokosuma dengan arsitektur frontend Vue dan backend Express untuk performa dan fleksibilitas tinggi.",
-    "features": [
-      "Katalog produk",
-      "Manajemen order",
-      "User authentication",
-      "Integrasi payment",
-      "Dashboard admin"
-    ],
-    "details": [
-      {
-        "heading": "Frontend Architecture",
-        "paragraph": "Menggunakan Vue.js untuk membangun UI yang responsif dan modular."
-      },
-      {
-        "heading": "Backend API",
-        "paragraph": "Menggunakan Express untuk REST API yang scalable dan ringan."
-      }
-    ],
+    "overview": "Mengembangkan platform e-commerce Tokosuma dengan arsitektur frontend menggunakan Vue.js dan backend Express.js. Dalam tim ini, saya mengerjakan berbagai modul mulai dari katalog produk, manajemen order, sistem autentikasi pengguna, hingga integrasi sistem pembayaran untuk menciptakan pengalaman belanja yang responsif dan lancar.",
     "links": {
       "demo": "https://dev.tokosuma.co.id/",
       "github": null
@@ -106,27 +66,17 @@
     "id": 4,
     "title": "Tokosuma Mobile",
     "description": "Aplikasi mobile e-commerce Tokosuma berbasis Flutter.",
-    "thumbnail": "",
-    "image": "",
+    "thumbnail": "src/assets/logo_tokosuma_mobile.png",
+    "image": "src/assets/logo_tokosuma_mobile.png",
     "category": "Mobile Apps",
-    "technologies": ["Flutter", "Dart"],
+    "technologies": [
+      { "name": "Flutter", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" },
+      { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan aplikasi mobile Tokosuma untuk mempermudah pengguna berbelanja melalui perangkat mobile.",
-    "features": [
-      "Browsing produk",
-      "Pemesanan via mobile",
-      "Integrasi API",
-      "User authentication",
-      "Responsive UI"
-    ],
-    "details": [
-      {
-        "heading": "Cross Platform",
-        "paragraph": "Dibangun dengan Flutter untuk mendukung Android dengan performa tinggi."
-      }
-    ],
+    "overview": "Mengembangkan aplikasi mobile e-commerce Tokosuma berbasis Flutter untuk memberikan kemudahan akses bagi pengguna Android. Kontribusi saya mencakup implementasi UI yang responsif, integrasi dengan REST API backend, serta pengembangan fitur browsing produk dan proses pemesanan yang dioptimalkan untuk perangkat mobile.",
     "links": {
       "demo": "https://play.google.com/store/apps/details?id=com.gelora.toko_suma_app",
       "github": null
@@ -136,26 +86,18 @@
     "id": 5,
     "title": "Aplikasi Monitoring Produksi",
     "description": "Aplikasi untuk memantau progress produksi percetakan.",
-    "thumbnail": "",
-    "image": "",
+    "thumbnail": "src/assets/logo_monitoring_mobile.png",
+    "image": "src/assets/logo_monitoring_mobile.png",
     "category": "Mobile Apps",
-    "technologies": ["Flutter", "Dart", "Express.js"],
+    "technologies": [
+      { "name": "Flutter", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" },
+      { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" },
+      { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Aplikasi untuk memonitor progress job produksi cetak secara real-time agar memudahkan tracking pekerjaan.",
-    "features": [
-      "Monitoring progress produksi",
-      "Tracking job cetak",
-      "Integrasi backend",
-      "Realtime update"
-    ],
-    "details": [
-      {
-        "heading": "Production Tracking",
-        "paragraph": "Membantu tim produksi dalam memantau status pekerjaan secara efisien."
-      }
-    ],
+    "overview": "Membangun aplikasi monitoring produksi untuk melacak progres setiap pesanan cetak secara real-time. Aplikasi ini membantu tim produksi dalam memantau status pekerjaan (job tracking) mulai dari persiapan hingga pengiriman, memastikan transparansi dan efisiensi dalam alur kerja operasional percetakan.",
     "links": {
       "demo": null,
       "github": null
@@ -168,23 +110,14 @@
     "thumbnail": "",
     "image": "",
     "category": "Web Apps",
-    "technologies": ["Laravel", "MySQL"],
+    "technologies": [
+      { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" },
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Membangun berbagai sistem internal untuk meningkatkan efisiensi operasional perusahaan.",
-    "features": [
-      "Sasaran mutu otomatis",
-      "Tracking stok teknisi",
-      "Pendataan reject/good produksi",
-      "Manajemen data operasional"
-    ],
-    "details": [
-      {
-        "heading": "Digitalisasi",
-        "paragraph": "Mengubah proses manual menjadi sistem digital untuk meningkatkan efisiensi."
-      }
-    ],
+    "overview": "Mengembangkan berbagai modul sistem internal untuk digitalisasi operasional perusahaan. Beberapa fitur yang saya kerjakan meliputi sistem sasaran mutu otomatis, tracking stok untuk teknisi, serta sistem pendataan reject/good produksi untuk meminimalisir kesalahan manual dan meningkatkan efisiensi pendataan.",
     "links": {
       "demo": null,
       "github": null
@@ -197,28 +130,15 @@
     "thumbnail": "",
     "image": "",
     "category": "Mobile Apps",
-    "technologies": ["Java", "Android Native", "REST API"],
+    "technologies": [
+      { "name": "Java", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" },
+      { "name": "Android Native", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original.svg" },
+      { "name": "REST API", "icon": "https://www.svgrepo.com/show/354262/rest-api.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan aplikasi HRIS berbasis Android native menggunakan Java untuk mendukung operasional manajemen karyawan secara mobile dan efisien.",
-    "features": [
-      "Pengajuan peminjaman kendaraan",
-      "Pencatatan laporan kegiatan harian",
-      "Manajemen data karyawan",
-      "Integrasi dengan backend API",
-      "Role-based access (user & admin)"
-    ],
-    "details": [
-      {
-        "heading": "Mobile-first HR System",
-        "paragraph": "Dirancang untuk memudahkan karyawan dalam melakukan aktivitas HR langsung dari perangkat mobile tanpa perlu akses desktop."
-      },
-      {
-        "heading": "Native Performance",
-        "paragraph": "Dibangun menggunakan Java native Android untuk memastikan performa stabil dan responsif."
-      }
-    ],
+    "overview": "Mengembangkan aplikasi HRIS berbasis Android Native menggunakan Java. Aplikasi ini dirancang untuk mendigitalkan proses administratif HR, seperti pengajuan peminjaman kendaraan, pencatatan laporan kegiatan harian, dan manajemen data karyawan secara mobile agar lebih mudah diakses oleh seluruh anggota tim.",
     "links": {
       "demo": null,
       "github": null
@@ -231,23 +151,13 @@
     "thumbnail": "",
     "image": "",
     "category": "Web Apps",
-    "technologies": ["Laravel"],
+    "technologies": [
+      { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" }
+    ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan sistem proposal digital untuk mempermudah user dalam membuat dan mengelola proposal produk.",
-    "features": [
-      "Pembuatan proposal produk",
-      "Manajemen role akses",
-      "Perbaikan bug sistem",
-      "Optimasi workflow"
-    ],
-    "details": [
-      {
-        "heading": "System Improvement",
-        "paragraph": "Melakukan enhancement fitur dan peningkatan performa sistem."
-      }
-    ],
+    "overview": "Mengembangkan sistem proposal digital berbasis Laravel untuk mempermudah pembuatan dan pengelolaan proposal produk. Saya fokus pada optimasi workflow pembuatan dokumen, manajemen role akses, serta melakukan perbaikan bug untuk memastikan sistem berjalan stabil dalam mendukung kegiatan bisnis perusahaan.",
     "links": {
       "demo": null,
       "github": null

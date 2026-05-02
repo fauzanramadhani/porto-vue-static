@@ -53,7 +53,10 @@
             @click="viewProject(project.id)"
           >
             <div class="project-image">
-              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
+              <div v-if="!project.image" class="project-initials-large">
+                {{ getInitials(project.title) }}
+              </div>
+              <img v-else :src="normalizeImagePath(project.image)" :alt="project.title" />
               <div class="project-overlay">
                 <v-btn 
                   variant="text" 
@@ -84,10 +87,10 @@
               <div class="project-tech">
                 <span 
                   v-for="tech in project.technologies" 
-                  :key="tech"
+                  :key="typeof tech === 'object' ? tech.name : tech"
                   class="tech-tag"
                 >
-                  {{ tech }}
+                  {{ typeof tech === 'object' ? tech.name : tech }}
                 </span>
               </div>
               <div class="project-meta">
@@ -154,7 +157,10 @@
             @click="viewProject(project.id)"
           >
             <div class="project-image">
-              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
+              <div v-if="!project.image" class="project-initials-large">
+                {{ getInitials(project.title) }}
+              </div>
+              <img v-else :src="normalizeImagePath(project.image)" :alt="project.title" />
             </div>
             <div class="project-content">
               <h3 class="project-title">{{ project.title }}</h3>
@@ -162,10 +168,10 @@
               <div class="project-tech">
                 <span 
                   v-for="tech in project.technologies" 
-                  :key="tech"
+                  :key="typeof tech === 'object' ? tech.name : tech"
                   class="tech-tag"
                 >
-                  {{ tech }}
+                  {{ typeof tech === 'object' ? tech.name : tech }}
                 </span>
               </div>
               <div class="project-meta">
@@ -194,6 +200,14 @@ const normalizeImagePath = (path) => {
   if (path.startsWith('http') || path.startsWith('/')) return path;
   if (path.startsWith('src/')) return `/${path}`;
   return path;
+};
+
+const getInitials = (title) => {
+  if (!title) return 'P';
+  const words = title.split(' ').filter(w => w.length > 0);
+  if (words.length === 0) return 'P';
+  if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
 };
 
 const selectedFilter = ref('All');
@@ -299,6 +313,7 @@ onMounted(async () => {
   border-radius: 20px;
   padding: 8px 20px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .filter-btn:hover {
@@ -366,6 +381,19 @@ onMounted(async () => {
   transition: transform 0.3s ease;
 }
 
+.project-initials-large {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00eaff 0%, #0072ff 100%);
+  color: #000;
+  font-weight: 800;
+  font-size: 3.5rem;
+  border-radius: 8px;
+}
+
 .project-card:hover .project-image img {
   transform: scale(1.1);
 }
@@ -397,6 +425,7 @@ onMounted(async () => {
   color: #000 !important;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .chevron-icon {

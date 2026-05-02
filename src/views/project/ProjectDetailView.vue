@@ -34,7 +34,10 @@
 
             <!-- Featured Image -->
             <div class="featured-image">
-              <img :src="normalizeImagePath(project.image)" :alt="project.title" />
+              <div v-if="!project.image" class="project-initials-hero">
+                {{ getInitials(project.title) }}
+              </div>
+              <img v-else :src="normalizeImagePath(project.image)" :alt="project.title" />
             </div>
 
             <!-- Project Overview -->
@@ -49,43 +52,18 @@
               <div class="tech-grid">
                 <div v-for="tech in project.technologies" :key="tech.name" class="tech-item">
                   <div class="tech-icon">
-                    <component :is="tech.icon" />
+                    <img v-if="tech.icon" :src="tech.icon" :alt="tech.name" class="tech-icon-img" />
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="tech-icon-placeholder">
+                      <path d="M0 32C0 14.3 14.3 0 32 0H448c17.7 0 32 14.3 32 32V96l51.3 51.3c4.6 4.6 7.2 10.9 7.2 17.4V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V32zM448 352c0-17.7-14.3-32-32-32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32zM96 160c0 17.7 14.3 32 32 32H352c17.7 0 32-14.3 32-32s-14.3-32-32-32H128c-17.7 0-32 14.3-32 32z"/>
+                    </svg>
                   </div>
                   <span class="tech-name">{{ tech.name }}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Project Features -->
-            <div class="features-section">
-              <h2 class="section-heading">Key Features</h2>
-              <div class="features-list">
-                <div v-for="feature in project.features" :key="feature" class="feature-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="feature-icon">
-                    <path d="M96 128a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM96 320a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM96 512a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM160 64c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32z"/>
-                  </svg>
-                  <span>{{ feature }}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Project Details -->
-            <div class="project-details">
-              <h2 class="section-heading">Project Details</h2>
-              <div v-for="(section, index) in project.details" :key="index" class="detail-section">
-                <h3 v-if="section.heading" class="detail-heading">{{ section.heading }}</h3>
-                <p v-if="section.paragraph" class="detail-paragraph">{{ section.paragraph }}</p>
-                <div v-if="section.codeBlock" class="code-block">
-                  <pre><code>{{ section.codeBlock }}</code></pre>
-                </div>
-                <ul v-if="section.list" class="detail-list">
-                  <li v-for="(item, itemIndex) in section.list" :key="itemIndex">{{ item }}</li>
-                </ul>
-              </div>
-            </div>
-
             <!-- Project Links -->
-            <div class="project-links">
+            <div v-if="hasLinks" class="project-links">
               <h2 class="section-heading">Project Links</h2>
               <div class="links-grid">
                 <a v-if="project.links.demo" :href="project.links.demo" target="_blank" class="project-link demo-link">
@@ -116,7 +94,10 @@
             <div class="other-projects">
               <div v-for="otherProject in otherProjects" :key="otherProject.id" class="other-project" @click="navigateToProject(otherProject.id)">
                 <div class="other-project-image">
-                  <img :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
+                  <div v-if="!otherProject.image" class="project-logo project-initials">
+                    {{ getInitials(otherProject.title) }}
+                  </div>
+                  <img v-else :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
                 </div>
                 <div class="other-project-content">
                   <h4 class="other-project-title">{{ otherProject.title }}</h4>
@@ -159,7 +140,10 @@
 
           <!-- Featured Image -->
           <div class="mobile-featured-image">
-            <img :src="normalizeImagePath(project.image)" :alt="project.title" />
+            <div v-if="!project.image" class="project-initials-hero">
+              {{ getInitials(project.title) }}
+            </div>
+            <img v-else :src="normalizeImagePath(project.image)" :alt="project.title" />
           </div>
 
           <!-- Project Overview -->
@@ -174,43 +158,18 @@
             <div class="mobile-tech-grid">
               <div v-for="tech in project.technologies" :key="tech.name" class="mobile-tech-item">
                 <div class="mobile-tech-icon">
-                  <component :is="tech.icon" />
+                  <img v-if="tech.icon" :src="tech.icon" :alt="tech.name" class="tech-icon-img" />
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="tech-icon-placeholder">
+                    <path d="M0 32C0 14.3 14.3 0 32 0H448c17.7 0 32 14.3 32 32V96l51.3 51.3c4.6 4.6 7.2 10.9 7.2 17.4V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V32zM448 352c0-17.7-14.3-32-32-32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32zM96 160c0 17.7 14.3 32 32 32H352c17.7 0 32-14.3 32-32s-14.3-32-32-32H128c-17.7 0-32 14.3-32 32z"/>
+                  </svg>
                 </div>
                 <span class="mobile-tech-name">{{ tech.name }}</span>
               </div>
             </div>
           </div>
 
-          <!-- Project Features -->
-          <div class="mobile-features-section">
-            <h2 class="mobile-section-heading">Key Features</h2>
-            <div class="mobile-features-list">
-              <div v-for="feature in project.features" :key="feature" class="mobile-feature-item">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="mobile-feature-icon">
-                  <path d="M96 128a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM96 320a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM96 512a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM160 64c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32zm0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32 14.3-32 32-32 32 14.3 32 32z"/>
-                </svg>
-                <span>{{ feature }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project Details -->
-          <div class="mobile-project-details">
-            <h2 class="mobile-section-heading">Project Details</h2>
-            <div v-for="(section, index) in project.details" :key="index" class="mobile-detail-section">
-              <h3 v-if="section.heading" class="mobile-detail-heading">{{ section.heading }}</h3>
-              <p v-if="section.paragraph" class="mobile-detail-paragraph">{{ section.paragraph }}</p>
-              <div v-if="section.codeBlock" class="mobile-code-block">
-                <pre><code>{{ section.codeBlock }}</code></pre>
-              </div>
-              <ul v-if="section.list" class="mobile-detail-list">
-                <li v-for="(item, itemIndex) in section.list" :key="itemIndex">{{ item }}</li>
-              </ul>
-            </div>
-          </div>
-
           <!-- Project Links -->
-          <div class="mobile-project-links">
+          <div v-if="hasLinks" class="mobile-project-links">
             <h2 class="mobile-section-heading">Project Links</h2>
             <div class="mobile-links-grid">
               <a v-if="project.links.demo" :href="project.links.demo" target="_blank" class="mobile-project-link mobile-demo-link">
@@ -240,7 +199,10 @@
             <div class="mobile-other-projects-grid">
               <div v-for="otherProject in otherProjects" :key="otherProject.id" class="mobile-other-project" @click="navigateToProject(otherProject.id)">
                 <div class="mobile-other-project-image">
-                  <img :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
+                  <div v-if="!otherProject.image" class="project-logo project-initials">
+                    {{ getInitials(otherProject.title) }}
+                  </div>
+                  <img v-else :src="normalizeImagePath(otherProject.image)" :alt="otherProject.title" />
                 </div>
                 <div class="mobile-other-project-content">
                   <h4 class="mobile-other-project-title">{{ otherProject.title }}</h4>
@@ -256,7 +218,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import dataService from '@/services/dataService';
 import ProfileHeader from '@/components/ProfileHeaderCard.vue';
@@ -267,12 +229,26 @@ const route = useRoute();
 const project = ref(null);
 const otherProjects = ref([]);
 
+const hasLinks = computed(() => {
+  if (!project.value || !project.value.links) return false;
+  const links = project.value.links;
+  return !!(links.demo || links.github || links.documentation);
+});
+
 // Helper to normalize image paths
 const normalizeImagePath = (path) => {
   if (!path) return '';
   if (path.startsWith('http') || path.startsWith('/')) return path;
   if (path.startsWith('src/')) return `/${path}`;
   return path;
+};
+
+const getInitials = (title) => {
+  if (!title) return 'P';
+  const words = title.split(' ').filter(w => w.length > 0);
+  if (words.length === 0) return 'P';
+  if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
 };
 
 // Methods
@@ -413,6 +389,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .back-arrow-icon {
@@ -458,17 +435,35 @@ onMounted(async () => {
   color: #b0b0b0;
 }
 
-/* Featured Image */
 .featured-image {
   margin-bottom: 32px;
   border-radius: 16px;
   overflow: hidden;
+  max-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .featured-image img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.project-initials-hero {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00eaff 0%, #0072ff 100%);
+  color: #000;
+  font-weight: 800;
+  font-size: 6rem;
+  border-radius: 16px;
 }
 
 /* Section Headings */
@@ -523,6 +518,20 @@ onMounted(async () => {
   justify-content: center;
   background: rgba(0, 234, 255, 0.1);
   border-radius: 8px;
+  overflow: hidden;
+}
+
+.tech-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.tech-icon-placeholder {
+  width: 24px;
+  height: 24px;
+  fill: #00eaff;
 }
 
 .tech-name {
@@ -718,6 +727,28 @@ onMounted(async () => {
   border-radius: 8px;
 }
 
+.project-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #23243a;
+  flex-shrink: 0;
+}
+
+.project-initials {
+  width: 100% !important;
+  height: 120px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00eaff 0%, #0072ff 100%);
+  color: #000;
+  font-weight: 700;
+  font-size: 2rem;
+  border-radius: 8px;
+}
+
 .other-project-content {
   display: flex;
   flex-direction: column;
@@ -757,6 +788,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .mobile-back-btn .back-arrow-icon {
