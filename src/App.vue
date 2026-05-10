@@ -32,7 +32,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import VantaBackground from './assets/VantaBackground.vue'
+import VantaBackground from './components/VantaBackground.vue'
 import BottomNav from './components/BottomNav.vue'
 import HomeView from './views/HomeView.vue'
 import AboutView from './views/about/AboutView.vue'

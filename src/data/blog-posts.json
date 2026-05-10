@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Kotlin Flow in Practice: Streams, State, and Reactive Patterns in Android",
     "excerpt": "A practical guide to understanding Kotlin Flow, its core features, trade-offs, and how it compares to other reactive solutions in Android development.",
-    "image": "src/assets/kotlin_flows_icon.png",
+    "image": "/assets/kotlin_flows_icon.png",
     "category": "Android",
     "tags": ["kotlin", "flow", "stateflow", "coroutines", "reactive"],
     "date": "January 18, 2025",

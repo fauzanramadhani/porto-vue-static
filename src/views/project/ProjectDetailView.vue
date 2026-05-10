@@ -239,8 +239,7 @@ const hasLinks = computed(() => {
 const normalizeImagePath = (path) => {
   if (!path) return '';
   if (path.startsWith('http') || path.startsWith('/')) return path;
-  if (path.startsWith('src/')) return `/${path}`;
-  return path;
+  return `/${path}`;
 };
 
 const getInitials = (title) => {

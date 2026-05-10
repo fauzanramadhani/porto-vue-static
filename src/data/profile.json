@@ -2,8 +2,8 @@
   "name": "Fauzan Gracia Ramadhani",
   "tagline": "Full Stack Developer | Tech Enthusiast | Problem Solver",
   "dateOfBirth": "2001-12-05",
-  "profilePhotoUrl": "src/assets/profile_zan.jpg",
-  "coverPhotoUrl": "src/assets/sampul_zan.jpg",
+  "profilePhotoUrl": "/assets/profile_zan.jpg",
+  "coverPhotoUrl": "/assets/sampul_zan.jpg",
   "status": {
     "label": "Available for Work",
     "isOnline": true

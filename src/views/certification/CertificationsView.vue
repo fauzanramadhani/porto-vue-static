@@ -169,7 +169,7 @@ const openCertificate = (fileName) => {
   // Assuming the files are served from /src/assets/sertif/
   // In a real Vite project, you'd likely want these in the public folder
   // or use a dynamic import. For now, we'll try to resolve it.
-  const url = new URL(`../../assets/sertif/${fileName}`, import.meta.url).href;
+  const url = `/assets/sertif/${fileName}`;
   window.open(url, '_blank');
 };
 

@@ -210,11 +210,8 @@ const relatedPosts = ref([]);
 // Helper to normalize image paths
 const normalizeImagePath = (path) => {
   if (!path) return '';
-  // If already absolute URL or starts with /, return as is
   if (path.startsWith('http') || path.startsWith('/')) return path;
-  // If starts with src/, add leading /
-  if (path.startsWith('src/')) return `/${path}`;
-  return path;
+  return `/${path}`;
 };
 
 // Methods
