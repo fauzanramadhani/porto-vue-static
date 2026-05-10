@@ -133,18 +133,44 @@
               </div>
             </template>
             <template v-else>
-              <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item">
-                <div class="exp-logo-wrapper" :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }">
-                  <img :src="logoSrc(exp.logoUrl)" :alt="exp.company" class="exp-logo" />
+              <div v-for="exp in reversedExperiences" :key="exp.id" class="exp-item mobile-exp-item">
+
+                <div class="mobile-exp-header">
+
+                  <div
+                    class="exp-logo-wrapper"
+                    :style="{ padding: isPng(exp.logoUrl) ? '8px' : '0' }"
+                  >
+                    <img
+                      :src="logoSrc(exp.logoUrl)"
+                      :alt="exp.company"
+                      class="exp-logo"
+                    />
+                  </div>
+
+                  <div class="exp-info">
+                    <div class="exp-company">{{ exp.company }}</div>
+
+                    <div class="exp-title">{{ exp.position }}</div>
+
+                    <div class="exp-years">
+                      {{ formatDate(exp.startMonth, exp.startYear) }}
+                      —
+                      {{ exp.isCurrent ? 'Present' : formatDate(exp.endMonth, exp.endYear) }}
+                    </div>
+                  </div>
+
                 </div>
-                <div class="exp-info">
-                  <div class="exp-company">{{ exp.company }}</div>
-                  <div class="exp-title">{{ exp.position }}</div>
-                  <div class="exp-years">{{ formatDate(exp.startMonth, exp.startYear) }} — {{ exp.isCurrent ? 'Present' : formatDate(exp.endMonth, exp.endYear) }}</div>
-                  <ul v-if="exp.description && exp.description.length" class="exp-description">
-                    <li v-for="(desc, idx) in exp.description" :key="idx">{{ desc }}</li>
-                  </ul>
-                </div>
+
+                <ul
+                  v-if="exp.description && exp.description.length"
+                  class="exp-description"
+                >
+                  <li v-for="(desc, idx) in exp.description" :key="idx">
+                    {{ desc }}
+                  </li>
+                </ul>
+
               </div>
             </template>
           </div>
@@ -508,20 +534,32 @@ onMounted(async () => {
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 767px) {
+  .mobile-exp-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .mobile-exp-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    margin-bottom: 8px;
+  }
   .about-card {
     padding: 24px;
   }
 
-  .section-title {
-    font-size: 1.75rem;
-  }
-  
-  .about-text {
-    font-size: 1rem;
-  }
-
-  .exp-card {
-    padding: 24px;
+  .mobile-exp-item .exp-description {
+    margin-top: 4px;
+    padding-left: 20px;
+    margin-bottom: 12px;
   }
 }
 </style>
