@@ -157,7 +157,7 @@ const formatDate = (month, year) => {
   gap: 12px;
   flex: 1 1 auto;
   overflow-y: auto;
-  padding-right: 4px;
+  padding: 12px 4px 24px 0;
 }
 
 .exp-list::-webkit-scrollbar {

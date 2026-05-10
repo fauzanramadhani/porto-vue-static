@@ -131,11 +131,10 @@ const goToMore = () => {
 .certification-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
   overflow-y: auto;
-  padding-right: 4px;
-  max-height: 260px;
   flex: 1;
+  padding: 12px 4px 24px 0;
 }
 
 .certification-list::-webkit-scrollbar {

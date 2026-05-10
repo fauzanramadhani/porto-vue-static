@@ -152,9 +152,8 @@ const fallbackThumb = 'https://images.unsplash.com/photo-1460925895917-afdab827c
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
-  padding-right: 4px;
-  max-height: 260px;
   flex: 1;
+  padding: 12px 4px 24px 0;
 }
 
 .project-list::-webkit-scrollbar {
