@@ -13,7 +13,6 @@
             <div class="sk-line shimmer" style="width:60%"></div>
             <div class="sk-line shimmer" style="width:40%"></div>
           </div>
-          <div class="sk-line shimmer" style="width:80px"></div>
         </div>
       </template>
       <template v-else>
@@ -26,7 +25,6 @@
             <div class="certification-title">{{ c.title }}</div>
             <div class="certification-issuer">{{ c.issuer }}</div>
           </div>
-          <div class="certification-date">{{ formatDate(c.issuedDate) }}</div>
         </div>
         <div v-if="remainingCount > 0" class="cert-more" @click="goToMore">
           + {{ remainingCount }} More
@@ -67,11 +65,6 @@ const goToMore = () => {
     router.push('/certifications');
 };
 
-const formatDate = (d) => {
-  if (!d) return ''
-  const dt = new Date(d)
-  return isNaN(dt) ? '' : dt.toLocaleDateString()
-}
 </script>
 
 <style scoped>
@@ -215,13 +208,6 @@ const formatDate = (d) => {
 .shimmer { background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
 @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
-.certification-date {
-  color: #cfd8dc;
-  font-size: 0.97rem;
-  font-weight: 500;
-  min-width: 90px;
-  text-align: right;
-}
 
 /* Mobile Responsive */
 @media (max-width: 1034px) {
@@ -298,15 +284,5 @@ const formatDate = (d) => {
     line-height: 1.2;
   }
   
-  .certification-date {
-    margin-top: 0;
-    font-size: 0.75rem;
-    color: #b2b8ff;
-    white-space: nowrap;
-    line-height: 1.2;
-    min-width: auto;
-    text-align: right;
-    /* Optional: hide date if too cramped? No, users usually like dates. */
-  }
 }
 </style>

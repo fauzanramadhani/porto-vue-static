@@ -63,8 +63,11 @@
     "description": [
       "Developed and enhanced features for internal HRIS applications across both mobile and web platforms.",
       "Built internal enterprise applications to support operational processes across multiple business units.",
+      "Developed two e-commerce applications including payment gateway integration and transaction flow management.",
+      "Handled CI/CD pipelines using GitHub Actions, including automated deployment, backup management, system maintenance, and security implementation.",
+      "Managed end-to-end full stack development responsibilities, covering frontend, backend, infrastructure, and production support.",
       "Communicated directly with end-users to identify issues, provide solutions, and ensure quick resolution.",
-      "Collaborated effectively within a team to deliver reliable and scalable software solutions."
+      "Collaborated within a team to deliver reliable and scalable software solutions."
     ]
   }
 ]

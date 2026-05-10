@@ -22,8 +22,6 @@
                 <SkeletonLoader width="90%" height="16px"/>
                 
                 <div class="cert-details cert-details-loading">
-                  <SkeletonLoader width="120px" height="16px"/>
-                  <SkeletonLoader width="130px" height="16px"/>
                   <SkeletonLoader width="140px" height="16px"/>
                 </div>
               </div>
@@ -53,17 +51,26 @@
               
               <div class="cert-details">
                 <div class="detail-item">
-                  <span class="detail-label">Issued:</span>
-                  <span class="detail-value">{{ cert.issuedDate }}</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Expires:</span>
-                  <span class="detail-value">{{ cert.expiryDate || 'No Expiry' }}</span>
-                </div>
-                <div class="detail-item">
                   <span class="detail-label">Credential ID:</span>
-                  <span class="detail-value">{{ cert.credentialId }}</span>
+                  <span class="detail-value">{{ cert.credentialId || 'N/A' }}</span>
                 </div>
+              </div>
+              
+              <div class="cert-actions">
+                <button 
+                  v-if="cert.file" 
+                  @click="openCertificate(cert.file)" 
+                  class="cert-btn view-btn"
+                >
+                  <font-awesome-icon :icon="['far', 'file-pdf']" /> View Certificate
+                </button>
+                <button 
+                  v-if="cert.verifyUrl" 
+                  @click="verifyCertificate(cert.verifyUrl)" 
+                  class="cert-btn verify-btn"
+                >
+                  <font-awesome-icon :icon="['fas', 'external-link-alt']" /> Verify
+                </button>
               </div>
             </div>
           </div>
@@ -92,8 +99,6 @@
                 <SkeletonLoader width="90%" height="14px"/>
                 
                 <div class="cert-details">
-                  <SkeletonLoader width="120px" height="14px"/>
-                  <SkeletonLoader width="130px" height="14px"/>
                   <SkeletonLoader width="140px" height="14px"/>
                 </div>
               </div>
@@ -122,14 +127,16 @@
               <p class="cert-description">{{ cert.description }}</p>
               
               <div class="cert-details">
-                <div class="detail-item">
-                  <span class="detail-label">Issued:</span>
-                  <span class="detail-value">{{ cert.issuedDate }}</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Expires:</span>
-                  <span class="detail-value">{{ cert.expiryDate || 'No Expiry' }}</span>
-                </div>
+              </div>
+
+              <div class="cert-actions mobile-actions">
+                <button 
+                  v-if="cert.file" 
+                  @click="openCertificate(cert.file)" 
+                  class="cert-btn view-btn"
+                >
+                  <font-awesome-icon :icon="['far', 'file-pdf']" /> View
+                </button>
               </div>
             </div>
           </div>
@@ -157,9 +164,13 @@ const inProgressCertifications = computed(() => {
   return certifications.value.filter(cert => cert.status === 'In Progress').length;
 });
 
-const viewCertificate = (certId) => {
-  console.log('Viewing certificate:', certId);
-  // Navigate to certificate detail or open certificate URL
+const openCertificate = (fileName) => {
+  if (!fileName) return;
+  // Assuming the files are served from /src/assets/sertif/
+  // In a real Vite project, you'd likely want these in the public folder
+  // or use a dynamic import. For now, we'll try to resolve it.
+  const url = new URL(`../../assets/sertif/${fileName}`, import.meta.url).href;
+  window.open(url, '_blank');
 };
 
 const verifyCertificate = (verifyUrl) => {
@@ -361,21 +372,52 @@ onMounted(async () => {
   font-weight: 400;
 }
 
-.view-cert-btn {
+.cert-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.cert-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 500;
-  text-transform: none;
-  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.view-btn {
+  background: rgba(0, 234, 255, 0.1);
+  color: #00eaff;
+  border-color: rgba(0, 234, 255, 0.2);
+}
+
+.view-btn:hover {
+  background: rgba(0, 234, 255, 0.2);
+  border-color: rgba(0, 234, 255, 0.4);
 }
 
 .verify-btn {
-  font-weight: 500;
-  text-transform: none;
-  padding: 8px 16px;
-  border-color: rgba(0, 234, 255, 0.3);
+  background: transparent;
+  color: #b0b0b0;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .verify-btn:hover {
-  background: rgba(0, 234, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-actions {
+  margin-top: 12px;
 }
 
 /* Tablet/Mobile Breakpoint matches HomeView */

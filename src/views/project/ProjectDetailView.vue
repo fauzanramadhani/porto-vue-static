@@ -390,6 +390,11 @@ onMounted(async () => {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  color: #00eaff !important;
+}
+
+.back-btn:hover {
+  background: rgba(0, 234, 255, 0.05) !important;
 }
 
 .back-arrow-icon {
@@ -789,6 +794,11 @@ onMounted(async () => {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  color: #00eaff !important;
+}
+
+.mobile-back-btn:hover {
+  background: rgba(0, 234, 255, 0.05) !important;
 }
 
 .mobile-back-btn .back-arrow-icon {

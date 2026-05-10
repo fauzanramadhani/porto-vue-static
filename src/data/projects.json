@@ -30,7 +30,8 @@
     "technologies": [
       { "name": "Vue.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" },
       { "name": "Midtrans API", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" },
-      { "name": "Node.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" }
+      { "name": "Node.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" },
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
     "year": "2024",
     "status": "Completed",
@@ -51,14 +52,14 @@
     "technologies": [
       { "name": "Vue.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" },
       { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" },
-      { "name": "MongoDB", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" }
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Mengembangkan platform e-commerce Tokosuma dengan arsitektur frontend menggunakan Vue.js dan backend Express.js. Dalam tim ini, saya mengerjakan berbagai modul mulai dari katalog produk, manajemen order, sistem autentikasi pengguna, hingga integrasi sistem pembayaran untuk menciptakan pengalaman belanja yang responsif dan lancar.",
     "links": {
-      "demo": "https://dev.tokosuma.co.id/",
+      "demo": "https://tokosuma.co.id/",
       "github": null
     }
   },
@@ -92,7 +93,8 @@
     "technologies": [
       { "name": "Flutter", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" },
       { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" },
-      { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" }
+      { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" },
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
     "year": "2024",
     "status": "Completed",
@@ -132,13 +134,12 @@
     "category": "Mobile Apps",
     "technologies": [
       { "name": "Java", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" },
-      { "name": "Android Native", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original.svg" },
-      { "name": "REST API", "icon": "https://www.svgrepo.com/show/354262/rest-api.svg" }
+      { "name": "Android Native", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original.svg" }
     ],
     "year": "2024",
     "status": "Completed",
     "duration": "Ongoing",
-    "overview": "Mengembangkan aplikasi HRIS berbasis Android Native menggunakan Java. Aplikasi ini dirancang untuk mendigitalkan proses administratif HR, seperti pengajuan peminjaman kendaraan, pencatatan laporan kegiatan harian, dan manajemen data karyawan secara mobile agar lebih mudah diakses oleh seluruh anggota tim.",
+    "overview": "Mengembangkan aplikasi HRIS berbasis Android Native menggunakan Java. Aplikasi ini dirancang untuk mendigitalkan proses administratif HR, seperti pengajuan peminjaman kendaraan, pencatatan laporan kegiatan harian, dan manajemen data karyawan secara mobile agar lebih mudah diakses oleh seluruh karyawan perusahaan.",
     "links": {
       "demo": null,
       "github": null
@@ -152,7 +153,8 @@
     "image": "",
     "category": "Web Apps",
     "technologies": [
-      { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" }
+      { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" },
+      { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
     "year": "2024",
     "status": "Completed",
