@@ -11,18 +11,23 @@
   "socialLinks": [
     {
       "platform": "github",
-      "url": "https://github.com/johndoe",
+      "url": "https://github.com/fauzanramadhani",
       "icon": "https://cdn.worldvectorlogo.com/logos/github-icon-2.svg"
     },
     {
       "platform": "linkedin",
-      "url": "https://linkedin.com/in/johndoe",
+      "url": "https://www.linkedin.com/in/fauzan-ramadhani-0a4ab4247",
       "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0bGEl9v47XieEtHyj0TqTr1tOXJmib-KHtw&s"
     },
     {
-      "platform": "twitter",
-      "url": "https://twitter.com/johndoe",
-      "icon": "https://img.freepik.com/premium-vector/twitter-new-x-logo-design-vector_1340851-70.jpg?semt=ais_hybrid&w=740&q=80"
+      "platform": "whatsapp",
+      "url": "https://wa.me/6282260012008",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/960px-WhatsApp_logo-color-vertical.svg.png"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/zans05_",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
     }
   ]
 }

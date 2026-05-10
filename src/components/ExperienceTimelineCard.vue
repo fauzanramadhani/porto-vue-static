@@ -5,7 +5,7 @@
         <font-awesome-icon :icon="['fab', 'stack-overflow']" />
       </span>
       <span class="exp-header-title">Experience</span>
-      <ArrowButton to="/about" title="View more experience" />
+      <ArrowButton to="/about#experience" title="View more experience" />
     </div>
     <div class="exp-list">
       <template v-if="loading">
@@ -72,7 +72,7 @@ const remainingCount = computed(() => {
 });
 
 const goToMore = () => {
-    router.push('/about');
+    router.push('/about#experience');
 };
 
 const fallbackLogo =

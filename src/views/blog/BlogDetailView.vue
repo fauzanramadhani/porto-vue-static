@@ -79,7 +79,7 @@
           </div>
 
           <!-- Sidebar -->
-          <div class="sidebar-card">
+          <div v-if="relatedPosts && relatedPosts.length > 0" class="sidebar-card">
             <h3 class="sidebar-title">Related Posts</h3>
             <div class="related-posts">
               <div v-for="post in relatedPosts" :key="post.id" class="related-post" @click="navigateToPost(post.id)">
@@ -174,7 +174,7 @@
           </div>
 
           <!-- Mobile Related Posts -->
-          <div class="mobile-related-posts">
+          <div v-if="relatedPosts && relatedPosts.length > 0" class="mobile-related-posts">
             <h3 class="mobile-related-posts-title">Related Posts</h3>
             <div class="mobile-related-posts-grid">
               <div v-for="post in relatedPosts" :key="post.id" class="mobile-related-post" @click="navigateToPost(post.id)">

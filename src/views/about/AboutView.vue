@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
+          <div id="experience" class="exp-card" v-if="isLoading || (experiences && experiences.length)">
             <div class="exp-header">
               <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
               <span class="exp-header-title">Experience</span>
@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div class="exp-card" v-if="isLoading || (experiences && experiences.length)">
+        <div id="experience" class="exp-card" v-if="isLoading || (experiences && experiences.length)">
           <div class="exp-header">
             <span class="exp-header-icon"><font-awesome-icon :icon="['fab', 'stack-overflow']" /></span>
             <span class="exp-header-title">Experience</span>
@@ -154,9 +154,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import dataService from '@/services/dataService'
 
+const route = useRoute()
 const isLoading = ref(true)
 
 const aboutText = ref('')
@@ -188,12 +190,32 @@ const formatDate = (month, year) => {
   return `${month} ${year}`
 }
 
+const scrollToHash = () => {
+  const hash = route.hash
+  if (hash && route.path === '/about') {
+    setTimeout(() => {
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 200) // Small delay to ensure v-show has updated the layout
+  }
+}
+
+// Watch for route changes (tab switching or direct hash navigation)
+watch(() => route.fullPath, () => {
+  scrollToHash()
+})
+
 onMounted(async () => {
   try {
     const aboutData = await dataService.getAboutData()
     aboutText.value = aboutData.aboutText || ''
     skills.value = aboutData.skills || []
     experiences.value = aboutData.experiences || []
+
+    // Initial check on mount
+    scrollToHash()
   } catch (error) {
     console.error('Failed to load about data:', error)
   } finally {
