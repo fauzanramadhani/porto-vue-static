@@ -11,7 +11,7 @@
       { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" },
       { "name": "Bootstrap", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-original.svg" }
     ],
-    "year": "2024",
+    "year": "2025",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Sebagai bagian dari tim pengembang, saya berkontribusi dalam membangun website company profile dan sistem e-commerce terintegrasi untuk Gelora Printing. Proyek ini mencakup pengembangan katalog produk percetakan, sistem pemesanan online, manajemen order, hingga integrasi pembayaran. Fokus utama saya adalah memastikan skalabilitas sistem untuk menangani berbagai variasi produk custom dan integrasi alur kerja dari pemesanan hingga proses produksi.",
@@ -33,7 +33,7 @@
       { "name": "Node.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" },
       { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
-    "year": "2024",
+    "year": "2026",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Membangun sistem payment terpusat (payment gateway) menggunakan Midtrans sebagai core API. Proyek ini dirancang secara modular agar dapat digunakan secara reusable oleh berbagai platform e-commerce dalam ekosistem internal perusahaan. Saya bertanggung jawab dalam integrasi API, penanganan transaksi, hingga tracking status pembayaran secara real-time.",
@@ -54,7 +54,7 @@
       { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" },
       { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
-    "year": "2024",
+    "year": "2026",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Mengembangkan platform e-commerce Tokosuma dengan arsitektur frontend menggunakan Vue.js dan backend Express.js. Dalam tim ini, saya mengerjakan berbagai modul mulai dari katalog produk, manajemen order, sistem autentikasi pengguna, hingga integrasi sistem pembayaran untuk menciptakan pengalaman belanja yang responsif dan lancar.",
@@ -74,7 +74,7 @@
       { "name": "Flutter", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" },
       { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" }
     ],
-    "year": "2024",
+    "year": "2026",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Mengembangkan aplikasi mobile e-commerce Tokosuma berbasis Flutter untuk memberikan kemudahan akses bagi pengguna Android. Kontribusi saya mencakup implementasi UI yang responsif, integrasi dengan REST API backend, serta pengembangan fitur browsing produk dan proses pemesanan yang dioptimalkan untuk perangkat mobile.",
@@ -96,7 +96,7 @@
       { "name": "Express.js", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" },
       { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
-    "year": "2024",
+    "year": "2026",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Membangun aplikasi monitoring produksi untuk melacak progres setiap pesanan cetak secara real-time. Aplikasi ini membantu tim produksi dalam memantau status pekerjaan (job tracking) mulai dari persiapan hingga pengiriman, memastikan transparansi dan efisiensi dalam alur kerja operasional percetakan.",
@@ -136,7 +136,7 @@
       { "name": "Java", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" },
       { "name": "Android Native", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original.svg" }
     ],
-    "year": "2024",
+    "year": "2025",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Mengembangkan aplikasi HRIS berbasis Android Native menggunakan Java. Aplikasi ini dirancang untuk mendigitalkan proses administratif HR, seperti pengajuan peminjaman kendaraan, pencatatan laporan kegiatan harian, dan manajemen data karyawan secara mobile agar lebih mudah diakses oleh seluruh karyawan perusahaan.",
@@ -156,7 +156,7 @@
       { "name": "Laravel", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg" },
       { "name": "MySQL", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" }
     ],
-    "year": "2024",
+    "year": "2026",
     "status": "Completed",
     "duration": "Ongoing",
     "overview": "Mengembangkan sistem proposal digital berbasis Laravel untuk mempermudah pembuatan dan pengelolaan proposal produk. Saya fokus pada optimasi workflow pembuatan dokumen, manajemen role akses, serta melakukan perbaikan bug untuk memastikan sistem berjalan stabil dalam mendukung kegiatan bisnis perusahaan.",
