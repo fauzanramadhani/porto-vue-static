@@ -64,14 +64,14 @@
               <div class="share-section">
                 <span class="share-label">Share:</span>
                 <div class="share-buttons">
-                  <v-btn variant="text" color="#00eaff" class="share-btn">
-                    <i class="fab fa-twitter"></i>
+                  <v-btn variant="text" class="share-btn" @click="sharePost('twitter')" aria-label="Share on X">
+                    <font-awesome-icon :icon="['fab', 'x-twitter']" />
                   </v-btn>
-                  <v-btn variant="text" color="#00eaff" class="share-btn">
-                    <i class="fab fa-facebook"></i>
+                  <v-btn variant="text" class="share-btn" @click="sharePost('facebook')" aria-label="Share on Facebook">
+                    <font-awesome-icon :icon="['fab', 'facebook']" />
                   </v-btn>
-                  <v-btn variant="text" color="#00eaff" class="share-btn">
-                    <i class="fab fa-linkedin"></i>
+                  <v-btn variant="text" class="share-btn" @click="sharePost('linkedin')" aria-label="Share on LinkedIn">
+                    <font-awesome-icon :icon="['fab', 'linkedin']" />
                   </v-btn>
                 </div>
               </div>
@@ -160,14 +160,14 @@
             <div class="mobile-share-section">
               <span class="mobile-share-label">Share:</span>
               <div class="mobile-share-buttons">
-                <v-btn variant="text" color="#00eaff" class="mobile-share-btn">
-                  <i class="fab fa-twitter"></i>
+                <v-btn variant="text" class="mobile-share-btn" @click="sharePost('twitter')" aria-label="Share on X">
+                  <font-awesome-icon :icon="['fab', 'x-twitter']" />
                 </v-btn>
-                <v-btn variant="text" color="#00eaff" class="mobile-share-btn">
-                  <i class="fab fa-facebook"></i>
+                <v-btn variant="text" class="mobile-share-btn" @click="sharePost('facebook')" aria-label="Share on Facebook">
+                  <font-awesome-icon :icon="['fab', 'facebook']" />
                 </v-btn>
-                <v-btn variant="text" color="#00eaff" class="mobile-share-btn">
-                  <i class="fab fa-linkedin"></i>
+                <v-btn variant="text" class="mobile-share-btn" @click="sharePost('linkedin')" aria-label="Share on LinkedIn">
+                  <font-awesome-icon :icon="['fab', 'linkedin']" />
                 </v-btn>
               </div>
             </div>
@@ -221,6 +221,41 @@ const goBack = () => {
 
 const navigateToPost = (postId) => {
   router.push(`/blog/${postId}`);
+};
+
+const sharePost = (platform) => {
+  const currentUrl = window.location.href;
+
+  // penting: gunakan URL absolut & encode
+  const url = encodeURIComponent(currentUrl);
+  const title = encodeURIComponent(
+    blogPost.value?.title || 'Check out this blog post'
+  );
+
+  let shareUrl = '';
+
+  switch (platform) {
+    case 'twitter':
+      shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+      break;
+
+    case 'facebook':
+      // gunakan dialog/share modern
+      shareUrl = `https://www.facebook.com/dialog/share?app_id=YOUR_APP_ID&display=popup&href=${url}`;
+      break;
+
+    case 'linkedin':
+      shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+      break;
+  }
+
+  if (shareUrl) {
+    window.open(
+      shareUrl,
+      '_blank',
+      'width=600,height=500,noopener,noreferrer'
+    );
+  }
 };
 
 onMounted(async () => {
@@ -509,12 +544,16 @@ onMounted(async () => {
 .share-buttons {
   display: flex;
   gap: 8px;
+  color: #b0b0b0;
 }
 
 .share-btn {
   min-width: 40px;
   height: 40px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== SIDEBAR ===== */
@@ -850,11 +889,15 @@ onMounted(async () => {
 .mobile-share-buttons {
   display: flex;
   gap: 8px;
+  color: #b0b0b0;
 }
 
 .mobile-share-btn {
   min-width: 40px;
   height: 40px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

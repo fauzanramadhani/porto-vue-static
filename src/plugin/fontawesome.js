@@ -5,13 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // Import icon yang mau dipakai
 import { faHome, faUser, faNewspaper as faNewspaperSolid, faIdBadge as faIdBadgeSolid, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { faNewspaper, faFileCode, faFilePdf, faIdBadge } from '@fortawesome/free-regular-svg-icons'
-import { faStackOverflow } from '@fortawesome/free-brands-svg-icons'
+import { faStackOverflow, faXTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 // Tambahkan ke library
 library.add(
   faHome, faUser, faNewspaper, faNewspaperSolid, faFileCode, faFilePdf, faIdBadge,
   faIdBadgeSolid,
   faStackOverflow,
+  faXTwitter,
+  faFacebook,
+  faLinkedin,
   faExternalLinkAlt
 )
 
