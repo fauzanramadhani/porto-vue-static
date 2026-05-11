@@ -28,6 +28,11 @@
       "platform": "instagram",
       "url": "https://www.instagram.com/zans05_",
       "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+    },
+    {
+      "platform": "email",
+      "url": "mailto:fauzanramadhani06@gmail.com",
+      "icon": "https://images.icon-icons.com/70/PNG/512/email_14161.png"
     }
   ]
 }

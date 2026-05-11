@@ -36,7 +36,7 @@
               v-for="(link, index) in profile?.socialLinks"
               :key="index"
               :href="link.url"
-              target="_blank"
+              :target="link.platform === 'email' ? '_self' : '_blank'"
               class="social-link"
               :aria-label="link.platform"
             >
