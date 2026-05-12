@@ -77,9 +77,21 @@ const goToMore = () => {
 
 const fallbackLogo =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png';
+
 const logoSrc = (url) => {
   if (!url) return fallbackLogo;
-  return /^https?:\/\//i.test(url) ? url : `${fallbackLogo}`;
+
+  // kalau sudah full URL
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  // kalau relative path
+  if (url.startsWith('/')) {
+    return url;
+  }
+
+  return fallbackLogo;
 };
 
 const formatDate = (month, year) => {

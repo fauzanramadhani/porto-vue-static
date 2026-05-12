@@ -382,6 +382,9 @@ onMounted(async () => {
   gap: 8px;
   cursor: pointer;
   color: #00eaff !important;
+
+  width: fit-content;
+  border-radius: 999px;
 }
 
 .back-btn:hover {
